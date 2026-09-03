@@ -33,6 +33,7 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
       background-color: var(--bg-base);
       color: var(--text-main);
@@ -43,21 +44,25 @@
       line-height: 1.45;
     }
 
-    /* SIDEBAR */
+    /* STICKY SIDEBAR */
     aside.sidebar {
-      width: 220px;
+      width: 230px;
       background: var(--bg-sidebar);
       border-right: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
       padding: 20px 14px;
       flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
     }
     @media (max-width: 1200px) {
       aside.sidebar { display: none; }
     }
     .sidebar-section {
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
     .sidebar-title {
       font-size: 0.68rem;
@@ -73,13 +78,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 7px 10px;
+      padding: 8px 10px;
       border-radius: 6px;
       color: var(--text-muted);
       font-size: 0.82rem;
       text-decoration: none;
       cursor: pointer;
       transition: all 0.15s;
+      user-select: none;
     }
     .sidebar-nav-item:hover {
       background: var(--bg-hover);
@@ -89,10 +95,11 @@
       background: rgba(56, 189, 248, 0.15);
       color: var(--accent-blue);
       font-weight: 600;
+      border-left: 3px solid var(--accent-blue);
     }
     .sidebar-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -102,12 +109,12 @@
     .dot-purple { background: #a855f7; }
     .dot-gray { background: #64748b; }
 
-    /* MAIN WRAPPER */
+    /* MAIN CONTENT */
     main.main-content {
       flex: 1;
-      padding: 20px 24px;
+      padding: 22px 28px;
       overflow-x: hidden;
-      width: calc(100% - 220px);
+      width: calc(100% - 230px);
     }
     @media (max-width: 1200px) {
       main.main-content { width: 100%; padding: 16px; }
@@ -118,7 +125,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
       gap: 12px;
     }
@@ -150,12 +157,12 @@
       gap: 6px;
     }
 
-    /* KPI CARDS (6 ใบ) */
+    /* KPI CARDS */
     .kpi-row {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
     @media (max-width: 1400px) {
       .kpi-row { grid-template-columns: repeat(3, 1fr); }
@@ -171,6 +178,11 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .kpi-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
     }
     .kpi-title {
       font-size: 0.7rem;
@@ -201,7 +213,8 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 16px 18px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
     }
     .panel-header {
       display: flex;
@@ -234,7 +247,7 @@
       display: grid;
       grid-template-columns: 2.1fr 1fr 1fr;
       gap: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     @media (max-width: 1300px) {
       .grid-row-overview { grid-template-columns: 1fr; }
@@ -244,7 +257,7 @@
       display: grid;
       grid-template-columns: 1.55fr 1fr;
       gap: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     @media (max-width: 1300px) {
       .grid-row-detail { grid-template-columns: 1fr; }
@@ -254,7 +267,7 @@
       display: grid;
       grid-template-columns: 1.4fr 1fr 1fr;
       gap: 16px;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     @media (max-width: 1400px) {
       .grid-row-bottom { grid-template-columns: 1fr 1fr; }
@@ -296,6 +309,7 @@
     .mono { font-family: var(--font-mono); }
     .text-right { text-align: right; }
     .text-center { text-align: center; }
+    .font-semibold { font-weight: 600; }
 
     /* BADGES */
     .badge-buy {
@@ -328,7 +342,7 @@
       border-radius: 4px;
     }
 
-    /* DONUT CHARTS CENTER TEXT */
+    /* DONUT CHARTS */
     .donut-card-inner {
       position: relative;
       height: 180px;
@@ -353,7 +367,7 @@
       font-family: var(--font-mono);
     }
 
-    /* TABS */
+    /* TAB PILLS */
     .tab-pills {
       display: flex;
       gap: 6px;
@@ -379,10 +393,8 @@
     .tab-pill.active-p003 { background: #d97706; color: #fff; font-weight: 700; border-color: #f59e0b; }
     .tab-pill.active-p004 { background: #7c3aed; color: #fff; font-weight: 700; border-color: #a855f7; }
 
-    /* PROGRESS BARS FOR GOALS */
-    .goal-item {
-      margin-bottom: 12px;
-    }
+    /* GOAL BARS */
+    .goal-item { margin-bottom: 12px; }
     .goal-top {
       display: flex;
       justify-content: space-between;
@@ -420,49 +432,128 @@
       color: var(--accent-green);
       font-weight: 700;
     }
+
+    /* MODAL POPUPS */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #0f182d;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      max-width: 650px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 16px; right: 18px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close-btn:hover { color: #fff; }
+    .modal-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+    .modal-body {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+    .modal-row strong { color: #fff; }
+    .modal-link {
+      color: var(--accent-blue);
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .modal-link:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- LEFT SIDEBAR -->
+  <!-- LEFT SIDEBAR (ALL ITEMS ARE NOW FULLY CLICKABLE) -->
   <aside class="sidebar">
+    <!-- OVERVIEW SECTION -->
     <div class="sidebar-section">
       <div class="sidebar-title">Overview</div>
-      <div class="sidebar-nav-item active">📊 Dashboard</div>
-      <div class="sidebar-nav-item">💼 Portfolios</div>
-      <div class="sidebar-nav-item">🛒 Orders</div>
-      <div class="sidebar-nav-item">💰 Dividend Analytics</div>
-      <div class="sidebar-nav-item">📈 Performance</div>
-      <div class="sidebar-nav-item">📑 Reports</div>
+      <div class="sidebar-nav-item active" id="nav-dashboard" onclick="navTo('dashboard')">📊 Dashboard</div>
+      <div class="sidebar-nav-item" id="nav-portfolios" onclick="navTo('portfolios')">💼 Portfolios</div>
+      <div class="sidebar-nav-item" id="nav-orders" onclick="navTo('orders')">🛒 Orders</div>
+      <div class="sidebar-nav-item" id="nav-dividends" onclick="navTo('dividends')">💰 Dividend Analytics</div>
+      <div class="sidebar-nav-item" id="nav-performance" onclick="navTo('performance')">📈 Performance</div>
+      <div class="sidebar-nav-item" id="nav-reports" onclick="openModal('reports')">📑 Reports</div>
     </div>
 
+    <!-- TOOLS SECTION -->
     <div class="sidebar-section">
       <div class="sidebar-title">Tools</div>
-      <div class="sidebar-nav-item">🎯 Goal Tracker</div>
-      <div class="sidebar-nav-item">⚖️ Rebalancing</div>
-      <div class="sidebar-nav-item">⚠️ Risk Monitor</div>
-      <div class="sidebar-nav-item">💵 Cash Flow</div>
+      <div class="sidebar-nav-item" id="nav-goals" onclick="navTo('goals')">🎯 Goal Tracker</div>
+      <div class="sidebar-nav-item" id="nav-rebalancing" onclick="navTo('rebalancing')">⚖️ Rebalancing</div>
+      <div class="sidebar-nav-item" id="nav-risk" onclick="navTo('risk')">⚠️ Risk Monitor</div>
+      <div class="sidebar-nav-item" id="nav-cashflow" onclick="navTo('cashflow')">💵 Cash Flow</div>
     </div>
 
+    <!-- SYSTEM SECTION -->
     <div class="sidebar-section">
       <div class="sidebar-title">System</div>
-      <div class="sidebar-nav-item">🛡️ Audit & Integrity</div>
-      <div class="sidebar-nav-item">🗄️ Data Sources</div>
-      <div class="sidebar-nav-item">⚙️ Settings</div>
+      <div class="sidebar-nav-item" id="nav-audit" onclick="navTo('audit')">🛡️ Audit & Integrity</div>
+      <div class="sidebar-nav-item" id="nav-datasources" onclick="openModal('datasources')">🗄️ Data Sources</div>
+      <div class="sidebar-nav-item" id="nav-settings" onclick="openModal('settings')">⚙️ Settings</div>
     </div>
 
+    <!-- PORTFOLIOS QUICK ACCESS -->
     <div class="sidebar-section" style="margin-top: auto;">
       <div class="sidebar-title">Portfolios</div>
-      <div class="sidebar-nav-item"><span class="sidebar-dot dot-blue"></span> P001 หุ้นเหน่ง</div>
-      <div class="sidebar-nav-item"><span class="sidebar-dot dot-green"></span> P002 หุ้นแนต</div>
-      <div class="sidebar-nav-item"><span class="sidebar-dot dot-amber"></span> P003 หุ้นพ่อ</div>
-      <div class="sidebar-nav-item"><span class="sidebar-dot dot-purple"></span> P004 RMFเหน่ง</div>
-      <div class="sidebar-nav-item"><span class="sidebar-dot dot-gray"></span> P005 RMFแนต</div>
+      <div class="sidebar-nav-item" onclick="selectPortfolio('P001')">
+        <span class="sidebar-dot dot-blue"></span> P001 หุ้นเหน่ง
+      </div>
+      <div class="sidebar-nav-item" onclick="selectPortfolio('P002')">
+        <span class="sidebar-dot dot-green"></span> P002 หุ้นแนต
+      </div>
+      <div class="sidebar-nav-item" onclick="selectPortfolio('P003')">
+        <span class="sidebar-dot dot-amber"></span> P003 หุ้นพ่อ
+      </div>
+      <div class="sidebar-nav-item" onclick="selectPortfolio('P004')">
+        <span class="sidebar-dot dot-purple"></span> P004 RMFเหน่ง
+      </div>
+      <div class="sidebar-nav-item" onclick="selectPortfolio('P005')">
+        <span class="sidebar-dot dot-gray"></span> P005 RMFแนต
+      </div>
     </div>
   </aside>
 
   <!-- MAIN DASHBOARD CONTENT -->
-  <main class="main-content">
+  <main class="main-content" id="section-dashboard">
     
     <!-- TOP HEADER -->
     <div class="top-header">
@@ -477,7 +568,7 @@
     </div>
 
     <!-- KPI ROW (6 CARDS) -->
-    <div class="kpi-row">
+    <div class="kpi-row" id="section-cashflow">
       <div class="kpi-card">
         <div class="kpi-title">📈 Total Portfolio Value</div>
         <div class="kpi-value">฿5,913,628.11</div>
@@ -511,11 +602,11 @@
     </div>
 
     <!-- ROW 2: PORTFOLIO OVERVIEW + 2 DONUTS -->
-    <div class="grid-row-overview">
+    <div class="grid-row-overview" id="section-portfolios">
       <!-- Overview Table -->
-      <div class="panel">
+      <div class="panel" id="section-rebalancing">
         <div class="panel-header">
-          <div class="panel-heading">📊 Portfolio Overview</div>
+          <div class="panel-heading">📊 Portfolio Overview & Cash Flow Rebalancing</div>
           <span class="panel-tag">P001–P005 Master View</span>
         </div>
         <div class="table-wrap">
@@ -533,7 +624,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr onclick="selectPortfolio('P001')" style="cursor: pointer;">
                 <td><span class="sidebar-dot dot-blue" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P001 หุ้นเหน่ง</strong></td>
                 <td style="color: var(--text-muted);">Equity Growth</td>
                 <td class="text-right mono font-semibold">1,114,763.05</td>
@@ -543,7 +634,7 @@
                 <td class="text-right mono" style="color: var(--accent-amber);">฿3,905</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
-              <tr>
+              <tr onclick="selectPortfolio('P002')" style="cursor: pointer;">
                 <td><span class="sidebar-dot dot-green" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P002 หุ้นแนต</strong></td>
                 <td style="color: var(--text-muted);">Dividend Income</td>
                 <td class="text-right mono font-semibold">1,656,400.00</td>
@@ -553,7 +644,7 @@
                 <td class="text-right mono" style="color: var(--accent-amber);">฿7,200</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
-              <tr>
+              <tr onclick="selectPortfolio('P003')" style="cursor: pointer;">
                 <td><span class="sidebar-dot dot-amber" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P003 หุ้นพ่อ</strong></td>
                 <td style="color: var(--text-muted);">Wealth + Income</td>
                 <td class="text-right mono font-semibold">2,069,793.06</td>
@@ -563,7 +654,7 @@
                 <td class="text-right mono" style="color: var(--accent-amber);">฿2,245</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
-              <tr>
+              <tr onclick="selectPortfolio('P004')" style="cursor: pointer;">
                 <td><span class="sidebar-dot dot-purple" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P004 RMFเหน่ง</strong></td>
                 <td style="color: var(--text-muted);">RMF Control-Band</td>
                 <td class="text-right mono font-semibold">922,672.00</td>
@@ -573,7 +664,7 @@
                 <td class="text-right mono" style="color: var(--accent-amber);">฿0</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
-              <tr>
+              <tr onclick="selectPortfolio('P005')" style="cursor: pointer;">
                 <td><span class="sidebar-dot dot-gray" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P005 RMFแนต</strong></td>
                 <td style="color: var(--text-muted);">Deferred</td>
                 <td class="text-right mono font-semibold">-</td>
@@ -598,7 +689,7 @@
       </div>
 
       <!-- Donut 1: Asset Allocation -->
-      <div class="panel">
+      <div class="panel" id="section-performance">
         <div class="panel-header">
           <div class="panel-heading" style="font-size: 0.85rem;">🍩 Asset Allocation (By Value)</div>
         </div>
@@ -629,7 +720,7 @@
     <!-- ROW 3: PORTFOLIO DETAIL + DIVIDEND ANALYTICS -->
     <div class="grid-row-detail">
       <!-- Left: Portfolio Detail Table -->
-      <div class="panel">
+      <div class="panel" id="section-detail">
         <div class="panel-header">
           <div class="panel-heading">🎯 Portfolio Detail (Holdings Summary)</div>
           <div class="tab-pills">
@@ -638,6 +729,15 @@
             <button class="tab-pill" id="tab-p003" onclick="switchDetail('P003')">P003</button>
             <button class="tab-pill" id="tab-p004" onclick="switchDetail('P004')">P004 RMF</button>
           </div>
+        </div>
+
+        <!-- RISK SURVEILLANCE BANNER (Option B) -->
+        <div id="section-risk" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-amber); border-radius: 6px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.78rem;">
+          <div style="font-weight: 700; color: #fbbf24; margin-bottom: 4px; display: flex; justify-content: space-between;">
+            <span id="surveillance-heading">⚠️ จุดเฝ้าระวัง — P001 หุ้นเหน่ง</span>
+            <span style="font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase;">Surveillance Monitor</span>
+          </div>
+          <div id="surveillance-text" style="color: var(--text-muted); line-height: 1.45;"></div>
         </div>
         
         <div class="table-wrap">
@@ -666,19 +766,19 @@
 
         <!-- Mini Selector Summary Cards at bottom -->
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px;">
-          <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem;">
+          <div onclick="switchDetail('P002')" style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem; cursor: pointer;">
             <strong>P002</strong> 7 Assets <span style="color: var(--accent-green);">100%</span><br>
             <span style="color: var(--text-dim);">Top: 64.0 · Cash ฿7,200</span>
           </div>
-          <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem;">
+          <div onclick="switchDetail('P003')" style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem; cursor: pointer;">
             <strong>P003</strong> 8 Assets <span style="color: var(--accent-green);">100%</span><br>
             <span style="color: var(--text-dim);">Top: 72.0 · Cash ฿2,245</span>
           </div>
-          <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem;">
+          <div onclick="switchDetail('P004')" style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem; cursor: pointer;">
             <strong>P004 RMF</strong> 3 Funds <span style="color: var(--accent-green);">100%</span><br>
             <span style="color: var(--text-dim);">Control-Band · Cash ฿0</span>
           </div>
-          <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem;">
+          <div onclick="openModal('p005')" style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem; cursor: pointer;">
             <strong>P005 RMF</strong> Deferred<br>
             <span style="color: var(--text-dim);">รอบทบทวนตาม Master</span>
           </div>
@@ -686,7 +786,7 @@
       </div>
 
       <!-- Right: Dividend Performance Analytics -->
-      <div class="panel">
+      <div class="panel" id="section-dividends">
         <div class="panel-header">
           <div class="panel-heading">💰 Dividend Performance Analytics</div>
           <span class="panel-tag">Forward Cashflow Projections</span>
@@ -699,7 +799,7 @@
               Expected Annual Dividend (Current Holdings)
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-              <div>
+              <div onclick="switchDetail('P001')" style="cursor: pointer;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px;">
                   <span>P001 หุ้นเหน่ง</span>
                   <span class="mono">62,180 THB</span>
@@ -709,7 +809,7 @@
                 </div>
               </div>
 
-              <div>
+              <div onclick="switchDetail('P002')" style="cursor: pointer;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px;">
                   <span>P002 หุ้นแนต</span>
                   <span class="mono">82,610 THB</span>
@@ -719,7 +819,7 @@
                 </div>
               </div>
 
-              <div>
+              <div onclick="switchDetail('P003')" style="cursor: pointer;">
                 <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px;">
                   <span>P003 หุ้นพ่อ</span>
                   <span class="mono">109,450 THB</span>
@@ -778,7 +878,7 @@
     <div class="grid-row-bottom">
       
       <!-- Orders (Consolidated Equity & RMF Orders) -->
-      <div class="panel">
+      <div class="panel" id="section-orders">
         <div class="panel-header">
           <div class="panel-heading" style="font-size: 0.82rem;">🛒 Consolidated Orders — This Cycle</div>
         </div>
@@ -901,7 +1001,7 @@
       <!-- Audit Status & Goal Tracker -->
       <div class="panel" style="display: flex; flex-direction: column; justify-content: space-between;">
         <!-- Audit Checklist -->
-        <div>
+        <div id="section-audit">
           <div class="panel-header" style="margin-bottom: 10px;">
             <div class="panel-heading" style="font-size: 0.82rem;">🛡️ Audit & Integrity Status</div>
           </div>
@@ -916,7 +1016,7 @@
         </div>
 
         <!-- Goal Tracker (Year 20 Target) -->
-        <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-color);">
+        <div id="section-goals" style="margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border-color);">
           <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; font-family: var(--font-mono);">
             🎯 Goal Tracker (Year 20 Target)
           </div>
@@ -958,6 +1058,15 @@
     </div>
 
   </main>
+
+  <!-- MODALS -->
+  <div class="modal-overlay" id="modal-container" onclick="closeModalOnBg(event)">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+      <div class="modal-title" id="modal-title">Title</div>
+      <div class="modal-body" id="modal-content">Content</div>
+    </div>
+  </div>
 
   <script>
     // Embedded Data Fallback
@@ -1788,8 +1897,38 @@
       "P004": { val: "922,672.00", cash: "฿0" }
     };
 
+    const SURVEILLANCE_DESCS = {
+      "P001": "<strong>QQQM19:</strong> Overweight 24.71% (เป้า 15%) จับตาหุ้นเทคสหรัฐฯ และอัตราดอกเบี้ย Fed | <strong>TISCO:</strong> ติด Hard Gate (MOS -9.57%) จับตาหนี้ครัวเรือนไทย",
+      "P002": "<strong>SCB:</strong> Overweight รุนแรง 37.31% (เป้า 10%) และ MOS -6.55% <em>หยุดเติมเงินเด็ดขาด</em> | <strong>WORLDA01:</strong> สัดส่วนเพียง 0.95% เร่งสะสมสู่เป้า 40%",
+      "P003": "<strong>AOT & WHA:</strong> Valuation ตึงตัว ติด No-Buy Zone จับตาการเจรจาสัญญาสัมปทาน AOT และรอบโอนที่ดิน WHA | <strong>WHART:</strong> ตัดสิทธิ์รอบนี้จาก Minimum Buy Cut",
+      "P004": "<strong>KFUSINDFXRMF:</strong> ทะลุกรอบบน 64.10% (Upper Band 54%) สั่ง HALT / NO BUY ทันที | โยกเงินสมทบ ฿150k เติม KFINDIARMF และ KFGOLDRMF เพื่อฟื้นฟูกรอบควบคุม"
+    };
+
+    // NAVIGATION CONTROLLER
+    function navTo(sectionKey) {
+      // Update sidebar active class
+      document.querySelectorAll('.sidebar-nav-item').forEach(el => el.classList.remove('active'));
+      const activeEl = document.getElementById('nav-' + sectionKey);
+      if (activeEl) activeEl.classList.add('active');
+
+      const targetId = 'section-' + sectionKey;
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // PORTFOLIO QUICK SELECTOR
+    function selectPortfolio(pId) {
+      if (pId === 'P005') {
+        openModal('p005');
+        return;
+      }
+      switchDetail(pId);
+      navTo('detail');
+    }
+
     function switchDetail(pId) {
-      // Update pills
       ['p001', 'p002', 'p003', 'p004'].forEach(k => {
         const b = document.getElementById('tab-' + k);
         if (b) {
@@ -1825,7 +1964,76 @@
         document.getElementById('detail-val-label').textContent = 'Portfolio Value: ' + v.val;
         document.getElementById('detail-cash-label').textContent = 'Cash: ' + v.cash;
       }
+
+      // Update surveillance banner
+      const pNames = { 'P001': 'P001 หุ้นเหน่ง', 'P002': 'P002 หุ้นแนต', 'P003': 'P003 หุ้นพ่อ', 'P004': 'P004 RMFเหน่ง' };
+      document.getElementById('surveillance-heading').innerHTML = '⚠️ จุดเฝ้าระวังและความเสี่ยง — ' + (pNames[pId] || pId);
+      document.getElementById('surveillance-text').innerHTML = SURVEILLANCE_DESCS[pId] || 'ไม่มีประเด็นความเสี่ยงผิดปกติ';
     }
+
+    // MODAL DIALOG CONTROLLER
+    function openModal(type) {
+      const overlay = document.getElementById('modal-container');
+      const title = document.getElementById('modal-title');
+      const content = document.getElementById('modal-content');
+
+      if (type === 'datasources') {
+        title.innerHTML = '🗄️ Data Sources & Audit Provenance';
+        content.innerHTML = `
+          <div class="modal-row"><span>Source of Truth:</span><strong>Google Sheets Master Database</strong></div>
+          <div class="modal-row"><span>Spreadsheet:</span><a class="modal-link" href="https://docs.google.com/spreadsheets/d/16RnM2QPl-z9gjcIiH8BH8emnEeBLdKJ1OOnysCJ3deo/edit" target="_blank">VF-DCA 2.2 — MASTER DATABASE ↗</a></div>
+          <div class="modal-row"><span>Master Spec:</span><a class="modal-link" href="https://docs.google.com/document/d/1qXY-PRamOABGV_nkMimpZJqqSpXNYDpqpLdOoDo2iT4/edit" target="_blank">Gemini Central Production Master v2.4 ↗</a></div>
+          <div class="modal-row"><span>Dataset Version:</span><strong>20260831-P001-P004</strong></div>
+          <div class="modal-row"><span>Audit Date:</span><strong>2026-08-31</strong></div>
+          <div class="modal-row"><span>Data Engine:</span><strong>Static Locked Production Cache</strong></div>
+        `;
+      } else if (type === 'settings') {
+        title.innerHTML = '⚙️ System Configuration & Parameters';
+        content.innerHTML = `
+          <div class="modal-row"><span>System Version:</span><strong>VF-DCA 2.2 Production Locked</strong></div>
+          <div class="modal-row"><span>Core Formula:</span><strong>VF-DCA-2026-V1 (0.45V + 0.25E + 0.20W + 0.10Q)</strong></div>
+          <div class="modal-row"><span>Required Return (Defensive):</span><strong>7.00% / Year</strong></div>
+          <div class="modal-row"><span>Required Return (Medium):</span><strong>9.00% / Year</strong></div>
+          <div class="modal-row"><span>Required Return (High):</span><strong>11.00% / Year</strong></div>
+          <div class="modal-row"><span>Take Profit Ladders:</span><strong>TP1: 1.18x | TP2: 1.25x | TP3: 1.32x</strong></div>
+          <div class="modal-row"><span>Execution Standard:</span><strong>Board Lot 100 Shares / Cash Policy HOLD</strong></div>
+        `;
+      } else if (type === 'reports') {
+        title.innerHTML = '📑 Cycle Executive Summary Report';
+        content.innerHTML = `
+          <p style="margin-bottom: 10px;"><strong>รอบการลงทุนประจำงวด:</strong> 31 สิงหาคม 2569 (Active Cycle)</p>
+          <div class="modal-row"><span>มูลค่าพอร์ตรวม:</span><strong>฿5,913,628.11</strong></div>
+          <div class="modal-row"><span>ยอดซื้อหุ้นรวม (P001-P003):</span><strong style="color:var(--accent-green);">฿116,650.00</strong></div>
+          <div class="modal-row"><span>ยอดซื้อ RMF รวม (P004):</span><strong style="color:var(--accent-purple);">฿150,000.00</strong></div>
+          <div class="modal-row"><span>ยอดเข้าซื้อจริงทั้งสิ้น:</span><strong style="color:var(--accent-green); font-size:1rem;">฿266,650.00</strong></div>
+          <div class="modal-row"><span>เงินสดคงเหลือรวม:</span><strong style="color:var(--accent-amber);">฿13,350.00 (HOLD)</strong></div>
+          <div class="modal-row"><span>สถานะการตรวจสอบ:</span><strong style="color:var(--accent-green);">100% RECONCILED & PASS</strong></div>
+        `;
+      } else if (type === 'p005') {
+        title.innerHTML = '⚪ P005 RMFแนต — DEFERRED';
+        content.innerHTML = `
+          <p style="margin-bottom: 12px;">พอร์ต <strong>P005 RMFแนต</strong> อยู่ในสถานะ <strong>DEFERRED</strong> ตาม Final Dataset ล่าสุด</p>
+          <div class="modal-row"><span>ประเภทพอร์ต:</span><strong>RMF Retirement</strong></div>
+          <div class="modal-row"><span>รอบการลงทุน:</span><strong>ประจำปี (Annual Cycle)</strong></div>
+          <div class="modal-row"><span>วงเงินตามแผน:</span><strong>฿90,000 / ปี</strong></div>
+          <div class="modal-row"><span>สถานะรอบนี้:</span><strong style="color:var(--text-muted);">รอการทบทวนช่วงปลายปีสำหรับการวางแผนลดหย่อนภาษี</strong></div>
+        `;
+      }
+
+      overlay.style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal-container').style.display = 'none';
+    }
+
+    function closeModalOnBg(e) {
+      if (e.target.id === 'modal-container') closeModal();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
     function initCharts() {
       if (typeof Chart === 'undefined') return;
