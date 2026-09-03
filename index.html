@@ -25,6 +25,7 @@
       --accent-red-border: rgba(239, 68, 68, 0.35);
       --accent-amber: #f59e0b;
       --accent-amber-bg: rgba(245, 158, 11, 0.12);
+      --accent-amber-border: rgba(245, 158, 11, 0.35);
       --accent-blue: #3b82f6;
       --accent-blue-bg: rgba(59, 130, 246, 0.12);
       --accent-purple: #8b5cf6;
@@ -336,7 +337,7 @@
     .portfolio-tab-bar {
       display: flex;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 10px;
       overflow-x: auto;
@@ -364,6 +365,57 @@
       color: #fff;
       font-weight: 600;
       box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+
+    /* OPTION B: PORTFOLIO SURVEILLANCE & WATCHPOINT BANNER */
+    .surveillance-container {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--accent-amber);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .surveillance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .surveillance-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-sans);
+      letter-spacing: -0.01em;
+    }
+    .surveillance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .surveillance-card {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+    }
+    .surveillance-card strong {
+      color: #f1f5f9;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.85rem;
+    }
+    .surveillance-card p {
+      color: var(--text-muted);
+      line-height: 1.45;
     }
 
     /* CONSOLIDATED TICKER CARDS */
@@ -459,6 +511,59 @@
       font-family: var(--font-mono);
       border-top: 1px solid var(--border-color);
     }
+  
+    /* THEMED CARDS BY PORTFOLIO */
+    /* P001 หุ้นเหน่ง — สีฟ้า (Sky Blue / Cyan-Blue) */
+    .theme-p001 {
+      background: linear-gradient(145deg, rgba(14, 116, 144, 0.35) 0%, rgba(8, 47, 73, 0.45) 100%) !important;
+      border: 1px solid rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 4px 14px rgba(6, 182, 212, 0.12);
+    }
+    .theme-p001 .panel-tag, .theme-p001 .badge {
+      background: rgba(14, 116, 144, 0.4) !important;
+      border-color: rgba(56, 189, 248, 0.5) !important;
+      color: #38bdf8 !important;
+    }
+    .theme-p001 .progress-bar-fill {
+      background: linear-gradient(90deg, #06b6d4 0%, #38bdf8 100%) !important;
+    }
+
+    /* P002 หุ้นแนต — สีเขียวกลาง (Medium Green) */
+    .theme-p002 {
+      background: linear-gradient(145deg, rgba(16, 149, 106, 0.35) 0%, rgba(6, 78, 59, 0.45) 100%) !important;
+      border: 1px solid rgba(16, 185, 129, 0.45) !important;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+    }
+    .theme-p002 .panel-tag, .theme-p002 .badge {
+      background: rgba(6, 78, 59, 0.5) !important;
+      border-color: rgba(16, 185, 129, 0.5) !important;
+      color: #34d399 !important;
+    }
+    .theme-p002 .progress-bar-fill {
+      background: linear-gradient(90deg, #10b981 0%, #34d399 100%) !important;
+    }
+
+    /* P003 หุ้นพ่อ — สีน้ำเงิน (Deep / Royal Blue) */
+    .theme-p003 {
+      background: linear-gradient(145deg, rgba(30, 64, 175, 0.4) 0%, rgba(15, 23, 68, 0.55) 100%) !important;
+      border: 1px solid rgba(59, 130, 246, 0.5) !important;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.15);
+    }
+    .theme-p003 .panel-tag, .theme-p003 .badge {
+      background: rgba(30, 64, 175, 0.45) !important;
+      border-color: rgba(96, 165, 250, 0.5) !important;
+      color: #60a5fa !important;
+    }
+    .theme-p003 .progress-bar-fill {
+      background: linear-gradient(90deg, #2563eb 0%, #60a5fa 100%) !important;
+    }
+
+    /* P004 & P005 RMF — สีเดิม (Original Slate) */
+    .theme-rmf {
+      background: var(--bg-card-sub) !important;
+      border: 1px solid var(--border-light) !important;
+    }
+
   </style>
 </head>
 <body>
@@ -536,53 +641,68 @@
       </div>
     </section>
 
-    <!-- 4. PERFORMANCE & DIVIDEND COMPARISON (ใหม่: กราฟ & เทียบเงินปันผล) -->
+    <!-- 4. PERFORMANCE & DIVIDEND COMPARISON -->
     <section class="panel-box">
       <div class="panel-header">
         <div class="panel-title">💰 Dividend Yield & Passive Income Performance Analysis</div>
         <span class="panel-tag">Forward Dividend Projections & Goals</span>
       </div>
 
-      <!-- Dividend Metric Cards -->
+      <!-- Dividend Metric Cards (Themed by Portfolio) -->
       <div class="div-metrics-grid" id="dividend-metrics-cards">
-        <div class="div-metric-box">
+        <!-- P001 หุ้นเหน่ง (สีฟ้า) -->
+        <div class="div-metric-box theme-p001">
           <div class="div-metric-header">
             <span class="div-metric-title">P001 หุ้นเหน่ง (Retirement)</span>
-            <span class="panel-tag" style="color: var(--accent-green);">Yield ~3.25%</span>
+            <span class="panel-tag">Yield ~3.25%</span>
           </div>
-          <div style="font-size: 1.15rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿36,200 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿3,016/ด.)</span></div>
-          <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">เป้าหมายปันผล: ฿60,000 / เดือน</div>
+          <div style="font-size: 1.18rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿36,200 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿3,016/ด.)</span></div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">เป้าหมายปันผล: ฿60,000 / เดือน</div>
           <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 5.03%;"></div></div>
         </div>
 
-        <div class="div-metric-box">
+        <!-- P002 หุ้นแนต (สีเขียวกลาง) -->
+        <div class="div-metric-box theme-p002">
           <div class="div-metric-header">
             <span class="div-metric-title">P002 หุ้นแนต (Dividend Income)</span>
-            <span class="panel-tag" style="color: var(--accent-green);">Yield ~4.85%</span>
+            <span class="panel-tag">Yield ~4.85%</span>
           </div>
-          <div style="font-size: 1.15rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿80,300 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿6,690/ด.)</span></div>
-          <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">เป้าหมายปันผล: ฿60,000 / เดือน</div>
+          <div style="font-size: 1.18rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿80,300 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿6,690/ด.)</span></div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">เป้าหมายปันผล: ฿60,000 / เดือน</div>
           <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 11.15%;"></div></div>
         </div>
 
-        <div class="div-metric-box">
+        <!-- P003 หุ้นพ่อ (สีน้ำเงิน) -->
+        <div class="div-metric-box theme-p003">
           <div class="div-metric-header">
             <span class="div-metric-title">P003 หุ้นพ่อ (Wealth + Income)</span>
-            <span class="panel-tag" style="color: var(--accent-green);">Yield ~4.15%</span>
+            <span class="panel-tag">Yield ~4.15%</span>
           </div>
-          <div style="font-size: 1.15rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿85,900 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿7,158/ด.)</span></div>
-          <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">เป้าหมายปันผล: ฿100,000 / เดือน</div>
+          <div style="font-size: 1.18rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">฿85,900 <span style="font-size: 0.75rem; color: var(--text-muted);">/ ปี (~฿7,158/ด.)</span></div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">เป้าหมายปันผล: ฿100,000 / เดือน</div>
           <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 7.16%;"></div></div>
         </div>
 
-        <div class="div-metric-box">
+        <!-- P004 RMFเหน่ง (สีเดิม) -->
+        <div class="div-metric-box theme-rmf">
           <div class="div-metric-header">
             <span class="div-metric-title">P004 RMFเหน่ง (Reinvested)</span>
             <span class="panel-tag">NAV Reinvest</span>
           </div>
-          <div style="font-size: 1.15rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">สะสมมูลค่าใน NAV <span style="font-size: 0.75rem; color: var(--text-muted);">(ไม่จ่ายกระแสสด)</span></div>
+          <div style="font-size: 1.18rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 4px;">สะสมมูลค่าใน NAV <span style="font-size: 0.75rem; color: var(--text-muted);">(ไม่จ่ายกระแสสด)</span></div>
           <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">สิทธิประโยชน์ทางภาษี + การเติบโตระยะยาว</div>
           <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 100%; background: #3b82f6;"></div></div>
+        </div>
+
+        <!-- P005 RMFแนต (สีเดิม) -->
+        <div class="div-metric-box theme-rmf">
+          <div class="div-metric-header">
+            <span class="div-metric-title">P005 RMFแนต (Deferred)</span>
+            <span class="panel-tag">DEFERRED</span>
+          </div>
+          <div style="font-size: 1.18rem; font-weight: 700; color: var(--text-muted); font-family: var(--font-mono); margin-top: 4px;">รอรอบทบทวน <span style="font-size: 0.75rem; color: var(--text-dim);">(Annual)</span></div>
+          <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 4px;">วางแผนภาษีปลายปี / วงเงิน ฿90,000</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0%;"></div></div>
         </div>
       </div>
 
@@ -610,13 +730,23 @@
       </div>
     </section>
 
-    <!-- 5. PORTFOLIO DETAIL (VALUATION MATRIX) -->
+    <!-- 5. PORTFOLIO DETAIL (VALUATION MATRIX) WITH OPTION B SURVEILLANCE CARDS -->
     <section class="panel-box">
       <div class="panel-header">
         <div class="panel-title">🎯 Portfolio Detail & Valuation Matrix</div>
         <span class="panel-tag">Select Portfolio</span>
       </div>
       <div class="portfolio-tab-bar" id="portfolio-tabs"></div>
+
+      <!-- OPTION B: DYNAMIC SURVEILLANCE & WATCHPOINT BANNER -->
+      <div class="surveillance-container" id="surveillance-box">
+        <div class="surveillance-header">
+          <span class="surveillance-title" id="surveillance-title">⚠️ จุดเฝ้าระวังและความเสี่ยงเชิงโครงสร้าง — P001 หุ้นเหน่ง</span>
+          <span class="panel-tag" style="color: #fbbf24;">SURVEILLANCE MONITOR</span>
+        </div>
+        <div class="surveillance-grid" id="surveillance-cards-grid"></div>
+      </div>
+
       <div class="table-container">
         <table class="institutional-table">
           <thead id="detail-thead"></thead>
@@ -1487,6 +1617,85 @@
   }
 };
 
+    // Surveillance knowledge base per portfolio (Option B)
+    const SURVEILLANCE_DATA = {
+      "P001": {
+        title: "⚠️ จุดเฝ้าระวังและความเสี่ยงเชิงโครงสร้าง — P001 หุ้นเหน่ง",
+        items: [
+          {
+            badge: "OVERWEIGHT TECH",
+            title: "การกระจุกตัวในหมวดเติบโต (QQQM19)",
+            desc: "สัดส่วนจริงปัจจุบัน 24.71% สูงกว่าเป้าหมาย 15.00% (+9.71%) ต้องเฝ้าระวังความผันผวนของหุ้นกลุ่มเทคโนโลยีสหรัฐฯ และความอ่อนไหวต่ออัตราดอกเบี้ย Fed"
+          },
+          {
+            badge: "NEGATIVE MOS",
+            title: "การติดหล่ม Valuation ของหุ้นปันผล (TISCO)",
+            desc: "ติด Hard Gate (MOS -9.57%) เนื่องจากราคาตลาดสูงกว่า Fair Value (฿115) จับตาปัญหาหนี้ครัวเรือนไทยที่อาจกระทบต่อสินเชื่อเช่าซื้อรถยนต์และการตั้งสำรอง"
+          },
+          {
+            badge: "DOMESTIC RECOVERY",
+            title: "กำลังซื้อในประเทศและการฟื้นตัวของ Margin (CPALL & BDMS)",
+            desc: "ติดตามภาระดอกเบี้ยจ่ายและต้นทุนทางการเงินของกลุ่ม CPALL รวมถึงการแข่งขันด้านศูนย์กลางการแพทย์ระดับภูมิภาคของ BDMS"
+          }
+        ]
+      },
+      "P002": {
+        title: "⚠️ จุดเฝ้าระวังและความเสี่ยงเชิงโครงสร้าง — P002 หุ้นแนต",
+        items: [
+          {
+            badge: "CRITICAL OVERWEIGHT",
+            title: "การกระจุกตัวรุนแรงในกลุ่มการเงิน (SCB)",
+            desc: "สัดส่วนจริงสูงถึง 37.31% (เป้าหมาย 10.00% หรือ Overweight +27.31%) และราคาเกิน Fair Value (MOS -6.55%) หยุดเติมเงินเด็ดขาด และจับตาทิศทางดอกเบี้ยนโยบายขาลงที่อาจกดดัน NIM"
+          },
+          {
+            badge: "POLICY & LEVERAGE",
+            title: "ความเสี่ยงด้านภาระหนี้และนโยบายภาครัฐ (GULF)",
+            desc: "จับตาอัตราส่วน Net D/E และการแทรกแซงค่าไฟ (ค่า Ft) ของภาครัฐ รวมถึงความผันผวนของต้นทุนก๊าซธรรมชาติ (Pool Gas)"
+          },
+          {
+            badge: "CORE ETF UNDERWEIGHT",
+            title: "สัดส่วน Core ETF ยังต่ำกว่าเป้าหมายมาก (WORLDA01)",
+            desc: "มีสัดส่วนจริงเพียง 0.95% จากเป้าหมาย 40.00% (Gap กว้างถึง +39.05%) พอร์ตพึ่งพิงหุ้นไทยสูง ต้องเร่งสะสม WORLDA01 เพื่อกระจายความเสี่ยงระดับโลกตามแผน"
+          }
+        ]
+      },
+      "P003": {
+        title: "⚠️ จุดเฝ้าระวังและความเสี่ยงเชิงโครงสร้าง — P003 หุ้นพ่อ",
+        items: [
+          {
+            badge: "STRETCHED VALUATION",
+            title: "หุ้นใหญ่ที่มี Valuation ตึงตัว (AOT & WHA)",
+            desc: "AOT และ WHA ติด No-Buy Zone โดยเฉพาะ AOT ราคาตลาดสูงกว่าเป้าหมาย จับตาการเจรจาสัญญาพื้นที่เชิงพาณิชย์และจำนวนนักท่องเที่ยวต่างชาติ"
+          },
+          {
+            badge: "FDI CYCLICALITY",
+            title: "ความผันผวนของวงจร FDI และการโอนที่ดิน (WHA & WHAUP)",
+            desc: "สัดส่วน WHA ในพอร์ตสูงถึง 24.63% (เป้าหมาย 14.00%) เฝ้าระวังรอบการโอนที่ดินนิคมฯ และปัจจัยภัยแล้งต่อปริมาณน้ำดิบของ WHAUP"
+          },
+          {
+            badge: "MINIMUM BUY CUT",
+            title: "การติดข้อจำกัด Minimum Buy Cut (WHART)",
+            desc: "WHART มี Valuation ผ่านเกณฑ์ แต่ถูกตัดสิทธิ์รอบนี้เพราะเงินสดคงเหลือ (฿2,245) ต่ำกว่า Minimum Buy (฿5,000) เงินจะถูกยกยอดเป็น Cash Pool ในรอบถัดไป"
+          }
+        ]
+      },
+      "P004": {
+        title: "⚠️ จุดเฝ้าระวังและความเสี่ยงเชิงโครงสร้าง — P004 RMFเหน่ง (Control Band)",
+        items: [
+          {
+            badge: "UPPER BAND BREACH",
+            title: "การทะลุกรอบบนของกองทุนหุ้นสหรัฐฯ (KFUSINDFXRMF)",
+            desc: "สัดส่วนปัจจุบันพุ่งสูงถึง 64.10% ทะลุกรอบควบคุมบน (Upper Band 54.00%) ระบบจึงสั่ง HALT / NO BUY เพื่อหยุดความเสี่ยงการกระจุกตัวในตลาดสหรัฐฯ"
+          },
+          {
+            badge: "BAND RESTORATION",
+            title: "การจัดสรรเงินสมทบเพื่อฟื้นฟูกรอบควบคุม (Restoration Strategy)",
+            desc: "โยกเงินสมทบ ฿150,000 ไปเติม KFINDIARMF (฿80,767) และ KFGOLDRMF (฿69,233) ที่อยู่ต่ำกว่ากรอบล่าง เพื่อดึงสัดส่วนกลับเข้ากรอบโดยไม่ต้องขายหน่วยลงทุนเดิม"
+          }
+        ]
+      }
+    };
+
     let DASHBOARD_DATA = null;
     let ACTIVE_PORTFOLIO_ID = "P001";
     let donutChartInstance = null;
@@ -1530,7 +1739,6 @@
     }
 
     function renderHeaderAndAudit(m, a) {
-      // Audit Bar
       document.getElementById('aud-audit').textContent = a.audit || 'PASS';
       document.getElementById('aud-data').textContent = a.data_integrity || 'PASS';
       document.getElementById('aud-balance').textContent = a.balance_check || 'PASS';
@@ -1580,7 +1788,6 @@
         tbody.appendChild(tr);
       });
 
-      // Update KPI Cards
       document.getElementById('kpi-total-val').textContent = fmtMoney(totalVal);
       document.getElementById('kpi-monthly-dca').textContent = fmtMoney(totalMonthly);
       document.getElementById('kpi-annual-rmf').textContent = fmtMoney(totalAnnual);
@@ -1599,7 +1806,6 @@
       };
       document.getElementById('current-chart-portfolio').textContent = pMap[currentPid] || currentPid;
 
-      // 1. Donut Allocation Chart for current selected portfolio
       const filteredAssets = assets.filter(a => (a.portfolio_id || a.portfolio) === currentPid);
       const labels = filteredAssets.map(a => a.ticker);
       const weights = filteredAssets.map(a => (a.current_weight != null ? (a.current_weight * 100).toFixed(1) : 0));
@@ -1648,7 +1854,6 @@
         });
       }
 
-      // 2. Dividend Yield & Passive Income Bar Chart
       const barCtx = document.getElementById('dividendBarChart');
       if (barCtx && !barChartInstance) {
         barChartInstance = new Chart(barCtx, {
@@ -1812,12 +2017,43 @@
           document.querySelectorAll('.portfolio-tab-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           renderDetailView(id);
+          renderSurveillanceBanner(id);
           renderCharts(DASHBOARD_DATA.assets, id);
         };
         nav.appendChild(btn);
       });
 
+      renderSurveillanceBanner(ACTIVE_PORTFOLIO_ID);
       renderDetailView(ACTIVE_PORTFOLIO_ID);
+    }
+
+    // OPTION B: Render Surveillance Cards for Active Portfolio
+    function renderSurveillanceBanner(pId) {
+      const info = SURVEILLANCE_DATA[pId];
+      const titleEl = document.getElementById('surveillance-title');
+      const gridEl = document.getElementById('surveillance-cards-grid');
+
+      if (!info) {
+        document.getElementById('surveillance-box').style.display = 'none';
+        return;
+      }
+
+      document.getElementById('surveillance-box').style.display = 'flex';
+      titleEl.textContent = info.title;
+      gridEl.innerHTML = '';
+
+      info.items.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'surveillance-card';
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+            <strong style="margin-bottom: 0;">${item.title}</strong>
+            <span class="panel-tag" style="color: #fbbf24; font-size: 0.7rem; font-weight: 700;">${item.badge}</span>
+          </div>
+          <p>${item.desc}</p>
+        `;
+        gridEl.appendChild(card);
+      });
     }
 
     function renderDetailView(pId) {
