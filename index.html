@@ -6,24 +6,27 @@
   <title>VF-DCA 2.2 — Institutional Portfolio Terminal</title>
   <style>
     :root {
-      --bg-main: #080b11;
-      --bg-card: #0f172a;
-      --bg-card-hover: #1e293b;
+      --bg-main: #06090e;
+      --bg-card: #0d131f;
+      --bg-card-sub: #121a2b;
+      --bg-hover: #182338;
       --border-color: #1e293b;
-      --border-accent: #334155;
-      --text-main: #f1f5f9;
+      --border-light: #283548;
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
       --accent-green: #10b981;
       --accent-green-bg: rgba(16, 185, 129, 0.12);
+      --accent-green-border: rgba(16, 185, 129, 0.35);
       --accent-red: #ef4444;
       --accent-red-bg: rgba(239, 68, 68, 0.12);
+      --accent-red-border: rgba(239, 68, 68, 0.35);
       --accent-amber: #f59e0b;
       --accent-amber-bg: rgba(245, 158, 11, 0.12);
       --accent-blue: #3b82f6;
       --accent-blue-bg: rgba(59, 130, 246, 0.12);
-      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,328 +35,522 @@
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.5;
-      padding: 24px 16px;
+      padding: 24px 32px;
+      width: 100%;
+      min-height: 100vh;
     }
 
-    .container {
-      max-width: 1360px;
+    @media (min-width: 1600px) {
+      body { padding: 32px 48px; }
+    }
+    @media (max-width: 768px) {
+      body { padding: 16px 12px; }
+    }
+
+    .full-width-container {
+      width: 100%;
+      max-width: 100%;
       margin: 0 auto;
     }
 
     /* HEADER */
-    header {
-      background: var(--bg-card);
+    header.dashboard-header {
+      background: linear-gradient(180deg, #0f172a 0%, #0d131f 100%);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
+      padding: 22px 28px;
+      margin-bottom: 20px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
     }
-
-    .title-group h1 {
-      font-size: 1.35rem;
+    .header-left h1 {
+      font-size: 1.45rem;
       font-weight: 700;
-      color: #fff;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .title-group p {
-      font-size: 0.85rem;
+    .header-left p {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-top: 4px;
+      margin-top: 5px;
+      font-family: var(--font-mono);
     }
-
-    .meta-badges {
+    .header-right {
       display: flex;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
-      gap: 8px;
     }
-    .badge {
-      font-size: 0.75rem;
-      font-family: var(--font-mono);
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: var(--bg-card-hover);
-      border: 1px solid var(--border-accent);
-      color: var(--text-main);
-    }
-    .badge.green { background: var(--accent-green-bg); border-color: var(--accent-green); color: var(--accent-green); font-weight: 600; }
-    .badge.red { background: var(--accent-red-bg); border-color: var(--accent-red); color: var(--accent-red); font-weight: 600; }
-    .badge.amber { background: var(--accent-amber-bg); border-color: var(--accent-amber); color: var(--accent-amber); font-weight: 600; }
-
-    /* SECTION STYLES */
-    section {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 24px;
-    }
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 12px;
-    }
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* AUDIT STATUS BAR */
-    .audit-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-    .audit-item {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-color);
-      padding: 12px 16px;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .audit-label {
-      font-size: 0.72rem;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      font-family: var(--font-mono);
-    }
-    .audit-value {
-      font-size: 0.95rem;
-      font-weight: 600;
+    .status-badge-active {
+      background: var(--accent-green-bg);
+      border: 1px solid var(--accent-green);
       color: var(--accent-green);
       font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.02em;
     }
 
-    /* SUMMARY CARDS */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-    .summary-card {
-      background: rgba(30, 41, 59, 0.4);
+    /* AUDIT BAR (Compact Institutional) */
+    .audit-bar {
+      background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 16px;
+      padding: 12px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-    .card-header {
+    .audit-bar-title {
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .audit-bar-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .audit-chip {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+    .audit-chip strong {
+      color: var(--accent-green);
+      font-weight: 700;
+    }
+
+    /* KPI SUMMARY GRID */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent-blue);
+      opacity: 0.4;
+    }
+    .kpi-card.green::before { background: var(--accent-green); opacity: 0.8; }
+    .kpi-card.amber::before { background: var(--accent-amber); opacity: 0.8; }
+    .kpi-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-family: var(--font-mono);
+      margin-bottom: 8px;
+    }
+    .kpi-val {
+      font-size: 1.65rem;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+    .kpi-val.green { color: var(--accent-green); }
+    .kpi-val.amber { color: var(--accent-amber); }
+    .kpi-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 6px;
+      font-family: var(--font-sans);
+    }
+
+    /* SECTION CONTAINERS */
+    section.panel-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 28px;
+    }
+    .panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .card-title {
-      font-size: 0.95rem;
+    .panel-title {
+      font-size: 1.15rem;
       font-weight: 600;
-      color: #fff;
-    }
-    .card-body {
+      color: #ffffff;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 0.82rem;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: -0.01em;
     }
-    .card-row {
-      display: flex;
-      justify-content: space-between;
-    }
-    .card-row .val {
+    .panel-tag {
+      font-size: 0.75rem;
       font-family: var(--font-mono);
-      font-weight: 500;
-      color: var(--text-main);
+      padding: 3px 10px;
+      border-radius: 5px;
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-light);
+      color: var(--text-muted);
     }
-    .card-row .val.green { color: var(--accent-green); font-weight: 600; }
-    .card-row .val.amber { color: var(--accent-amber); font-weight: 600; }
 
     /* TABLES */
-    .table-responsive {
+    .table-container {
+      width: 100%;
       overflow-x: auto;
       border-radius: 8px;
       border: 1px solid var(--border-color);
+      background: #090e17;
     }
-    table {
+    table.institutional-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.84rem;
+      font-size: 0.88rem;
       text-align: left;
     }
-    th {
-      background: #131d31;
+    table.institutional-table th {
+      background: #111a2c;
       color: var(--text-muted);
-      padding: 10px 14px;
+      padding: 13px 16px;
       font-weight: 600;
       border-bottom: 1px solid var(--border-color);
       white-space: nowrap;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
-    td {
-      padding: 10px 14px;
+    table.institutional-table td {
+      padding: 13px 16px;
       border-bottom: 1px solid var(--border-color);
       color: var(--text-main);
       white-space: nowrap;
     }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(30, 41, 59, 0.4); }
+    table.institutional-table tr:last-child td { border-bottom: none; }
+    table.institutional-table tbody tr:hover { background: var(--bg-hover); }
+    
+    .mono { font-family: var(--font-mono); }
     .text-right { text-align: right; }
     .text-center { text-align: center; }
-    .mono { font-family: var(--font-mono); }
+    .font-semibold { font-weight: 600; }
+
+    /* BADGES & TAGS */
+    .badge-action {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+    .badge-action.buy {
+      background: var(--accent-green-bg);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+    .badge-action.nobuy {
+      background: var(--accent-red-bg);
+      color: var(--accent-red);
+      border: 1px solid var(--accent-red-border);
+    }
+    .badge-action.deferred {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
 
     /* TABS */
-    .tab-nav {
+    .portfolio-tab-bar {
       display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 20px;
       border-bottom: 1px solid var(--border-color);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       overflow-x: auto;
     }
-    .tab-btn {
-      background: transparent;
-      border: 1px solid var(--border-accent);
+    .portfolio-tab-btn {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-color);
       color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.88rem;
       cursor: pointer;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      transition: all 0.2s;
       white-space: nowrap;
     }
-    .tab-btn:hover { background: var(--bg-card-hover); color: #fff; }
-    .tab-btn.active {
+    .portfolio-tab-btn:hover {
+      background: var(--bg-hover);
+      color: #fff;
+    }
+    .portfolio-tab-btn.active {
       background: var(--accent-blue);
       border-color: var(--accent-blue);
       color: #fff;
       font-weight: 600;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
     }
 
-    /* TAGS */
-    .tag {
-      display: inline-block;
-      font-size: 0.72rem;
+    /* CONSOLIDATED CARDS (Ticker Rollup) */
+    .ticker-rollup-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .ticker-rollup-card {
+      background: var(--bg-card-sub);
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .rollup-info .ticker-name {
+      font-size: 1.1rem;
+      font-weight: 700;
       font-family: var(--font-mono);
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 4px;
+      color: #fff;
     }
-    .tag.buy { background: var(--accent-green-bg); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.3); }
-    .tag.nobuy { background: var(--accent-red-bg); color: var(--accent-red); border: 1px solid rgba(239, 68, 68, 0.3); }
-    .tag.deferred { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); border: 1px solid rgba(148, 163, 184, 0.2); }
-
-    footer {
-      text-align: center;
-      padding: 20px 0;
-      color: var(--text-dim);
+    .rollup-info .ticker-shares {
       font-size: 0.8rem;
+      color: var(--text-muted);
       font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+    .rollup-amount {
+      text-align: right;
+    }
+    .rollup-amount .amount-val {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-green);
+      font-family: var(--font-mono);
+    }
+    .rollup-amount .amount-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+
+    footer.dashboard-footer {
+      text-align: center;
+      padding: 30px 0 10px 0;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+      border-top: 1px solid var(--border-color);
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="title-group">
-        <h1>🔒 VF-DCA 2.2 — Institutional Portfolio Terminal</h1>
-        <p>Valuation-First Dynamic DCA Management System • Production Layer</p>
+  <div class="full-width-container">
+    
+    <!-- 1. INSTITUTIONAL HEADER -->
+    <header class="dashboard-header">
+      <div class="header-left">
+        <h1>🔒 VF-DCA 2.2 — Consolidated Dashboard</h1>
+        <p>Gemini Central Production Master v2.4 • Final Audited Dataset · 2026-08-31</p>
       </div>
-      <div class="meta-badges">
-        <span class="badge" id="meta-sys-ver">SYSTEM: VF-DCA 2.2</span>
-        <span class="badge" id="meta-master-ver">MASTER: v2.4</span>
-        <span class="badge" id="meta-dataset-ver">DATASET: Loading...</span>
-        <span class="badge" id="meta-as-of">AS OF: Loading...</span>
-        <span class="badge green" id="meta-update-status">STATUS: PASS</span>
+      <div class="header-right">
+        <div class="status-badge-active">
+          <span>●</span> PRODUCTION ACTIVE
+        </div>
       </div>
     </header>
 
-    <section>
-      <div class="section-header">
-        <div class="section-title">🛡️ Audit & System Integrity Verification</div>
-        <span class="badge green" id="audit-global-badge">AUDIT: PASS</span>
+    <!-- 2. AUDIT & INTEGRITY STATUS BAR (Compact) -->
+    <div class="audit-bar">
+      <div class="audit-bar-title">🛡️ System Audit & Integrity Status</div>
+      <div class="audit-bar-items">
+        <div class="audit-chip">AUDIT: <strong id="aud-audit">PASS</strong></div>
+        <div class="audit-chip">DATA: <strong id="aud-data">PASS</strong></div>
+        <div class="audit-chip">BALANCE: <strong id="aud-balance">PASS</strong></div>
+        <div class="audit-chip">ALLOCATION: <strong id="aud-alloc">PASS</strong></div>
+        <div class="audit-chip">EXECUTION: <strong id="aud-exec">PASS</strong></div>
+        <div class="audit-chip">DASHBOARD: <strong id="aud-dash">PASS</strong></div>
       </div>
-      <div class="audit-grid">
-        <div class="audit-item"><span class="audit-label">Final Audit</span><span class="audit-value" id="audit-final">PASS</span></div>
-        <div class="audit-item"><span class="audit-label">Data Integrity</span><span class="audit-value" id="audit-data">PASS</span></div>
-        <div class="audit-item"><span class="audit-label">Balance Check</span><span class="audit-value" id="audit-balance">PASS</span></div>
-        <div class="audit-item"><span class="audit-label">Allocation Check</span><span class="audit-value" id="audit-allocation">PASS</span></div>
-        <div class="audit-item"><span class="audit-label">Execution Check</span><span class="audit-value" id="audit-execution">PASS</span></div>
-        <div class="audit-item"><span class="audit-label">Dashboard Update</span><span class="audit-value" id="audit-dashboard">PASS</span></div>
-      </div>
-    </section>
+    </div>
 
-    <section>
-      <div class="section-header">
-        <div class="section-title">📊 Portfolio Overview & Cash Flow Summary</div>
-        <span class="badge" id="overview-count">5 Portfolios</span>
+    <!-- 3. KPI SUMMARY -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Portfolio Value</div>
+        <div class="kpi-val" id="kpi-total-val">฿5,763,628.11</div>
+        <div class="kpi-sub">มูลค่าสินทรัพย์รวม P001–P004</div>
       </div>
-      <div class="cards-grid" id="portfolio-cards"></div>
-      <div class="table-responsive">
-        <table>
+      <div class="kpi-card">
+        <div class="kpi-label">Monthly DCA Budget</div>
+        <div class="kpi-val" id="kpi-monthly-dca">฿130,000.00</div>
+        <div class="kpi-sub">P001 (70k) + P002 (30k) + P003 (30k)</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Annual RMF Budget</div>
+        <div class="kpi-val" id="kpi-annual-rmf">฿150,000.00</div>
+        <div class="kpi-sub">P004 RMFเหน่ง (Active Cycle)</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">Actual Buy Deployed</div>
+        <div class="kpi-val green" id="kpi-actual-buy">฿266,650.00</div>
+        <div class="kpi-sub">หุ้น ฿116,650 + RMF ฿150,000</div>
+      </div>
+      <div class="kpi-card amber">
+        <div class="kpi-label">Remaining Cash Pool</div>
+        <div class="kpi-val amber" id="kpi-remaining-cash">฿13,350.00</div>
+        <div class="kpi-sub">Cash Policy: HOLD (100% Balanced)</div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-label">Cycle Status</div>
+        <div class="kpi-val green" id="kpi-cycle-status">PASS</div>
+        <div class="kpi-sub">4 Active • 1 Deferred (P005)</div>
+      </div>
+    </div>
+
+    <!-- 4. PORTFOLIO OVERVIEW TABLE -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <div class="panel-title">📊 Portfolio Overview & Cash Flow Rebalancing</div>
+        <span class="panel-tag">P001 – P005 Master View</span>
+      </div>
+      <div class="table-container">
+        <table class="institutional-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Portfolio Name</th>
-              <th>Type</th>
-              <th class="text-right">Portfolio Value</th>
-              <th class="text-right">DCA Budget</th>
-              <th class="text-right">Actual Buy</th>
-              <th class="text-right">Remaining Cash</th>
-              <th class="text-center">Cash Policy</th>
+              <th>Portfolio</th>
+              <th class="text-right">Value (THB)</th>
+              <th class="text-center">Frequency</th>
+              <th class="text-right">Budget (THB)</th>
+              <th class="text-right">Actual Buy (THB)</th>
+              <th class="text-right">Cash (THB)</th>
+              <th class="text-center">Policy</th>
               <th class="text-center">Status</th>
             </tr>
           </thead>
-          <tbody id="overview-table-body"></tbody>
+          <tbody id="overview-tbody"></tbody>
         </table>
       </div>
     </section>
 
-    <section>
-      <div class="section-header">
-        <div class="section-title">🎯 Portfolio Detail & Valuation Matrix</div>
+    <!-- 5. CONSOLIDATED EQUITY ORDERS (P001–P003) -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <div class="panel-title">🛒 Consolidated Equity Orders — P001–P003</div>
+        <span class="status-badge-active" id="equity-orders-badge">Total Buy: ฿116,650.00</span>
       </div>
-      <div class="tab-nav" id="portfolio-tabs"></div>
-      <div class="table-responsive">
-        <table>
-          <thead id="detail-table-head"></thead>
-          <tbody id="detail-table-body"></tbody>
-        </table>
-      </div>
-    </section>
+      
+      <!-- Ticker Rollup Cards (BDMS, CPALL, WORLDA01, WHART, CPN) -->
+      <div class="ticker-rollup-grid" id="ticker-rollup-cards"></div>
 
-    <section>
-      <div class="section-header">
-        <div class="section-title">🛒 Consolidated Execution Orders</div>
-        <span class="badge green" id="orders-total-badge">Total Orders</span>
-      </div>
-      <div class="table-responsive">
-        <table>
+      <!-- Detailed Breakdown Table -->
+      <div class="table-container">
+        <table class="institutional-table">
           <thead>
             <tr>
               <th>Portfolio</th>
               <th>Ticker</th>
-              <th class="text-center">Order Type</th>
-              <th class="text-right">Quantity / Shares</th>
-              <th class="text-right">Price (THB)</th>
-              <th class="text-right">Execution Amount (THB)</th>
+              <th class="text-center">Action</th>
+              <th class="text-right">Shares / Units</th>
+              <th class="text-right">Exec Price (THB)</th>
+              <th class="text-right">Total Buy (THB)</th>
             </tr>
           </thead>
-          <tbody id="orders-table-body"></tbody>
+          <tbody id="orders-tbody"></tbody>
         </table>
       </div>
     </section>
 
-    <footer>
-      VF-DCA 2.2 • Governed strictly by Master Specification v2.4 • Deterministic Presentation Layer Only
+    <!-- 6. P004 RMF — CONTROL-BAND ENGINE -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <div class="panel-title">🛡️ P004 RMFเหน่ง — Control-Band Engine</div>
+        <span class="panel-tag">Annual Contribution: ฿150,000.00</span>
+      </div>
+      <div class="table-container">
+        <table class="institutional-table">
+          <thead>
+            <tr>
+              <th>Fund Ticker</th>
+              <th class="text-center">Action</th>
+              <th class="text-right">Current Weight</th>
+              <th class="text-right">Target Weight</th>
+              <th class="text-right">Control Band</th>
+              <th class="text-right">Weight Gap</th>
+              <th class="text-right">Contribution (Buy)</th>
+              <th class="text-right">Post Weight</th>
+              <th class="text-center">Band Status</th>
+              <th>Strategy Direction</th>
+            </tr>
+          </thead>
+          <tbody id="rmf-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. PORTFOLIO DETAIL (VALUATION MATRIX) -->
+    <section class="panel-box">
+      <div class="panel-header">
+        <div class="panel-title">🎯 Portfolio Detail & Valuation Matrix</div>
+        <span class="panel-tag">Select Portfolio</span>
+      </div>
+      <div class="portfolio-tab-bar" id="portfolio-tabs"></div>
+      <div class="table-container">
+        <table class="institutional-table">
+          <thead id="detail-thead"></thead>
+          <tbody id="detail-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="dashboard-footer">
+      VF-DCA 2.2 • Governed strictly by Master Specification v2.4 • Production Presentation Layer Only
     </footer>
+
   </div>
 
   <script>
@@ -1172,42 +1369,35 @@
           orders: raw.consolidated_orders || raw.orders || []
         };
 
-        // Header
-        const m = DASHBOARD_DATA.metadata;
-        if (m.system_version) document.getElementById('meta-sys-ver').textContent = 'SYSTEM: ' + m.system_version;
-        if (m.master_version) document.getElementById('meta-master-ver').textContent = 'MASTER: ' + m.master_version;
-        if (m.dataset_version) document.getElementById('meta-dataset-ver').textContent = 'DATASET: ' + m.dataset_version;
-        if (m.data_as_of_date) document.getElementById('meta-as-of').textContent = 'AS OF: ' + m.data_as_of_date;
-
-        // Audit
-        const a = DASHBOARD_DATA.audit;
-        document.getElementById('audit-final').textContent = a.audit || 'PASS';
-        document.getElementById('audit-data').textContent = a.data_integrity || 'PASS';
-        document.getElementById('audit-balance').textContent = a.balance_check || 'PASS';
-        document.getElementById('audit-allocation').textContent = a.allocation_check || 'PASS';
-        document.getElementById('audit-execution').textContent = a.execution_check || 'PASS';
-        document.getElementById('audit-dashboard').textContent = a.dashboard_update || 'PASS';
-
-        // Overview
+        renderHeaderAndAudit(DASHBOARD_DATA.metadata, DASHBOARD_DATA.audit);
         renderOverview(DASHBOARD_DATA.portfolios);
-
-        // Tabs & Detail
-        renderTabs(DASHBOARD_DATA.portfolios);
-
-        // Orders
-        renderOrders(DASHBOARD_DATA.orders);
+        renderEquityOrders(DASHBOARD_DATA.orders);
+        renderRMFSection(DASHBOARD_DATA.assets);
+        renderDetailTabs(DASHBOARD_DATA.portfolios);
       }).catch(err => {
-        console.error(err);
+        console.error("Dashboard Init Error:", err);
       });
     }
 
+    function renderHeaderAndAudit(m, a) {
+      // Audit Bar
+      document.getElementById('aud-audit').textContent = a.audit || 'PASS';
+      document.getElementById('aud-data').textContent = a.data_integrity || 'PASS';
+      document.getElementById('aud-balance').textContent = a.balance_check || 'PASS';
+      document.getElementById('aud-alloc').textContent = a.allocation_check || 'PASS';
+      document.getElementById('aud-exec').textContent = a.execution_check || 'PASS';
+      document.getElementById('aud-dash').textContent = a.dashboard_update || 'PASS';
+    }
+
     function renderOverview(portfolios) {
-      const cards = document.getElementById('portfolio-cards');
-      const tbody = document.getElementById('overview-table-body');
-      cards.innerHTML = '';
+      const tbody = document.getElementById('overview-tbody');
       tbody.innerHTML = '';
 
-      document.getElementById('overview-count').textContent = portfolios.length + ' Portfolios';
+      let totalVal = 0;
+      let totalMonthly = 0;
+      let totalAnnual = 0;
+      let totalBuy = 0;
+      let totalCash = 0;
 
       portfolios.forEach(p => {
         const id = p.portfolio_id || p.id;
@@ -1215,105 +1405,187 @@
         const val = p.current_portfolio_value;
         const budget = p.budget;
         const actual = p.actual_buy;
-        const rem = p.remaining_cash;
+        const cash = p.remaining_cash;
+        const freq = p.budget_type || 'Monthly';
+        const policy = p.cash_policy || 'HOLD';
         const status = p.cycle_status || 'PASS';
 
-        // Card
-        const c = document.createElement('div');
-        c.className = 'summary-card';
-        c.innerHTML = `
-          <div class="card-header">
-            <span class="card-title">${id} ${name}</span>
-            <span class="tag ${status === 'PASS' ? 'buy' : 'deferred'}">${status}</span>
-          </div>
-          <div class="card-body">
-            <div class="card-row"><span>มูลค่าพอร์ต:</span><span class="val">${fmtMoney(val)}</span></div>
-            <div class="card-row"><span>งบลงทุน (${p.budget_type || 'Monthly'}):</span><span class="val">${fmtMoney(budget)}</span></div>
-            <div class="card-row"><span>ยอดเข้าซื้อจริง:</span><span class="val green">${fmtMoney(actual)}</span></div>
-            <div class="card-row"><span>เงินสดคงเหลือ:</span><span class="val amber">${fmtMoney(rem)}</span></div>
-          </div>
-        `;
-        cards.appendChild(c);
+        if (val) totalVal += Number(val);
+        if (freq === 'Monthly' && budget) totalMonthly += Number(budget);
+        if (freq === 'Annual' && id === 'P004' && budget) totalAnnual += Number(budget);
+        if (actual) totalBuy += Number(actual);
+        if (cash) totalCash += Number(cash);
 
-        // Row
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="mono"><strong>${id}</strong></td>
-          <td>${name}</td>
-          <td><span class="badge">${p.portfolio_type || 'EQUITY'}</span></td>
-          <td class="text-right mono">${fmtMoney(val)}</td>
+          <td><strong>${id}</strong> <span style="color: var(--text-muted);">${name}</span></td>
+          <td class="text-right mono font-semibold">${fmtMoney(val)}</td>
+          <td class="text-center"><span class="panel-tag">${freq}</span></td>
           <td class="text-right mono">${fmtMoney(budget)}</td>
-          <td class="text-right mono" style="color: var(--accent-green); font-weight: 600;">${fmtMoney(actual)}</td>
-          <td class="text-right mono" style="color: var(--accent-amber); font-weight: 600;">${fmtMoney(rem)}</td>
-          <td class="text-center mono"><span class="badge">${p.cash_policy || 'HOLD'}</span></td>
-          <td class="text-center"><span class="tag ${status === 'PASS' ? 'buy' : 'deferred'}">${status}</span></td>
+          <td class="text-right mono font-semibold" style="color: var(--accent-green);">${fmtMoney(actual)}</td>
+          <td class="text-right mono font-semibold" style="color: var(--accent-amber);">${fmtMoney(cash)}</td>
+          <td class="text-center mono"><span class="panel-tag">${policy}</span></td>
+          <td class="text-center"><span class="badge-action ${status === 'PASS' ? 'buy' : 'deferred'}">${status}</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Update KPI Cards
+      document.getElementById('kpi-total-val').textContent = fmtMoney(totalVal);
+      document.getElementById('kpi-monthly-dca').textContent = fmtMoney(totalMonthly);
+      document.getElementById('kpi-annual-rmf').textContent = fmtMoney(totalAnnual);
+      document.getElementById('kpi-actual-buy').textContent = fmtMoney(totalBuy);
+      document.getElementById('kpi-remaining-cash').textContent = fmtMoney(totalCash);
+    }
+
+    function renderEquityOrders(orders) {
+      const rollupGrid = document.getElementById('ticker-rollup-cards');
+      const tbody = document.getElementById('orders-tbody');
+      rollupGrid.innerHTML = '';
+      tbody.innerHTML = '';
+
+      // Group by ticker for P001-P003
+      const equityOrders = orders.filter(o => o.portfolio_id !== 'P004' && o.portfolio_id !== 'P005');
+      const tickerMap = {};
+      let grandTotal = 0;
+
+      equityOrders.forEach(o => {
+        const t = o.ticker;
+        if (!tickerMap[t]) tickerMap[t] = { shares: 0, amount: 0, count: 0 };
+        tickerMap[t].shares += Number(o.quantity) || 0;
+        tickerMap[t].amount += Number(o.amount) || 0;
+        tickerMap[t].count += 1;
+        grandTotal += Number(o.amount) || 0;
+      });
+
+      // Render Ticker Rollup Cards
+      Object.keys(tickerMap).sort().forEach(t => {
+        const item = tickerMap[t];
+        const card = document.createElement('div');
+        card.className = 'ticker-rollup-card';
+        card.innerHTML = `
+          <div class="rollup-info">
+            <div class="ticker-name">${t}</div>
+            <div class="ticker-shares">${fmtShares(item.shares)} หุ้น (${item.count} พอร์ต)</div>
+          </div>
+          <div class="rollup-amount">
+            <div class="amount-val">${fmtMoney(item.amount)}</div>
+            <div class="amount-label">BUY THB</div>
+          </div>
+        `;
+        rollupGrid.appendChild(card);
+      });
+
+      // Render Table Rows
+      equityOrders.forEach(o => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><strong>${o.portfolio_id}</strong> ${o.portfolio_name || ''}</td>
+          <td class="mono font-semibold" style="color: #fff;">${o.ticker}</td>
+          <td class="text-center"><span class="badge-action buy">${o.order_type || 'BUY'}</span></td>
+          <td class="text-right mono">${fmtShares(o.quantity)}</td>
+          <td class="text-right mono">${o.price != null ? Number(o.price).toFixed(2) : '-'}</td>
+          <td class="text-right mono font-semibold" style="color: var(--accent-green);">${fmtMoney(o.amount)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Grand Total Row
+      const totalTr = document.createElement('tr');
+      totalTr.style.background = 'rgba(16, 185, 129, 0.08)';
+      totalTr.innerHTML = `
+        <td colspan="5" class="text-right"><strong>ยอดรวมคำสั่งซื้อหุ้น P001–P003 (Total Equity Buy):</strong></td>
+        <td class="text-right mono font-semibold" style="color: var(--accent-green); font-size: 1.05rem;">${fmtMoney(grandTotal)}</td>
+      `;
+      tbody.appendChild(totalTr);
+
+      document.getElementById('equity-orders-badge').textContent = 'Total Buy: ' + fmtMoney(grandTotal);
+    }
+
+    function renderRMFSection(assets) {
+      const tbody = document.getElementById('rmf-tbody');
+      tbody.innerHTML = '';
+
+      const rmfAssets = assets.filter(a => (a.portfolio_id || a.portfolio) === 'P004');
+
+      rmfAssets.forEach(a => {
+        const isBuy = a.action === 'BUY';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="mono font-semibold" style="color: #fff;">${a.ticker}</td>
+          <td class="text-center"><span class="badge-action ${isBuy ? 'buy' : 'nobuy'}">${a.action}</span></td>
+          <td class="text-right mono font-semibold">${fmtPct(a.current_weight)}</td>
+          <td class="text-right mono">${fmtPct(a.target_weight)}</td>
+          <td class="text-right mono" style="color: var(--text-muted);">${fmtPct(a.lower_band)} – ${fmtPct(a.upper_band)}</td>
+          <td class="text-right mono" style="color: ${a.allocation_gap > 0 ? 'var(--accent-green)' : 'var(--text-dim)'};">${fmtPct(a.allocation_gap)}</td>
+          <td class="text-right mono font-semibold" style="color: ${a.actual_buy > 0 ? 'var(--accent-green)' : 'inherit'};">${fmtMoney(a.actual_buy)}</td>
+          <td class="text-right mono font-semibold" style="color: #fff;">${fmtPct(a.post_contribution_weight)}</td>
+          <td class="text-center"><span class="panel-tag" style="color: ${a.band_status === 'RESTORED_TO_BAND' ? 'var(--accent-green)' : 'var(--accent-amber)'};">${a.band_status || '-'}</span></td>
+          <td style="color: var(--text-muted); font-size: 0.8rem;">${a.rebalancing_direction || a.no_buy_reason || '-'}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function renderTabs(portfolios) {
+    function renderDetailTabs(portfolios) {
       const nav = document.getElementById('portfolio-tabs');
       nav.innerHTML = '';
 
-      portfolios.forEach(p => {
+      // Only show P001, P002, P003, P004 tabs
+      portfolios.filter(p => (p.portfolio_id || p.id) !== 'P005').forEach(p => {
         const id = p.portfolio_id || p.id;
         const name = p.portfolio_name || p.name;
         const btn = document.createElement('button');
-        btn.className = 'tab-btn ' + (id === ACTIVE_PORTFOLIO_ID ? 'active' : '');
+        btn.className = 'portfolio-tab-btn ' + (id === ACTIVE_PORTFOLIO_ID ? 'active' : '');
         btn.textContent = id + ' ' + name;
         btn.onclick = () => {
           ACTIVE_PORTFOLIO_ID = id;
-          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.portfolio-tab-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          renderDetail(id);
+          renderDetailView(id);
         };
         nav.appendChild(btn);
       });
 
-      renderDetail(ACTIVE_PORTFOLIO_ID);
+      renderDetailView(ACTIVE_PORTFOLIO_ID);
     }
 
-    function renderDetail(pId) {
-      const thead = document.getElementById('detail-table-head');
-      const tbody = document.getElementById('detail-table-body');
+    function renderDetailView(pId) {
+      const thead = document.getElementById('detail-thead');
+      const tbody = document.getElementById('detail-tbody');
       tbody.innerHTML = '';
 
-      const isRMF = pId === 'P004' || pId === 'P005';
+      const isRMF = pId === 'P004';
 
       if (isRMF) {
         thead.innerHTML = `
           <tr>
             <th class="text-center">Rank</th>
-            <th>Ticker</th>
+            <th>Fund Ticker</th>
             <th class="text-center">Action</th>
-            <th class="text-right">Target Weight</th>
-            <th class="text-right">Lower Band</th>
-            <th class="text-right">Upper Band</th>
-            <th class="text-right">Current Weight</th>
-            <th class="text-right">Weight Gap</th>
+            <th class="text-right">Target</th>
+            <th class="text-right">Current</th>
+            <th class="text-right">Gap</th>
             <th class="text-right">Contribution (Buy)</th>
             <th class="text-right">Post Weight</th>
             <th class="text-center">Band Status</th>
-            <th>Rebalancing Notes</th>
+            <th>Status / Strategy</th>
           </tr>
         `;
       } else {
         thead.innerHTML = `
           <tr>
             <th class="text-center">Rank</th>
-            <th>Ticker</th>
+            <th>Asset Ticker</th>
             <th class="text-center">Action</th>
-            <th class="text-center">VF-DCA Score</th>
+            <th class="text-center">Score</th>
             <th class="text-right">Price</th>
             <th class="text-right">Fair Value</th>
             <th class="text-right">MOS</th>
-            <th class="text-right">Action Price</th>
-            <th class="text-right">TP1 (1.18x)</th>
-            <th class="text-right">Target %</th>
-            <th class="text-right">Actual %</th>
-            <th class="text-right">Gap %</th>
-            <th class="text-right">Actual Buy</th>
+            <th class="text-right">Target</th>
+            <th class="text-right">Current</th>
+            <th class="text-right">Gap</th>
+            <th class="text-right">Buy Amount</th>
             <th class="text-right">Shares</th>
             <th>Status / Reason</th>
           </tr>
@@ -1322,11 +1594,6 @@
 
       const list = (DASHBOARD_DATA.assets || []).filter(a => (a.portfolio_id || a.portfolio) === pId);
 
-      if (!list.length) {
-        tbody.innerHTML = '<tr><td colspan="15" class="text-center" style="color: var(--text-muted); padding: 24px;">ไม่พบรายการสินทรัพย์ หรือพอร์ตนี้อยู่ในสถานะ DEFERRED</td></tr>';
-        return;
-      }
-
       list.forEach(a => {
         const isBuy = a.action === 'BUY';
         const tr = document.createElement('tr');
@@ -1334,75 +1601,36 @@
         if (isRMF) {
           tr.innerHTML = `
             <td class="text-center mono">${a.ranking || '-'}</td>
-            <td class="mono"><strong>${a.ticker}</strong></td>
-            <td class="text-center"><span class="tag ${isBuy ? 'buy' : 'nobuy'}">${a.action}</span></td>
+            <td class="mono font-semibold" style="color: #fff;">${a.ticker}</td>
+            <td class="text-center"><span class="badge-action ${isBuy ? 'buy' : 'nobuy'}">${a.action}</span></td>
             <td class="text-right mono">${fmtPct(a.target_weight)}</td>
-            <td class="text-right mono">${fmtPct(a.lower_band)}</td>
-            <td class="text-right mono">${fmtPct(a.upper_band)}</td>
             <td class="text-right mono">${fmtPct(a.current_weight)}</td>
             <td class="text-right mono" style="color: ${a.allocation_gap > 0 ? 'var(--accent-green)' : 'inherit'}">${fmtPct(a.allocation_gap)}</td>
-            <td class="text-right mono" style="color: ${a.actual_buy > 0 ? 'var(--accent-green)' : 'inherit'}; font-weight: ${a.actual_buy > 0 ? '600' : 'normal'}">${fmtMoney(a.actual_buy)}</td>
-            <td class="text-right mono font-semibold">${fmtPct(a.post_contribution_weight)}</td>
-            <td class="text-center"><span class="badge ${a.band_status === 'RESTORED_TO_BAND' ? 'green' : 'amber'}">${a.band_status || '-'}</span></td>
-            <td style="color: var(--text-muted); font-size: 0.78rem;">${a.rebalancing_direction || a.no_buy_reason || '-'}</td>
+            <td class="text-right mono font-semibold" style="color: ${a.actual_buy > 0 ? 'var(--accent-green)' : 'inherit'}">${fmtMoney(a.actual_buy)}</td>
+            <td class="text-right mono font-semibold" style="color: #fff;">${fmtPct(a.post_contribution_weight)}</td>
+            <td class="text-center"><span class="panel-tag">${a.band_status || '-'}</span></td>
+            <td style="color: var(--text-muted); font-size: 0.8rem;">${a.rebalancing_direction || a.no_buy_reason || '-'}</td>
           `;
         } else {
           const mosVal = a.mos != null ? (Number(a.mos) * 100).toFixed(2) + '%' : '-';
           tr.innerHTML = `
             <td class="text-center mono">${a.ranking || '-'}</td>
-            <td class="mono"><strong>${a.ticker}</strong></td>
-            <td class="text-center"><span class="tag ${isBuy ? 'buy' : 'nobuy'}">${a.action}</span></td>
-            <td class="text-center mono" style="font-weight: 600; color: ${a.dca_score >= 50 ? 'var(--accent-green)' : 'inherit'}">${a.dca_score != null ? Number(a.dca_score).toFixed(1) : '-'}</td>
+            <td class="mono font-semibold" style="color: #fff;">${a.ticker}</td>
+            <td class="text-center"><span class="badge-action ${isBuy ? 'buy' : 'nobuy'}">${a.action}</span></td>
+            <td class="text-center mono font-semibold" style="color: ${a.dca_score >= 50 ? 'var(--accent-green)' : 'inherit'}">${a.dca_score != null ? Number(a.dca_score).toFixed(1) : '-'}</td>
             <td class="text-right mono">${a.current_price != null ? Number(a.current_price).toFixed(2) : '-'}</td>
             <td class="text-right mono">${a.fair_value != null ? Number(a.fair_value).toFixed(2) : '-'}</td>
-            <td class="text-right mono" style="color: ${parseFloat(mosVal) > 0 ? 'var(--accent-green)' : (parseFloat(mosVal) < 0 ? 'var(--accent-red)' : 'inherit')}; font-weight: 600;">${mosVal}</td>
-            <td class="text-right mono">${a.action_price != null ? Number(a.action_price).toFixed(2) : '-'}</td>
-            <td class="text-right mono">${a.tp1 != null ? Number(a.tp1).toFixed(2) : '-'}</td>
+            <td class="text-right mono font-semibold" style="color: ${parseFloat(mosVal) > 0 ? 'var(--accent-green)' : (parseFloat(mosVal) < 0 ? 'var(--accent-red)' : 'inherit')};">${mosVal}</td>
             <td class="text-right mono">${fmtPct(a.target_weight)}</td>
             <td class="text-right mono">${fmtPct(a.current_weight)}</td>
             <td class="text-right mono" style="color: ${a.allocation_gap > 0 ? 'var(--accent-green)' : 'inherit'}">${fmtPct(a.allocation_gap)}</td>
-            <td class="text-right mono" style="color: ${a.actual_buy > 0 ? 'var(--accent-green)' : 'inherit'}; font-weight: ${a.actual_buy > 0 ? '600' : 'normal'}">${fmtMoney(a.actual_buy)}</td>
-            <td class="text-right mono">${fmtShares(a.shares)}</td>
-            <td style="color: var(--text-muted); font-size: 0.78rem;">${a.no_buy_reason || (isBuy ? 'ELIGIBLE / PASS' : 'NO BUY ZONE')}</td>
+            <td class="text-right mono font-semibold" style="color: ${a.actual_buy > 0 ? 'var(--accent-green)' : 'inherit'}">${fmtMoney(a.actual_buy)}</td>
+            <td class="text-right mono font-semibold">${fmtShares(a.shares)}</td>
+            <td style="color: var(--text-muted); font-size: 0.8rem;">${a.no_buy_reason || (isBuy ? 'ELIGIBLE / PASS' : 'NO BUY ZONE')}</td>
           `;
         }
         tbody.appendChild(tr);
       });
-    }
-
-    function renderOrders(orders) {
-      const tbody = document.getElementById('orders-table-body');
-      tbody.innerHTML = '';
-
-      if (!orders.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center" style="color: var(--text-muted); padding: 24px;">ไม่มีคำสั่งซื้อที่ต้องดำเนินการในรอบนี้</td></tr>';
-        return;
-      }
-
-      let grandTotal = 0;
-      orders.forEach(o => {
-        grandTotal += Number(o.amount) || 0;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${o.portfolio_id} ${o.portfolio_name || ''}</strong></td>
-          <td class="mono"><strong>${o.ticker}</strong></td>
-          <td class="text-center"><span class="tag buy">${o.order_type || 'BUY'}</span></td>
-          <td class="text-right mono">${fmtShares(o.quantity)}</td>
-          <td class="text-right mono">${o.price != null ? Number(o.price).toFixed(2) : '-'}</td>
-          <td class="text-right mono" style="color: var(--accent-green); font-weight: 600;">${fmtMoney(o.amount)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      const totalTr = document.createElement('tr');
-      totalTr.style.background = 'rgba(16, 185, 129, 0.08)';
-      totalTr.innerHTML = `
-        <td colspan="5" class="text-right"><strong>ยอดรวมการส่งคำสั่งซื้อทั้งหมด (Grand Total Executed):</strong></td>
-        <td class="text-right mono" style="color: var(--accent-green); font-size: 0.95rem; font-weight: 700;">${fmtMoney(grandTotal)}</td>
-      `;
-      tbody.appendChild(totalTr);
-
-      document.getElementById('orders-total-badge').textContent = 'Total: ' + fmtMoney(grandTotal);
     }
 
     window.addEventListener('DOMContentLoaded', init);
