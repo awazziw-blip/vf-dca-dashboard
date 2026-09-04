@@ -1,0 +1,78 @@
+{
+  "system_version": "VF-DCA-2.2",
+  "master_version": "v2.4",
+  "dataset_version": "20260904-P005",
+  "audit_status": "PASS - CORRECTED",
+  "portfolio_id": "P005",
+  "portfolio_name": "RMFแนต",
+  "as_of_date": "2026-09-04",
+  "current_portfolio_value": 562879.89,
+  "annual_contribution": 90000.00,
+  "total_executed": 90000.00,
+  "remaining_cash": 0.00,
+  "post_contribution_value": 652879.89,
+  "holdings": [
+    {
+      "ticker": "KFUSINDFXRMF",
+      "action": "BUY",
+      "allocation_amount": 53783.65,
+      "pre_weight": 0.1757,
+      "post_weight": 0.2339,
+      "target_weight": 0.30,
+      "lower_band": 0.24,
+      "upper_band": 0.36,
+      "band_status": "BELOW_BAND"
+    },
+    {
+      "ticker": "KFAFIXRMF",
+      "action": "BUY",
+      "allocation_amount": 36216.35,
+      "pre_weight": 0.2163,
+      "post_weight": 0.2419,
+      "target_weight": 0.30,
+      "lower_band": 0.24,
+      "upper_band": 0.36,
+      "band_status": "IN_BAND"
+    },
+    {
+      "ticker": "KFINDIARMF",
+      "action": "HOLD",
+      "allocation_amount": 0.0,
+      "pre_weight": 0.0823,
+      "post_weight": 0.0710,
+      "target_weight": 0.10,
+      "lower_band": 0.08,
+      "upper_band": 0.12,
+      "band_status": "BELOW_BAND"
+    },
+    {
+      "ticker": "KFGTECHRMF",
+      "action": "HOLD",
+      "allocation_amount": 0.0,
+      "pre_weight": 0.2163,
+      "post_weight": 0.1865,
+      "target_weight": 0.20,
+      "lower_band": 0.16,
+      "upper_band": 0.24,
+      "band_status": "IN_BAND"
+    },
+    {
+      "ticker": "KFGOLDRMF",
+      "action": "NO_BUY",
+      "allocation_amount": 0.0,
+      "pre_weight": 0.3094,
+      "post_weight": 0.2668,
+      "target_weight": 0.10,
+      "lower_band": 0.08,
+      "upper_band": 0.12,
+      "band_status": "ABOVE_BAND"
+    }
+  ],
+  "flags": [
+    {
+      "id": "FLAG-01",
+      "type": "REVIEW_REQUIRED",
+      "description": "KFAFIXRMF and KFGTECHRMF have identical unit/NAV/value data in source capture. Arithmetic verified; source integrity requires physical verification on next cycle."
+    }
+  ]
+}
