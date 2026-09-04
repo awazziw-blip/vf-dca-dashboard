@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VF-DCA 2.2 — Consolidated Wealth & Dividend Dashboard v2.5</title>
   
-  <!-- Chart.js CDN with zero-dependency setup -->
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
@@ -322,7 +322,7 @@
       border: 1px solid var(--border-color);
     }
 
-    /* 4, 5, 6: GRID ROW OVERVIEW (Overview Table + Portfolio Donut + Asset Donut) */
+    /* 4, 5, 6: GRID ROW OVERVIEW */
     .grid-row-overview {
       display: grid;
       grid-template-columns: 2.2fr 1fr 1fr;
@@ -385,6 +385,17 @@
       padding: 3px 8px;
       border-radius: 4px;
       border: 1px solid var(--accent-red-border);
+      display: inline-block;
+    }
+    .badge-hold {
+      background: rgba(100, 116, 139, 0.15);
+      color: #94a3b8;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(100, 116, 139, 0.35);
       display: inline-block;
     }
     .badge-deferred {
@@ -544,7 +555,7 @@
     /* BOTTOM GRID: ORDERS, RMF, RISK, GOALS, CASHFLOW, AUDIT */
     .grid-row-bottom {
       display: grid;
-      grid-template-columns: 1.1fr 1fr 1fr;
+      grid-template-columns: 1.15fr 1fr 1fr;
       gap: 16px;
       margin-bottom: 22px;
     }
@@ -633,58 +644,18 @@
       line-height: 1.6;
     }
 
-    /* MODALS */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(4, 7, 13, 0.85);
-      backdrop-filter: blur(4px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-box {
-      background: #0f182d;
-      border: 1px solid var(--border-light);
-      border-radius: 12px;
-      max-width: 650px;
-      width: 100%;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
-    .modal-close-btn {
-      position: absolute;
-      top: 16px; right: 18px;
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-    .modal-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* WARNING BANNER */
+    .warning-banner {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 6px;
+      padding: 10px 14px;
       margin-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 12px;
-    }
-    .modal-body { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
-    .modal-row {
+      font-size: 0.78rem;
       display: flex;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
+      align-items: flex-start;
+      gap: 10px;
     }
-    .modal-row strong { color: #fff; }
   </style>
 </head>
 <body>
@@ -699,9 +670,9 @@
     <div class="sidebar-section">
       <div class="sidebar-title">Navigation</div>
       <a class="sidebar-nav-item active" href="#section-top"><span class="sidebar-dot dot-blue"></span> Dashboard Overview</a>
-      <a class="sidebar-nav-item" href="#section-overview"><span class="sidebar-dot dot-green"></span> Portfolios</a>
+      <a class="sidebar-nav-item" href="#section-overview"><span class="sidebar-dot dot-green"></span> Portfolios Overview</a>
       <a class="sidebar-nav-item" href="#section-dividends"><span class="sidebar-dot dot-amber"></span> Dividend Analytics</a>
-      <a class="sidebar-nav-item" href="#section-detail"><span class="sidebar-dot dot-blue"></span> Portfolio Detail</a>
+      <a class="sidebar-nav-item" href="#section-detail"><span class="sidebar-dot dot-blue"></span> Portfolio Detail (5)</a>
       <a class="sidebar-nav-item" href="#section-orders"><span class="sidebar-dot dot-green"></span> Consolidated Orders</a>
       <a class="sidebar-nav-item" href="#section-rmf"><span class="sidebar-dot dot-purple"></span> RMF Control-Band</a>
       <a class="sidebar-nav-item" href="#section-goals"><span class="sidebar-dot dot-blue"></span> Goal Tracker</a>
@@ -716,7 +687,7 @@
       <div class="sidebar-nav-item" onclick="filterPortfolio('P002')"><span class="sidebar-dot dot-green"></span> P002 หุ้นแนต</div>
       <div class="sidebar-nav-item" onclick="filterPortfolio('P003')"><span class="sidebar-dot dot-amber"></span> P003 หุ้นพ่อ</div>
       <div class="sidebar-nav-item" onclick="filterPortfolio('P004')"><span class="sidebar-dot dot-purple"></span> P004 RMFเหน่ง</div>
-      <div class="sidebar-nav-item" onclick="filterPortfolio('P005')"><span class="sidebar-dot dot-gray"></span> P005 RMFแนต (DEF)</div>
+      <div class="sidebar-nav-item" onclick="filterPortfolio('P005')"><span class="sidebar-dot dot-green"></span> P005 RMFแนต (AUDITED)</div>
     </div>
   </aside>
 
@@ -727,12 +698,13 @@
     <header class="top-header">
       <div>
         <div class="top-header-title">🔒 VF-DCA 2.2 — Consolidated Dashboard</div>
-        <div class="top-header-sub">Gemini Central Production Master v2.4 • Final Audited Dataset · 2026-08-31</div>
+        <div class="top-header-sub">Gemini Central Production Master v2.4 • Final Audited Dataset · 2026-09-04 (P001–P005 Integrated)</div>
       </div>
       <div class="header-badges">
         <span class="header-status-badge">● PRODUCTION ACTIVE</span>
-        <span class="header-meta-chip">Last Updated: 2026-09-03 07:44</span>
-        <span class="header-meta-chip">Dataset Date: 2026-08-31</span>
+        <span class="header-meta-chip">Audit: PASS - CORRECTED</span>
+        <span class="header-meta-chip">Last Updated: 2026-09-04 15:30</span>
+        <span class="header-meta-chip">Dataset: 2026-09-04</span>
         <span class="header-meta-chip" style="color: var(--accent-blue); font-weight: 700;">Dashboard Version: v2.5</span>
       </div>
     </header>
@@ -742,8 +714,8 @@
       <!-- 1. TOTAL PORTFOLIO VALUE -->
       <div class="kpi-card">
         <div class="kpi-title">📈 TOTAL PORTFOLIO VALUE</div>
-        <div class="kpi-value" id="kpi-total-val">฿5,763,628.11</div>
-        <div class="kpi-footer">4 Active Portfolios · P005 Deferred</div>
+        <div class="kpi-value" id="kpi-total-val">฿6,326,508.00</div>
+        <div class="kpi-footer">Across All 5 Active Portfolios</div>
       </div>
 
       <!-- 2. MONTHLY DCA -->
@@ -756,15 +728,15 @@
       <!-- 3. ANNUAL RMF CONTRIBUTION -->
       <div class="kpi-card purple">
         <div class="kpi-title">🏦 ANNUAL RMF CONTRIBUTION</div>
-        <div class="kpi-value" id="kpi-rmf-contrib" style="color: var(--accent-purple);">฿150,000</div>
-        <div class="kpi-footer">P004: 150k · P005 Deferred (90k)</div>
+        <div class="kpi-value" id="kpi-rmf-contrib" style="color: var(--accent-purple);">฿240,000</div>
+        <div class="kpi-footer">P004: 150k · P005: 90k (100% Deployed)</div>
       </div>
 
       <!-- 4. ACTUAL BUY -->
       <div class="kpi-card green">
         <div class="kpi-title">🛒 ACTUAL BUY</div>
-        <div class="kpi-value" id="kpi-actual-buy" style="color: var(--accent-green);">฿266,650</div>
-        <div class="kpi-footer">Equity: ฿116,650 · RMF: ฿150,000</div>
+        <div class="kpi-value" id="kpi-actual-buy" style="color: var(--accent-green);">฿356,650</div>
+        <div class="kpi-footer">Equity: ฿116,650 · RMF: ฿240,000</div>
       </div>
 
       <!-- 5. REMAINING CASH -->
@@ -778,9 +750,18 @@
       <div class="kpi-card green">
         <div class="kpi-title">🛡️ CYCLE STATUS</div>
         <div class="kpi-value" id="kpi-cycle-status" style="color: var(--accent-green);">PASS</div>
-        <div class="kpi-footer">Deterministic Engine · Audited</div>
+        <div class="kpi-footer">All 5 Systems Audited & Verified</div>
       </div>
     </section>
+
+    <!-- FLAG-01 AUDIT ALERT BANNER -->
+    <div class="warning-banner">
+      <span style="font-size: 1.1rem; line-height: 1;">⚠️</span>
+      <div>
+        <strong style="color: #fbbf24;">FLAG-01 (Source Integrity Audit Warning — P005 RMFแนต):</strong>
+        <span style="color: var(--text-muted);"> ตรวจพบ Units, NAV และ Market Value ของ <strong>KFAFIXRMF</strong> (121,739.25 บาท) มีค่าตรงกับ <strong>KFGTECHRMF</strong> (121,739.25 บาท) แบบ 100% ซึ่งผ่านการตรวจสอบความถูกต้องทางคณิตศาสตร์ (Arithmetic Audit = PASS) แต่คงสถานะ <strong>REVIEW REQUIRED</strong> สำหรับ Source Integrity โดยระบบไม่ทำการ overwrite ข้อมูลเอง และจัดสรรเงิน 90,000 บาท ตาม Control-Band Gap สู่ KFUSINDFXRMF (53,783.65) และ KFAFIXRMF (36,216.35)</span>
+      </div>
+    </div>
 
     <!-- 4, 5, 6: PORTFOLIO OVERVIEW + PORTFOLIO ALLOCATION + ASSET ALLOCATION -->
     <section class="grid-row-overview" id="section-overview">
@@ -810,7 +791,7 @@
                 <td><span class="sidebar-dot dot-blue" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P001 หุ้นเหน่ง</strong></td>
                 <td style="color: var(--text-muted);">Wealth + Dividend</td>
                 <td class="text-right mono font-semibold" style="color: #fff; font-size:0.88rem;">1,114,763.05</td>
-                <td class="text-right mono">19.34%</td>
+                <td class="text-right mono">17.62%</td>
                 <td class="text-center"><span class="panel-tag">Monthly</span></td>
                 <td class="text-right mono">฿70,000</td>
                 <td class="text-right mono" style="color: var(--accent-green);">฿66,095</td>
@@ -821,7 +802,7 @@
                 <td><span class="sidebar-dot dot-green" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P002 หุ้นแนต</strong></td>
                 <td style="color: var(--text-muted);">Wealth + Cashflow</td>
                 <td class="text-right mono font-semibold" style="color: #fff; font-size:0.88rem;">1,656,400.00</td>
-                <td class="text-right mono">28.74%</td>
+                <td class="text-right mono">26.18%</td>
                 <td class="text-center"><span class="panel-tag">Monthly</span></td>
                 <td class="text-right mono">฿30,000</td>
                 <td class="text-right mono" style="color: var(--accent-green);">฿22,800</td>
@@ -832,7 +813,7 @@
                 <td><span class="sidebar-dot dot-amber" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P003 หุ้นพ่อ</strong></td>
                 <td style="color: var(--text-muted);">Long-term Dividend</td>
                 <td class="text-right mono font-semibold" style="color: #fff; font-size:0.88rem;">2,069,793.06</td>
-                <td class="text-right mono">35.91%</td>
+                <td class="text-right mono">32.72%</td>
                 <td class="text-center"><span class="panel-tag">Monthly</span></td>
                 <td class="text-right mono">฿30,000</td>
                 <td class="text-right mono" style="color: var(--accent-green);">฿27,755</td>
@@ -843,31 +824,31 @@
                 <td><span class="sidebar-dot dot-purple" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P004 RMFเหน่ง</strong></td>
                 <td style="color: var(--text-muted);">Retirement Control-Band</td>
                 <td class="text-right mono font-semibold" style="color: #fff; font-size:0.88rem;">922,672.00</td>
-                <td class="text-right mono">16.01%</td>
+                <td class="text-right mono">14.58%</td>
                 <td class="text-center"><span class="panel-tag">Annual</span></td>
                 <td class="text-right mono">฿150,000</td>
                 <td class="text-right mono" style="color: var(--accent-green);">฿150,000</td>
                 <td class="text-right mono" style="color: var(--accent-amber);">฿0</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
-              <tr onclick="openModal('p005')" style="cursor: pointer; opacity: 0.75;">
-                <td><span class="sidebar-dot dot-gray" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P005 RMFแนต</strong></td>
+              <tr onclick="filterPortfolio('P005')" style="cursor: pointer;">
+                <td><span class="sidebar-dot dot-green" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P005 RMFแนต</strong></td>
                 <td style="color: var(--text-muted);">Retirement Control-Band</td>
-                <td class="text-right mono" style="color: var(--text-dim);">N/A (DEFERRED)</td>
-                <td class="text-right mono" style="color: var(--text-dim);">-</td>
+                <td class="text-right mono font-semibold" style="color: #fff; font-size:0.88rem;">562,879.89</td>
+                <td class="text-right mono">8.90%</td>
                 <td class="text-center"><span class="panel-tag">Annual</span></td>
                 <td class="text-right mono">฿90,000</td>
-                <td class="text-right mono" style="color: var(--text-dim);">฿0</td>
-                <td class="text-right mono" style="color: var(--text-dim);">฿0</td>
-                <td class="text-center"><span class="badge-deferred">DEFERRED</span></td>
+                <td class="text-right mono" style="color: var(--accent-green);">฿90,000</td>
+                <td class="text-right mono" style="color: var(--accent-amber);">฿0</td>
+                <td class="text-center"><span class="badge-buy" style="background: rgba(16, 185, 129, 0.2); border-color: var(--accent-green);">PASS - CORR</span></td>
               </tr>
               <tr style="background: rgba(16, 185, 129, 0.06); font-weight: 700;">
-                <td colspan="2"><strong>TOTAL CONSOLIDATED (ACTIVE)</strong></td>
-                <td class="text-right mono" style="color: var(--accent-blue); font-size: 0.95rem;">5,763,628.11</td>
+                <td colspan="2"><strong>TOTAL CONSOLIDATED</strong></td>
+                <td class="text-right mono" style="color: var(--accent-blue); font-size: 0.95rem;">6,326,508.00</td>
                 <td class="text-right mono">100.00%</td>
                 <td class="text-center">-</td>
-                <td class="text-right mono">฿280,000</td>
-                <td class="text-right mono" style="color: var(--accent-green);">฿266,650</td>
+                <td class="text-right mono">฿370,000</td>
+                <td class="text-right mono" style="color: var(--accent-green);">฿356,650</td>
                 <td class="text-right mono" style="color: var(--accent-amber);">฿13,350</td>
                 <td class="text-center"><span class="badge-buy">PASS</span></td>
               </tr>
@@ -884,12 +865,12 @@
         <div class="donut-card-inner">
           <canvas id="chartPortAlloc"></canvas>
           <div class="donut-center-text">
-            <div class="donut-center-val">5,763,628</div>
-            <div class="donut-center-label">THB Active Value</div>
+            <div class="donut-center-val">6,326,508</div>
+            <div class="donut-center-label">THB Total Value</div>
           </div>
         </div>
         <div style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-top: 4px; font-family: var(--font-mono);">
-          P005: Excluded (DEFERRED per Dataset)
+          P003 (32.7%) · P002 (26.2%) · P001 (17.6%) · P004 (14.6%) · P005 (8.9%)
         </div>
       </div>
 
@@ -901,12 +882,12 @@
         <div class="donut-card-inner">
           <canvas id="chartAssetAlloc"></canvas>
           <div class="donut-center-text">
-            <div class="donut-center-val">5,352,548</div>
+            <div class="donut-center-val">5,915,428</div>
             <div class="donut-center-label">THB Holdings Value</div>
           </div>
         </div>
         <div style="font-size: 0.68rem; color: var(--text-dim); text-align: center; margin-top: 4px; font-family: var(--font-mono);">
-          Thai Equities 66.8% · DR 11.2% · RMF 17.2% · REIT 4.7%
+          Thai Eq 60.5% · RMF 25.1% · Global DR 10.2% · REIT 4.3%
         </div>
       </div>
     </section>
@@ -964,11 +945,11 @@
 
         <div class="kpi-card" style="border-color: var(--border-color);">
           <div style="display: flex; justify-content: space-between;">
-            <strong style="color: var(--text-dim);">P005 RMFแนต</strong>
-            <span class="panel-tag">DEFERRED</span>
+            <strong style="color: var(--accent-purple);">P005 RMFแนต</strong>
+            <span class="panel-tag">NAV Reinvest</span>
           </div>
-          <div class="kpi-value" style="margin: 8px 0; color: var(--text-dim);">N/A</div>
-          <div style="font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono);">Data Not Available</div>
+          <div class="kpi-value" style="margin: 8px 0; color: var(--text-muted);">฿0</div>
+          <div style="font-size: 0.72rem; color: var(--text-dim); font-family: var(--font-mono);">สะสมมูลค่าใน NAV (0.00% Yield)</div>
         </div>
       </div>
 
@@ -1010,7 +991,7 @@
             <canvas id="chartDivGrowth"></canvas>
           </div>
           <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-dim); font-family: var(--font-mono); margin-top: 4px;">
-            <span>D. Historical Dividend Data Not Available (Tracking from Inception)</span>
+            <span>D. Historical: Not Available (Tracking from Inception)</span>
             <span>Unit: 1,000 THB / Year</span>
           </div>
         </div>
@@ -1075,19 +1056,19 @@
               <td class="text-right mono">฿150,000 / ปี</td>
               <td class="text-center"><span class="badge-buy">45%</span></td>
             </tr>
-            <tr style="opacity: 0.75;">
-              <td><span class="sidebar-dot dot-gray" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P005 RMFแนต</strong></td>
-              <td class="text-right mono">N/A (DEFERRED)</td>
-              <td class="text-right mono" style="color: var(--text-dim);">N/A</td>
-              <td class="text-right mono" style="color: var(--text-dim);">N/A</td>
-              <td class="text-right mono" style="color: var(--text-dim);">N/A</td>
-              <td class="text-right mono" style="color: var(--text-dim);">-</td>
+            <tr>
+              <td><span class="sidebar-dot dot-purple" style="display:inline-block; vertical-align:middle; margin-right:4px;"></span> <strong>P005 RMFแนต</strong></td>
+              <td class="text-right mono">562,879.89</td>
+              <td class="text-right mono" style="color: var(--text-muted);">฿0.00</td>
+              <td class="text-right mono" style="color: var(--text-muted);">฿0.00</td>
+              <td class="text-right mono">0.00% (NAV)</td>
+              <td class="text-right mono">0.00%</td>
               <td class="text-right mono">฿90,000 / ปี</td>
-              <td class="text-center"><span class="badge-deferred">DEFERRED</span></td>
+              <td class="text-center"><span class="badge-buy">45%</span></td>
             </tr>
             <tr style="background: rgba(16, 185, 129, 0.06); font-weight: 700;">
               <td><strong>TOTAL CONSOLIDATED</strong></td>
-              <td class="text-right mono" style="color: var(--accent-blue);">5,763,628.11</td>
+              <td class="text-right mono" style="color: var(--accent-blue);">6,326,508.00</td>
               <td class="text-right mono font-semibold" style="color: var(--accent-green);">฿254,240.00</td>
               <td class="text-right mono">฿21,186.67</td>
               <td class="text-right mono font-semibold">5.25% (Active Eq)</td>
@@ -1103,7 +1084,7 @@
     <!-- 9. PORTFOLIO DETAIL (HOLDINGS SUMMARY) -->
     <section class="panel" id="section-detail">
       <div class="panel-header">
-        <div class="panel-heading">🎯 PORTFOLIO DETAIL (HOLDINGS SUMMARY)</div>
+        <div class="panel-heading">🎯 PORTFOLIO DETAIL (HOLDINGS SUMMARY — ALL 5 PORTFOLIOS)</div>
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
           <div class="tab-pills">
             <button class="tab-pill active" id="filter-all" onclick="setDetailFilter('ALL')">All Portfolios</button>
@@ -1111,6 +1092,7 @@
             <button class="tab-pill" id="filter-p002" onclick="setDetailFilter('P002')">P002</button>
             <button class="tab-pill" id="filter-p003" onclick="setDetailFilter('P003')">P003</button>
             <button class="tab-pill" id="filter-p004" onclick="setDetailFilter('P004')">P004 RMF</button>
+            <button class="tab-pill" id="filter-p005" onclick="setDetailFilter('P005')">P005 RMF</button>
           </div>
           <button class="tab-pill" onclick="toggleAllAccordions()" style="background: var(--bg-hover); color: var(--accent-blue);">Toggle Expand / Collapse</button>
         </div>
@@ -1126,11 +1108,15 @@
       <!-- Left Column: Consolidated Equity Orders & RMF Orders -->
       <div class="panel" id="section-orders">
         <div class="panel-header">
-          <div class="panel-heading" style="font-size: 0.85rem;">🛒 CONSOLIDATED EQUITY ORDERS — P001–P003</div>
-          <span class="panel-tag" style="color: var(--accent-green); font-weight: 700;">฿116,650.00</span>
+          <div class="panel-heading" style="font-size: 0.85rem;">🛒 CONSOLIDATED ORDERS — ALL PORTFOLIOS</div>
+          <span class="panel-tag" style="color: var(--accent-green); font-weight: 700;">฿356,650.00 Total</span>
+        </div>
+
+        <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; font-family: var(--font-mono);">
+          EQUITY ORDERS — P001–P003 (฿116,650.00)
         </div>
         <div class="table-wrap">
-          <table class="data-table" style="font-size: 0.75rem;">
+          <table class="data-table" style="font-size: 0.75rem; margin-bottom: 12px;">
             <thead>
               <tr>
                 <th>Ticker</th>
@@ -1179,35 +1165,102 @@
             </tbody>
           </table>
         </div>
-        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 0; border-bottom: 1px dashed var(--border-color); margin-bottom: 14px;">
-          <span>TOTAL EQUITY BUY</span>
-          <span style="color: var(--accent-green); font-weight: 700;">฿116,650.00</span>
+
+        <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent-purple); text-transform: uppercase; margin-bottom: 6px; font-family: var(--font-mono);">
+          RMF ORDERS — P004 & P005 (฿240,000.00)
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" style="font-size: 0.75rem;">
+            <thead>
+              <tr>
+                <th>Port</th>
+                <th>Fund</th>
+                <th class="text-right">Units</th>
+                <th class="text-right">Buy THB</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>P004</strong></td>
+                <td>KFINDIARMF</td>
+                <td class="text-right mono">6,030.9886</td>
+                <td class="text-right mono font-semibold" style="color: var(--accent-green);">฿80,767.00</td>
+                <td class="text-center"><span class="badge-buy">BUY</span></td>
+              </tr>
+              <tr>
+                <td><strong>P004</strong></td>
+                <td>KFGOLDRMF</td>
+                <td class="text-right mono">2,613.9963</td>
+                <td class="text-right mono font-semibold" style="color: var(--accent-green);">฿69,233.00</td>
+                <td class="text-center"><span class="badge-buy">BUY</span></td>
+              </tr>
+              <tr>
+                <td><strong>P005</strong></td>
+                <td>KFUSINDFXRMF</td>
+                <td class="text-right mono">4,007.8131</td>
+                <td class="text-right mono font-semibold" style="color: var(--accent-green);">฿53,783.65</td>
+                <td class="text-center"><span class="badge-buy">BUY</span></td>
+              </tr>
+              <tr>
+                <td><strong>P005</strong></td>
+                <td>KFAFIXRMF</td>
+                <td class="text-right mono">1,576.0629</td>
+                <td class="text-right mono font-semibold" style="color: var(--accent-green);">฿36,216.35</td>
+                <td class="text-center"><span class="badge-buy">BUY</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.78rem; padding: 8px 0; border-top: 1px dashed var(--border-color); margin-top: 8px;">
+          <span>CONSOLIDATED TOTAL BUY</span>
+          <span style="color: var(--accent-green); font-weight: 700;">฿356,650.00</span>
         </div>
 
         <!-- 11. RMF CONTROL-BAND ENGINE -->
-        <div id="section-rmf" style="margin-top: 14px;">
+        <div id="section-rmf" style="margin-top: 16px;">
           <div class="panel-header" style="margin-bottom: 8px;">
-            <div class="panel-heading" style="font-size: 0.85rem; color: var(--accent-purple);">🏦 RMF CONTROL-BAND ENGINE — P004</div>
-            <span class="panel-tag" style="color: var(--accent-purple); font-weight: 700;">Annual Pool: ฿150k</span>
+            <div class="panel-heading" style="font-size: 0.85rem; color: var(--accent-purple);">🏦 RMF CONTROL-BAND ENGINE</div>
+            <span class="panel-tag" style="color: var(--accent-purple); font-weight: 700;">P004 (150k) & P005 (90k)</span>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-            <!-- Band 1: KFUSINDFXRMF -->
+          <div style="font-size: 0.70rem; font-weight: 700; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 6px;">P005 RMFแนต (฿90,000 Allocation)</div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;">
+            <!-- P005 Band 1: KFUSINDFXRMF -->
             <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; font-size: 0.75rem;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
-                <span><strong>KFUSINDFXRMF</strong> (Target 45%)</span>
-                <span class="mono" style="color: var(--accent-red); font-weight: 700;">64.10% (OVERWEIGHT)</span>
+                <span><strong>KFUSINDFXRMF</strong> (Target 30%)</span>
+                <span class="mono" style="color: var(--accent-amber); font-weight: 700;">17.57% → 23.39% (STILL BELOW)</span>
               </div>
               <div class="band-meter-container">
-                <div class="band-safe-zone" style="left: 36%; width: 18%;"></div>
-                <div class="band-current-pin" style="left: 64.1%; background: var(--accent-red);"></div>
+                <div class="band-safe-zone" style="left: 24%; width: 12%;"></div>
+                <div class="band-current-pin" style="left: 17.57%; background: var(--accent-amber);"></div>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-dim); font-family: var(--font-mono);">
-                <span>Lower: 36%</span><span>Target: 45%</span><span>Upper: 54%</span><span>Buy: ฿0 (HOLD)</span>
+                <span>Lower: 24%</span><span>Target: 30%</span><span>Upper: 36%</span><span style="color:var(--accent-green); font-weight:700;">Buy: ฿53,783.65</span>
               </div>
             </div>
 
-            <!-- Band 2: KFINDIARMF -->
+            <!-- P005 Band 2: KFAFIXRMF -->
+            <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; font-size: 0.75rem;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+                <span><strong>KFAFIXRMF</strong> (Target 30%) ⚠️</span>
+                <span class="mono" style="color: var(--accent-green); font-weight: 700;">21.63% → 24.19% (IN-BAND)</span>
+              </div>
+              <div class="band-meter-container">
+                <div class="band-safe-zone" style="left: 24%; width: 12%;"></div>
+                <div class="band-current-pin" style="left: 21.63%; background: var(--accent-green);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-dim); font-family: var(--font-mono);">
+                <span>Lower: 24%</span><span>Target: 30%</span><span>Upper: 36%</span><span style="color:var(--accent-green); font-weight:700;">Buy: ฿36,216.35</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.70rem; font-weight: 700; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 6px;">P004 RMFเหน่ง (฿150,000 Allocation)</div>
+          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+            <!-- P004 Band 1: KFINDIARMF -->
             <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; font-size: 0.75rem;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
                 <span><strong>KFINDIARMF</strong> (Target 35%)</span>
@@ -1222,7 +1275,7 @@
               </div>
             </div>
 
-            <!-- Band 3: KFGOLDRMF -->
+            <!-- P004 Band 2: KFGOLDRMF -->
             <div style="background: var(--bg-card-inner); padding: 8px 10px; border-radius: 6px; font-size: 0.75rem;">
               <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
                 <span><strong>KFGOLDRMF</strong> (Target 20%)</span>
@@ -1236,10 +1289,6 @@
                 <span>Lower: 16%</span><span>Target: 20%</span><span>Upper: 24%</span><span style="color: var(--accent-green); font-weight: 700;">Buy: ฿69,233</span>
               </div>
             </div>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.78rem; padding: 4px 0;">
-            <span>TOTAL RMF BUY</span>
-            <span style="color: var(--accent-purple); font-weight: 700;">฿150,000.00</span>
           </div>
         </div>
       </div>
@@ -1298,12 +1347,19 @@
                   <td class="text-right mono" style="color: var(--accent-amber);">฿0</td>
                   <td class="text-right mono font-semibold">100.0%</td>
                 </tr>
+                <tr>
+                  <td>P005 RMFแนต</td>
+                  <td class="text-right mono">฿90,000</td>
+                  <td class="text-right mono" style="color: var(--accent-green);">฿90,000</td>
+                  <td class="text-right mono" style="color: var(--accent-amber);">฿0</td>
+                  <td class="text-right mono font-semibold">100.0%</td>
+                </tr>
                 <tr style="background: rgba(16, 185, 129, 0.05); font-weight: 700;">
                   <td>CONSOLIDATED TOTAL</td>
-                  <td class="text-right mono">฿280,000</td>
-                  <td class="text-right mono" style="color: var(--accent-green);">฿266,650</td>
+                  <td class="text-right mono">฿370,000</td>
+                  <td class="text-right mono" style="color: var(--accent-green);">฿356,650</td>
                   <td class="text-right mono" style="color: var(--accent-amber);">฿13,350</td>
-                  <td class="text-right mono">95.2%</td>
+                  <td class="text-right mono">96.4%</td>
                 </tr>
               </tbody>
             </table>
@@ -1324,8 +1380,8 @@
             <span class="badge-buy">ACTIVE ONLINE</span>
           </div>
           <div class="audit-list">
-            <div class="audit-row"><span>AUDIT RESULT</span><span class="check">✔ PASS</span></div>
-            <div class="audit-row"><span>DATA INTEGRITY</span><span class="check">✔ PASS</span></div>
+            <div class="audit-row"><span>AUDIT RESULT</span><span class="check">✔ PASS - CORRECTED</span></div>
+            <div class="audit-row"><span>DATA INTEGRITY</span><span class="check">✔ PASS (FLAG-01)</span></div>
             <div class="audit-row"><span>BALANCE CHECK</span><span class="check">✔ PASS</span></div>
             <div class="audit-row"><span>ALLOCATION CHECK</span><span class="check">✔ PASS</span></div>
             <div class="audit-row"><span>EXECUTION CHECK</span><span class="check">✔ PASS</span></div>
@@ -1354,6 +1410,9 @@
             <div style="background: var(--bg-card-inner); padding: 6px 8px; border-radius: 4px;">
               <strong>P004 RMFเหน่ง</strong><br>
               <span class="panel-tag" style="color: #a855f7;">Quality 4.8/5</span> <span class="panel-tag" style="color: #38bdf8;">Low-Med Risk</span>
+            </div>
+            <div style="background: var(--bg-card-inner); padding: 6px 8px; border-radius: 4px; grid-column: span 2;">
+              <strong>P005 RMFแนต</strong> — <span class="panel-tag" style="color: #a855f7;">Quality 4.7/5</span> <span class="panel-tag" style="color: #38bdf8;">Low-Med Risk</span>
             </div>
           </div>
         </div>
@@ -1388,12 +1447,20 @@
             <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 74%; background: #f59e0b;"></div></div>
           </div>
 
-          <div style="margin-bottom: 0;">
+          <div style="margin-bottom: 8px;">
             <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: var(--font-mono);">
-              <span>P004 RMF Retirement</span>
+              <span>P004 RMFเหน่ง (Retirement)</span>
               <span class="mono">Pool: ฿150,000/ปี <strong style="color:#a855f7;">45%</strong></span>
             </div>
             <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%; background: #a855f7;"></div></div>
+          </div>
+
+          <div style="margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: var(--font-mono);">
+              <span>P005 RMFแนต (Retirement)</span>
+              <span class="mono">Pool: ฿90,000/ปี <strong style="color:#10b981;">45%</strong></span>
+            </div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 45%; background: #10b981;"></div></div>
           </div>
         </div>
 
@@ -1403,32 +1470,22 @@
 
     <!-- 22. FOOTER -->
     <footer class="dashboard-footer">
-      Source: VF-DCA 2.2 Final Dataset • Dataset: 2026-08-31 • Master: Gemini Central Production Master v2.4 • Data Integrity: PASS • Dashboard Version: v2.5
+      Source: VF-DCA 2.2 Final Dataset • Dataset: 2026-09-04 • Master: Gemini Central Production Master v2.4 • Data Integrity: PASS - CORRECTED • Dashboard Version: v2.5
     </footer>
 
   </main>
 
-  <!-- MODAL FOR P005 / ALERTS -->
-  <div class="modal-overlay" id="modal-container" onclick="closeModalOnBg(event)">
-    <div class="modal-box" id="modal-box">
-      <button class="modal-close-btn" onclick="closeModal()">&times;</button>
-      <div class="modal-title" id="modal-title">Title</div>
-      <div class="modal-body" id="modal-content">Content</div>
-    </div>
-  </div>
-
   <script>
-    // Embedded Data Fallback (Guarantees zero-blank rendering even without fetch)
     const EMBEDDED_DATA = {
   "metadata": {
     "system_version": "VF-DCA 2.2",
     "master_version": "v2.4",
-    "dataset_version": "20260831-P001-P004",
+    "dataset_version": "20260904-P001-P005",
     "dashboard_version": "v1.0",
-    "update_id": "20260903-0744",
-    "audit_date": "2026-08-31",
-    "data_as_of_date": "2026-08-31",
-    "update_timestamp": "2026-09-03T07:44:24+07:00",
+    "update_id": "20260904-1530",
+    "audit_date": "2026-09-04",
+    "data_as_of_date": "2026-09-04",
+    "update_timestamp": "2026-09-04T15:30:00+07:00",
     "portfolio_ids": [
       "P001",
       "P002",
@@ -1441,7 +1498,7 @@
   "production_status": {
     "system": "VF-DCA 2.2",
     "master": "v2.4",
-    "dataset": "20260831-P001-P004",
+    "dataset": "20260904-P001-P005",
     "audit": "PASS",
     "data_integrity": "PASS",
     "balance_check": "PASS",
@@ -1520,15 +1577,15 @@
       "portfolio_type": "RMF",
       "objective": "Retirement",
       "horizon_years": 20,
-      "current_portfolio_value": null,
+      "current_portfolio_value": 562879.89,
       "budget": 90000,
       "budget_type": "Annual",
       "minimum_buy": 0,
-      "actual_buy": 0,
-      "remaining_cash": 0,
+      "actual_buy": 90000.0,
+      "remaining_cash": 0.0,
       "cash_policy": "HOLD",
-      "cycle_status": "DEFERRED",
-      "active_assets_count": 0
+      "cycle_status": "PASS",
+      "active_assets_count": 5
     }
   ],
   "assets": [
@@ -2050,6 +2107,119 @@
       "band_status": "RESTORED_TO_BAND",
       "rebalancing_direction": "CONTRIBUTE_TO_TARGET",
       "confidence_tags": "[AUDITED]"
+    },
+    {
+      "portfolio_id": "P005",
+      "ticker": "KFUSINDFXRMF",
+      "action": "BUY",
+      "dca_score": null,
+      "ranking": 1,
+      "current_price": 13.4197,
+      "fair_value": null,
+      "mos": null,
+      "target_weight": 0.3,
+      "lower_band": 0.24,
+      "upper_band": 0.36,
+      "current_weight": 0.1757,
+      "allocation_gap": 0.1243,
+      "actual_buy": 53783.65,
+      "shares": 4007.8131,
+      "remaining_pool": 0.0,
+      "post_contribution_weight": 0.2339,
+      "band_status": "BELOW_BAND",
+      "rebalancing_direction": "CONTRIBUTE_TO_TARGET",
+      "confidence_tags": "[AUDITED]"
+    },
+    {
+      "portfolio_id": "P005",
+      "ticker": "KFAFIXRMF",
+      "action": "BUY",
+      "dca_score": null,
+      "ranking": 2,
+      "current_price": 22.979,
+      "fair_value": null,
+      "mos": null,
+      "target_weight": 0.3,
+      "lower_band": 0.24,
+      "upper_band": 0.36,
+      "current_weight": 0.2163,
+      "allocation_gap": 0.0837,
+      "actual_buy": 36216.35,
+      "shares": 1576.0629,
+      "remaining_pool": 0.0,
+      "post_contribution_weight": 0.2419,
+      "band_status": "RESTORED_TO_BAND",
+      "rebalancing_direction": "CONTRIBUTE_TO_TARGET",
+      "confidence_tags": "[AUDITED - REVIEW REQUIRED]"
+    },
+    {
+      "portfolio_id": "P005",
+      "ticker": "KFINDIARMF",
+      "action": "HOLD",
+      "dca_score": null,
+      "ranking": 3,
+      "current_price": 13.2965,
+      "fair_value": null,
+      "mos": null,
+      "target_weight": 0.1,
+      "lower_band": 0.08,
+      "upper_band": 0.12,
+      "current_weight": 0.0823,
+      "allocation_gap": 0.0177,
+      "actual_buy": 0.0,
+      "shares": 0,
+      "remaining_pool": 0.0,
+      "post_contribution_weight": 0.071,
+      "band_status": "BELOW_BAND",
+      "rebalancing_direction": "HOLD",
+      "no_buy_reason": "In-Band prior to contribution / Prioritized assets below lower band",
+      "confidence_tags": "[AUDITED]"
+    },
+    {
+      "portfolio_id": "P005",
+      "ticker": "KFGTECHRMF",
+      "action": "HOLD",
+      "dca_score": null,
+      "ranking": 4,
+      "current_price": 22.979,
+      "fair_value": null,
+      "mos": null,
+      "target_weight": 0.2,
+      "lower_band": 0.16,
+      "upper_band": 0.24,
+      "current_weight": 0.2163,
+      "allocation_gap": -0.0163,
+      "actual_buy": 0.0,
+      "shares": 0,
+      "remaining_pool": 0.0,
+      "post_contribution_weight": 0.1865,
+      "band_status": "IN_BAND",
+      "rebalancing_direction": "HOLD",
+      "no_buy_reason": "In-Band / Allocation directed to assets below lower band",
+      "confidence_tags": "[AUDITED - REVIEW REQUIRED]"
+    },
+    {
+      "portfolio_id": "P005",
+      "ticker": "KFGOLDRMF",
+      "action": "NO BUY",
+      "dca_score": null,
+      "ranking": 5,
+      "current_price": 25.5089,
+      "fair_value": null,
+      "mos": null,
+      "target_weight": 0.1,
+      "lower_band": 0.08,
+      "upper_band": 0.12,
+      "current_weight": 0.3094,
+      "allocation_gap": -0.2094,
+      "actual_buy": 0.0,
+      "shares": 0,
+      "remaining_pool": 0.0,
+      "post_contribution_weight": 0.2668,
+      "band_status": "ABOVE_UPPER_BAND",
+      "rebalancing_direction": "REDUCE / HOLD",
+      "no_buy_reason": "RMF Control Band: Overweight (30.94% > Upper Band 12.00%)",
+      "confidence_tags": "[AUDITED]"
     }
   ],
   "consolidated_orders": [
@@ -2160,6 +2330,24 @@
       "price": 26.4855,
       "amount": 69233.0,
       "order_type": "BUY"
+    },
+    {
+      "portfolio_id": "P005",
+      "portfolio_name": "RMFแนต",
+      "ticker": "KFUSINDFXRMF",
+      "quantity": 4007.8131,
+      "price": 13.4197,
+      "amount": 53783.65,
+      "order_type": "BUY"
+    },
+    {
+      "portfolio_id": "P005",
+      "portfolio_name": "RMFแนต",
+      "ticker": "KFAFIXRMF",
+      "quantity": 1576.0629,
+      "price": 22.979,
+      "amount": 36216.35,
+      "order_type": "BUY"
     }
   ],
   "remaining_cash_reconciliation": {
@@ -2189,9 +2377,9 @@
     },
     "P005": {
       "budget": 90000.0,
-      "actual_buy": 0.0,
+      "actual_buy": 90000.0,
       "remaining_cash": 0.0,
-      "status": "DEFERRED"
+      "status": "BALANCED"
     }
   },
   "audit_integrity": {
@@ -2203,10 +2391,8 @@
     "dashboard_update_status": "PASS"
   }
 };
-
     let dashboardData = EMBEDDED_DATA;
 
-    // Portfolio Metadata Mapping
     const PORTFOLIO_NAMES = {
       'P001': 'P001 หุ้นเหน่ง',
       'P002': 'P002 หุ้นแนต',
@@ -2220,26 +2406,26 @@
       'P002': '#10b981',
       'P003': '#f59e0b',
       'P004': '#a855f7',
-      'P005': '#64748b'
+      'P005': '#34d399'
     };
 
-    // Surveillance notes
     const SURVEILLANCE_NOTES = {
       'P001': 'BDMS, CPALL, WORLDA01, WHART ผ่าน Hard Gate ทุกตัว ได้รับการจัดสรรตาม Rank | QQQM19 มี MOS เพียง 6.34% และ TISCO ราคา 127.00 สูงกว่า Fair Value 117.23 จึงสั่ง NO BUY ตามวินัย Valuation-First',
       'P002': 'BDMS, WORLDA01, WHART ได้รับการเข้าซื้อตาม Rank | CPALL (ติด Hard Gate), GULF, WHA, SCB ไม่ผ่านเงื่อนไขการซื้อรอบนี้ เงินสดคงเหลือ ฿7,200 ถือครองไว้ (HOLD)',
       'P003': 'BDMS, CPALL, CPN เข้าซื้อตามสัดส่วน | AOT, WHA, TISCO, WHAUP, WHART ติด Hard Gate หรือคะแนนต่ำกว่าเกณฑ์ สั่ง NO BUY เงินสดคงเหลือ ฿2,245 (HOLD)',
-      'P004': 'KFUSINDFXRMF อยู่ในสถานะ OVERWEIGHT (64.10% เทียบเพดาน 54.0%) จึงสั่ง NO BUY | จัดสรรเงิน ฿150,000 เต็มจำนวนเข้า KFINDIARMF (฿80,767) และ KFGOLDRMF (฿69,233) เพื่อดึงสัดส่วนกลับเข้าสู่ Control Band สำเร็จ'
+      'P004': 'KFUSINDFXRMF อยู่ในสถานะ OVERWEIGHT (64.10% เทียบเพดาน 54.0%) สั่ง NO BUY | จัดสรรเงิน ฿150,000 เข้า KFINDIARMF (฿80,767) และ KFGOLDRMF (฿69,233) ดึงสัดส่วนกลับเข้าสู่ Control Band สำเร็จ',
+      'P005': 'FLAG-01: KFAFIXRMF และ KFGTECHRMF มีตัวเลข Units/NAV/Market Value ตรงกัน 100% ล็อกไว้เป็น Source Warning | กองทุนต่ำกว่า Lower Band 24% คือ KFUSINDFXRMF (Gap 12.43%) และ KFAFIXRMF (Gap 8.37%) จัดสรร 90,000 เข้าซื้อทั้ง 2 กอง (53,783.65 + 36,216.35)'
     };
 
     function initCharts() {
-      // ① Portfolio Allocation — Donut
+      // ① Portfolio Allocation — Donut (5 Portfolios)
       new Chart(document.getElementById('chartPortAlloc'), {
         type: 'doughnut',
         data: {
-          labels: ['P003 หุ้นพ่อ (35.9%)', 'P002 หุ้นแนต (28.7%)', 'P001 หุ้นเหน่ง (19.3%)', 'P004 RMFเหน่ง (16.0%)'],
+          labels: ['P003 หุ้นพ่อ (32.7%)', 'P002 หุ้นแนต (26.2%)', 'P001 หุ้นเหน่ง (17.6%)', 'P004 RMFเหน่ง (14.6%)', 'P005 RMFแนต (8.9%)'],
           datasets: [{
-            data: [2069793.06, 1656400.00, 1114763.05, 922672.00],
-            backgroundColor: ['#f59e0b', '#10b981', '#38bdf8', '#a855f7'],
+            data: [2069793.06, 1656400.00, 1114763.05, 922672.00, 562879.89],
+            backgroundColor: ['#f59e0b', '#10b981', '#38bdf8', '#a855f7', '#34d399'],
             borderColor: '#0d1527',
             borderWidth: 2
           }]
@@ -2264,13 +2450,13 @@
         }
       });
 
-      // ② Asset Allocation — Donut
+      // ② Asset Allocation — Donut (5 Portfolios)
       new Chart(document.getElementById('chartAssetAlloc'), {
         type: 'doughnut',
         data: {
-          labels: ['Thai Equities (66.8%)', 'RMF Funds (17.2%)', 'Global DR (11.2%)', 'REITs (4.7%)'],
+          labels: ['Thai Equities (60.5%)', 'RMF Funds (25.1%)', 'Global DR (10.2%)', 'REITs (4.3%)'],
           datasets: [{
-            data: [3576523.24, 922764.27, 600206.07, 253054.43],
+            data: [3576523.24, 1485644.16, 600206.07, 253054.43],
             backgroundColor: ['#f97316', '#a855f7', '#38bdf8', '#eab308'],
             borderColor: '#0d1527',
             borderWidth: 2
@@ -2304,7 +2490,7 @@
           datasets: [{
             label: 'Annual Dividend (THB)',
             data: [109450, 82610, 62180, 0, 0],
-            backgroundColor: ['#f59e0b', '#10b981', '#38bdf8', '#a855f7', '#64748b'],
+            backgroundColor: ['#f59e0b', '#10b981', '#38bdf8', '#a855f7', '#34d399'],
             borderRadius: 4
           }]
         },
@@ -2436,7 +2622,7 @@
         data: {
           labels: ['Healthcare', 'Consumer Staples', 'Property / REIT', 'Financials', 'Technology DR', 'Energy', 'RMF Multi-Asset'],
           datasets: [{
-            data: [28.4, 18.1, 16.2, 12.7, 9.6, 7.2, 7.8],
+            data: [26.4, 16.8, 15.1, 11.8, 8.9, 6.7, 14.3],
             backgroundColor: ['#10b981', '#38bdf8', '#f59e0b', '#a855f7', '#06b6d4', '#ef4444', '#64748b'],
             borderColor: '#0d1527',
             borderWidth: 2
@@ -2458,12 +2644,12 @@
       });
     }
 
-    // Render Holdings Accordions
+    // Render Holdings Accordions (P001–P005)
     function renderHoldingsAccordions(filterPid = 'ALL') {
       const container = document.getElementById('holdings-accordions-container');
       container.innerHTML = '';
 
-      const pids = ['P001', 'P002', 'P003', 'P004'];
+      const pids = ['P001', 'P002', 'P003', 'P004', 'P005'];
       const targets = filterPid === 'ALL' ? pids : [filterPid];
 
       targets.forEach(pid => {
@@ -2487,6 +2673,7 @@
               <span class="sidebar-dot" style="background: ${pColor};"></span>
               <strong style="color: #fff;">${pName}</strong>
               <span class="panel-tag">${pSummary.portfolio_type}</span>
+              ${pid === 'P005' ? '<span class="badge-buy" style="font-size:0.65rem; background:rgba(16,185,129,0.2);">AUDITED</span>' : ''}
             </div>
             <div class="accordion-summary">
               <span>Value: <strong style="color:#fff;">฿${pVal}</strong></span>
@@ -2517,7 +2704,8 @@
                 <tbody>
                   ${pAssets.map(a => {
                     const isBuy = a.action === 'BUY';
-                    const badgeClass = isBuy ? 'badge-buy' : 'badge-nobuy';
+                    const isHold = a.action === 'HOLD';
+                    const badgeClass = isBuy ? 'badge-buy' : (isHold ? 'badge-hold' : 'badge-nobuy');
                     const targetPct = (a.target_weight * 100).toFixed(1) + '%';
                     const currPct = (a.current_weight * 100).toFixed(1) + '%';
                     const gapPct = (a.allocation_gap * 100).toFixed(1) + '%';
@@ -2525,7 +2713,7 @@
                     const score = a.dca_score !== null ? a.dca_score.toFixed(1) : '-';
                     const rank = a.ranking !== null ? '#' + a.ranking : '-';
                     const mos = a.mos !== null ? (a.mos * 100).toFixed(1) + '%' : '-';
-                    const actionLabel = isBuy ? `BUY (฿${a.actual_buy.toLocaleString()})` : 'NO BUY';
+                    const actionLabel = isBuy ? `BUY (฿${Number(a.actual_buy).toLocaleString()})` : a.action;
 
                     return `
                       <tr>
@@ -2566,7 +2754,7 @@
 
     let allCollapsed = false;
     function toggleAllAccordions() {
-      const pids = ['P001', 'P002', 'P003', 'P004'];
+      const pids = ['P001', 'P002', 'P003', 'P004', 'P005'];
       allCollapsed = !allCollapsed;
       pids.forEach(pid => {
         const body = document.getElementById(`body-${pid}`);
@@ -2591,40 +2779,9 @@
     }
 
     function filterPortfolio(pid) {
-      if (pid === 'P005') {
-        openModal('p005');
-        return;
-      }
       setDetailFilter(pid);
       const el = document.getElementById('section-detail');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function openModal(type) {
-      const m = document.getElementById('modal-container');
-      const title = document.getElementById('modal-title');
-      const content = document.getElementById('modal-content');
-
-      if (type === 'p005') {
-        title.innerHTML = '🟡 P005 RMFแนต — DEFERRED';
-        content.innerHTML = `
-          <p style="margin-bottom: 12px;">พอร์ต <strong>P005 RMFแนต</strong> อยู่ในสถานะ <strong>DEFERRED</strong> ในรอบการจัดสรร Final Audited Dataset 2026-08-31 ตาม Master System v2.4</p>
-          <div class="modal-row"><span>ประเภทพอร์ต:</span><strong>RMF Retirement (บำนาญ 20 ปี)</strong></div>
-          <div class="modal-row"><span>งบลงทุนรายปี:</span><strong>฿90,000.00</strong></div>
-          <div class="modal-row"><span>ยอดจัดสรรจริงรอบนี้:</span><strong style="color:var(--accent-amber);">฿0.00 (DEFERRED)</strong></div>
-          <div class="modal-row"><span>เงินสดคงเหลือ:</span><strong>฿0.00</strong></div>
-          <div class="modal-row"><span>สถานะระบบ:</span><strong style="color:var(--accent-amber);">HOLD / AWAITING EXECUTION WINDOW</strong></div>
-          <p style="margin-top: 14px; font-size: 0.78rem; color: var(--text-dim);">หมายเหตุ: ข้อมูลของ P005 ถูกกันออกจากการคำนวณสัดส่วนมูลค่าพอร์ตปัจจุบัน (Excluded from Consolidated Total) ตามข้อกำหนดความถูกต้องของ Final Dataset อย่างเคร่งครัด</p>
-        `;
-      }
-      m.style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modal-container').style.display = 'none';
-    }
-    function closeModalOnBg(e) {
-      if (e.target.id === 'modal-container') closeModal();
     }
 
     // ScrollSpy for Sidebar
