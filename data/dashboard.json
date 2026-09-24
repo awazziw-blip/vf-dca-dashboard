@@ -1,0 +1,742 @@
+{
+  "metadata": {
+    "system_version": "VF-DCA-2.3",
+    "master_identifier": "VF-DCA-2.3.1-LOCKED",
+    "core_formula": "VF-DCA-2026-V1",
+    "generated_at": "2026-09-24 15:09:30 +07:00",
+    "export_format": "dashboard.json",
+    "export_layer": "VF-DCA Production Database Exporter",
+    "portfolio_count": 5,
+    "workbook_id": "1EVWoUSi5UMApOjTnv9ycIaVbrj2PAsMC9BvbOPFxFRg"
+  },
+  "production_status": {
+    "system_version": "VF-DCA-2.3",
+    "master_identifier": "VF-DCA-2.3.1-LOCKED",
+    "core_formula": "VF-DCA-2026-V1",
+    "core_logic": "V2.2 maintained",
+    "production_architecture": "Gemini Research → GPT Audit/Decision → Google Sheets → AppSheet",
+    "research_layer": "Gemini Deep Research; no final investment decision",
+    "decision_authority": "GPT Audit Master / FINAL CORRECTED DATASET",
+    "persistence_layer": "Google Sheets",
+    "presentation_layer": "AppSheet",
+    "raw_audited_separation": "Required",
+    "github_dashboard": "ARCHIVED / NOT PRODUCTION",
+    "appsheet_decision_recalc": "PROHIBITED",
+    "user_workflow": "UNCHANGED / ZERO USER WORK INCREASE"
+  },
+  "portfolio_summaries": [
+    {
+      "portfolio_id": "P001",
+      "portfolio_name": "หุ้นเหน่ง",
+      "portfolio_type": "EQUITY",
+      "current_portfolio_value": 1114763.05,
+      "budget": 70000.0,
+      "planned_executable_buy": 66095.0,
+      "actual_buy": 66095.0,
+      "remaining_pool": 3905.0,
+      "minimum_buy": 10000.0,
+      "cycle_status": "AUDITED_LEGACY",
+      "reconciliation_status": "PASS",
+      "execution_drift": 0.0,
+      "latest_cycle_id": "LEGACY-20260831-P001"
+    },
+    {
+      "portfolio_id": "P002",
+      "portfolio_name": "หุ้นแนต",
+      "portfolio_type": "DIVIDEND",
+      "current_portfolio_value": 1656400.0,
+      "budget": 30000.0,
+      "planned_executable_buy": 22800.0,
+      "actual_buy": 22800.0,
+      "remaining_pool": 7200.0,
+      "minimum_buy": 5000.0,
+      "cycle_status": "AUDITED_LEGACY",
+      "reconciliation_status": "PASS",
+      "execution_drift": 0.0,
+      "latest_cycle_id": "LEGACY-20260831-P002"
+    },
+    {
+      "portfolio_id": "P003",
+      "portfolio_name": "หุ้นพ่อ",
+      "portfolio_type": "EQUITY",
+      "current_portfolio_value": 2018859.48,
+      "budget": 30000.0,
+      "planned_executable_buy": 29510.0,
+      "actual_buy": 29510.0,
+      "remaining_pool": 490.0,
+      "minimum_buy": 5000.0,
+      "cycle_status": "PASS — CORRECTED",
+      "reconciliation_status": "PASS",
+      "execution_drift": 0.0,
+      "latest_cycle_id": "20260924-P003"
+    },
+    {
+      "portfolio_id": "P004",
+      "portfolio_name": "RMFเหน่ง",
+      "portfolio_type": "RMF",
+      "current_portfolio_value": 922672.0,
+      "budget": 150000.0,
+      "planned_executable_buy": 150000.0,
+      "actual_buy": 150000.0,
+      "remaining_pool": 0.0,
+      "minimum_buy": 0.0,
+      "cycle_status": "AUDITED_LEGACY",
+      "reconciliation_status": "PASS",
+      "execution_drift": 0.0,
+      "latest_cycle_id": "LEGACY-20260831-P004"
+    },
+    {
+      "portfolio_id": "P005",
+      "portfolio_name": "RMFแนต",
+      "portfolio_type": "RMF",
+      "current_portfolio_value": 1375454.46,
+      "budget": 90000.0,
+      "planned_executable_buy": null,
+      "actual_buy": null,
+      "remaining_pool": null,
+      "minimum_buy": 0.0,
+      "cycle_status": "SNAPSHOT_ONLY",
+      "reconciliation_status": "DATA_PENDING",
+      "execution_drift": null,
+      "latest_cycle_id": "LEGACY-20260916-P005"
+    }
+  ],
+  "assets": [
+    {
+      "portfolio_id": "P003",
+      "ticker": "BDMS",
+      "target_weight": 0.18,
+      "current_weight": 0.0787,
+      "allocation_gap": 0.1013,
+      "dca_score": 72.0,
+      "ranking": 1,
+      "mos": 0.2786,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": "PASS",
+      "gate_thesis": "PASS",
+      "gate_valuation": "PASS",
+      "gate_expected_return": "PASS",
+      "action": "BUY",
+      "theoretical_allocation": 16160.0,
+      "planned_executable_buy": 16160.0,
+      "actual_buy": 16160.0,
+      "board_lot": 800,
+      "decision_reason": "BUY"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "CPALL",
+      "target_weight": 0.18,
+      "current_weight": 0.0931,
+      "allocation_gap": 0.0869,
+      "dca_score": 57.0,
+      "ranking": 2,
+      "mos": 0.2823,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": "PASS",
+      "gate_thesis": "PASS",
+      "gate_valuation": "PASS",
+      "gate_expected_return": "PASS",
+      "action": "BUY",
+      "theoretical_allocation": 13350.0,
+      "planned_executable_buy": 13350.0,
+      "actual_buy": 13350.0,
+      "board_lot": 300,
+      "decision_reason": "BUY"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "CPN",
+      "target_weight": 0.12,
+      "current_weight": 0.1295,
+      "allocation_gap": -0.0095,
+      "dca_score": 47.0,
+      "ranking": 3,
+      "mos": 0.1233,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": "PASS",
+      "gate_thesis": "PASS",
+      "gate_valuation": "PASS",
+      "gate_expected_return": "PASS",
+      "action": "HOLD",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "HOLD"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "WHART",
+      "target_weight": 0.08,
+      "current_weight": 0.0484,
+      "allocation_gap": 0.0316,
+      "dca_score": 39.5,
+      "ranking": 4,
+      "mos": 0.0348,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": null,
+      "gate_thesis": null,
+      "gate_valuation": null,
+      "gate_expected_return": null,
+      "action": "HOLD",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "HOLD / GROUP_CAP"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "WHAUP",
+      "target_weight": 0.08,
+      "current_weight": 0.0539,
+      "allocation_gap": 0.0261,
+      "dca_score": 34.5,
+      "ranking": 5,
+      "mos": 0.0067,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": null,
+      "gate_thesis": null,
+      "gate_valuation": null,
+      "gate_expected_return": "FAIL",
+      "action": "HOLD",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "HOLD / ER_FAIL / GROUP_CAP"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "WHA",
+      "target_weight": 0.14,
+      "current_weight": 0.2525,
+      "allocation_gap": -0.1125,
+      "dca_score": 32.0,
+      "ranking": 6,
+      "mos": 0.1074,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": null,
+      "gate_thesis": null,
+      "gate_valuation": null,
+      "gate_expected_return": null,
+      "action": "TRIM_REVIEW",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "TRIM_REVIEW / GROUP_CONCENTRATION"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "TISCO",
+      "target_weight": 0.1,
+      "current_weight": 0.0883,
+      "allocation_gap": 0.0117,
+      "dca_score": 30.0,
+      "ranking": 7,
+      "mos": -0.1,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": null,
+      "gate_thesis": null,
+      "gate_valuation": "FAIL",
+      "gate_expected_return": null,
+      "action": "HOLD",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "HOLD / HARD_GATE_NO_NEW_MONEY"
+    },
+    {
+      "portfolio_id": "P003",
+      "ticker": "AOT",
+      "target_weight": 0.12,
+      "current_weight": 0.2555,
+      "allocation_gap": -0.1355,
+      "dca_score": 23.0,
+      "ranking": 8,
+      "mos": 0.1245,
+      "expected_return": null,
+      "quality": null,
+      "thesis": null,
+      "gate_quality": null,
+      "gate_thesis": null,
+      "gate_valuation": null,
+      "gate_expected_return": null,
+      "action": "TRIM_REVIEW",
+      "theoretical_allocation": 0.0,
+      "planned_executable_buy": 0.0,
+      "actual_buy": 0.0,
+      "board_lot": 0,
+      "decision_reason": "TRIM_REVIEW / NO_NEW_MONEY"
+    }
+  ],
+  "consolidated_orders": [
+    {
+      "portfolio_id": "P003",
+      "portfolio_name": "หุ้นพ่อ",
+      "ticker": "BDMS",
+      "quantity": 800,
+      "price": 20.2,
+      "amount": 16160.0,
+      "order_type": "BUY"
+    },
+    {
+      "portfolio_id": "P003",
+      "portfolio_name": "หุ้นพ่อ",
+      "ticker": "CPALL",
+      "quantity": 300,
+      "price": 44.5,
+      "amount": 13350.0,
+      "order_type": "BUY"
+    }
+  ],
+  "remaining_cash_reconciliation": {
+    "P003": {
+      "cycle_id": "20260924-P003",
+      "monthly_budget": 30000.0,
+      "actual_buy_total": 29510.0,
+      "remaining_cash_pool": 490.0,
+      "cash_policy": "HOLD",
+      "reconciled": true,
+      "discrepancy": 0.0
+    },
+    "P001": {
+      "cycle_id": "LEGACY-20260831-P001",
+      "monthly_budget": 70000.0,
+      "actual_buy_total": 66095.0,
+      "remaining_cash_pool": 3905.0,
+      "cash_policy": "HOLD",
+      "reconciled": true,
+      "discrepancy": 0.0
+    },
+    "P002": {
+      "cycle_id": "LEGACY-20260831-P002",
+      "monthly_budget": 30000.0,
+      "actual_buy_total": 22800.0,
+      "remaining_cash_pool": 7200.0,
+      "cash_policy": "HOLD",
+      "reconciled": true,
+      "discrepancy": 0.0
+    },
+    "P004": {
+      "cycle_id": "LEGACY-20260831-P004",
+      "monthly_budget": 150000.0,
+      "actual_buy_total": 150000.0,
+      "remaining_cash_pool": 0.0,
+      "cash_policy": "HOLD",
+      "reconciled": true,
+      "discrepancy": 0.0
+    },
+    "P005": {
+      "cycle_id": "LEGACY-20260916-P005",
+      "monthly_budget": 90000.0,
+      "actual_buy_total": null,
+      "remaining_cash_pool": null,
+      "cash_policy": "DATA_PENDING",
+      "reconciled": null,
+      "discrepancy": null
+    }
+  },
+  "dividend": {
+    "status": "DATA_PENDING",
+    "projected_dividend_pool": null,
+    "portfolio_yields": {
+      "P001": null,
+      "P002": null,
+      "P003": null,
+      "P004": null,
+      "P005": null
+    },
+    "notes": "Forward DPS not populated in active production master."
+  },
+  "rmf": {
+    "P004": {
+      "portfolio_name": "RMFเหน่ง",
+      "portfolio_type": "RMF",
+      "current_value": 922672.0,
+      "budget": 150000.0,
+      "holdings": [
+        {
+          "ticker": "KFUSINDFXRMF",
+          "quantity": 44794.8668,
+          "current_price": 13.3307,
+          "market_value": 591395.0,
+          "actual_weight": "64.10%"
+        },
+        {
+          "ticker": "KFINDIARMF",
+          "quantity": 17077.6305,
+          "current_price": 13.392,
+          "market_value": 228882.0,
+          "actual_weight": "24.81%"
+        },
+        {
+          "ticker": "KFGOLDRMF",
+          "quantity": 3882.5255,
+          "current_price": 26.4855,
+          "market_value": 102395.0,
+          "actual_weight": "11.10%"
+        }
+      ]
+    },
+    "P005": {
+      "portfolio_name": "RMFแนต",
+      "portfolio_type": "RMF",
+      "current_value": 1375454.46,
+      "budget": 90000.0,
+      "holdings": [
+        {
+          "ticker": "KFUSINDFXRMF",
+          "quantity": 7370.0941,
+          "current_price": 13.2737,
+          "market_value": 97828.42,
+          "actual_weight": "7.11%"
+        },
+        {
+          "ticker": "KFINDIARMF",
+          "quantity": 3484.982,
+          "current_price": 13.2416,
+          "market_value": 46146.74,
+          "actual_weight": "3.36%"
+        },
+        {
+          "ticker": "KFGOLDRMF",
+          "quantity": 6827.3773,
+          "current_price": 25.3299,
+          "market_value": 172936.78,
+          "actual_weight": "12.57%"
+        },
+        {
+          "ticker": "KFAFIXRMF",
+          "quantity": 78221.2658,
+          "current_price": 11.9127,
+          "market_value": 931826.47,
+          "actual_weight": "67.75%"
+        },
+        {
+          "ticker": "KFGTECHRMF",
+          "quantity": 5297.848,
+          "current_price": 23.9184,
+          "market_value": 126716.05,
+          "actual_weight": "9.21%"
+        }
+      ]
+    }
+  },
+  "goals": {
+    "P001": {
+      "objective": "Retirement",
+      "horizon_years": 20,
+      "goal_target": 60000.0,
+      "goal_unit": "THB/month",
+      "goal_progress": null,
+      "goal_feasibility": null
+    },
+    "P002": {
+      "objective": "Retirement Income",
+      "horizon_years": 20,
+      "goal_target": 60000.0,
+      "goal_unit": "THB/month",
+      "goal_progress": null,
+      "goal_feasibility": null
+    },
+    "P003": {
+      "objective": "Wealth + Income",
+      "horizon_years": 20,
+      "goal_target": 100000.0,
+      "goal_unit": "THB/month",
+      "goal_progress": null,
+      "goal_feasibility": null
+    },
+    "P004": {
+      "objective": "Retirement",
+      "horizon_years": 20,
+      "goal_target": null,
+      "goal_unit": null,
+      "goal_progress": null,
+      "goal_feasibility": null
+    },
+    "P005": {
+      "objective": "Retirement",
+      "horizon_years": 20,
+      "goal_target": null,
+      "goal_unit": null,
+      "goal_progress": null,
+      "goal_feasibility": null
+    }
+  },
+  "risk": {
+    "group_caps": {
+      "normal": "<=25%",
+      "review_upper": ">25% to 30%: stop new buys in group",
+      "trim_review": ">30%: trim review; no automatic sale"
+    },
+    "p003_group_concentration": {
+      "WHA_GROUP": {
+        "group_weight": 0.3551,
+        "group_status": ">30% / TRIM_REVIEW",
+        "tickers": [
+          "WHART",
+          "WHAUP",
+          "WHA"
+        ]
+      },
+      "TRANSPORT": {
+        "group_weight": 0.2555,
+        "group_status": ">25% to 30%: stop new buys in group",
+        "tickers": [
+          "AOT"
+        ]
+      },
+      "PROPERTY": {
+        "group_weight": 0.1295,
+        "group_status": "<=25% / NORMAL",
+        "tickers": [
+          "CPN"
+        ]
+      },
+      "COMMERCE": {
+        "group_weight": 0.0931,
+        "group_status": "<=25% / NORMAL",
+        "tickers": [
+          "CPALL"
+        ]
+      },
+      "FINANCE": {
+        "group_weight": 0.0883,
+        "group_status": "<=25% / NORMAL",
+        "tickers": [
+          "TISCO"
+        ]
+      },
+      "HEALTHCARE": {
+        "group_weight": 0.0787,
+        "group_status": "<=25% / NORMAL",
+        "tickers": [
+          "BDMS"
+        ]
+      }
+    }
+  },
+  "cash_flow": {
+    "monthly_budgets": {
+      "P001": 70000.0,
+      "P002": 30000.0,
+      "P003": 30000.0,
+      "P004": 150000.0,
+      "P005": 90000.0
+    },
+    "total_monthly_equity_budget": 130000.0,
+    "p003_latest_execution": {
+      "budget": 30000.0,
+      "actual_buy": 29510.0,
+      "remaining_pool": 490.0,
+      "cash_policy": "HOLD"
+    }
+  },
+  "surveillance_notes": [
+    "WHA: Group concentration review triggered at 35.51% (>30%). Stop new buys; review trim stage 1 (25% position) without automatic liquidation.",
+    "AOT: Single asset concentration at 25.55% (>25%). Allocation drift +13.55% vs 12% target. Hard gate stop new buys triggered.",
+    "TISCO: Valuation hard gate failed with negative MOS (-10.00%). No new money allocated.",
+    "WHART: Group cap locked due to WHA_GROUP concentration >30%. Hold action maintained.",
+    "WHAUP: Expected return fail & group cap locked. Hold action maintained.",
+    "CPN: Weight at 12.95% vs 12.00% target (-0.95% gap). Hold action maintained.",
+    "BDMS: Rank 1 DCA Score 72, 10.13% allocation gap. Executed BUY 800 shares @ 20.20 THB (16,160 THB).",
+    "CPALL: Rank 2 DCA Score 57, 8.69% allocation gap. Executed BUY 300 shares @ 44.50 THB (13,350 THB)."
+  ],
+  "audit_integrity": {
+    "audit_status": "PASS — CORRECTED",
+    "dataset_version": "VF-DCA-2.3",
+    "cycle_id": "20260924-P003",
+    "audit_authority": "GPT Audit Master / FINAL CORRECTED DATASET",
+    "checks": {
+      "no_unauthorized_recalculation": true,
+      "target_weights_source_verified": "11_PORTFOLIO_ASSET_MASTER",
+      "p003_target_weight_sum": 1.0,
+      "execution_reconciliation": true,
+      "board_lot_rounding_correct": true,
+      "group_caps_enforced": true
+    }
+  },
+  "execution": {
+    "portfolio_id": "P003",
+    "cycle_id": "20260924-P003",
+    "budget": 30000.0,
+    "theoretical_allocation_total": 29510.0,
+    "planned_executable_buy": 29510.0,
+    "actual_buy": 29510.0,
+    "remaining_pool": 490.0,
+    "execution_drift": 0.0,
+    "reconciliation": {
+      "budget": 30000.0,
+      "actual_buy_plus_remaining": 30000.0,
+      "discrepancy": 0.0,
+      "status": "PASS"
+    }
+  },
+  "state_ledger": {
+    "current_snapshot": {
+      "cycle_id": "20260924-P003",
+      "as_of_date": "2026-09-24",
+      "records": [
+        {
+          "ticker": "BDMS",
+          "current_weight": 0.0787,
+          "target_weight": 0.18,
+          "allocation_drift": 0.1013,
+          "allocation_drift_status": "UNDERWEIGHT",
+          "planned_buy": 16160.0,
+          "actual_buy": 16160.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "BUY"
+        },
+        {
+          "ticker": "CPALL",
+          "current_weight": 0.0931,
+          "target_weight": 0.18,
+          "allocation_drift": 0.0869,
+          "allocation_drift_status": "UNDERWEIGHT",
+          "planned_buy": 13350.0,
+          "actual_buy": 13350.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "BUY"
+        },
+        {
+          "ticker": "CPN",
+          "current_weight": 0.1295,
+          "target_weight": 0.12,
+          "allocation_drift": 0.0095,
+          "allocation_drift_status": "NORMAL",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "HOLD"
+        },
+        {
+          "ticker": "WHART",
+          "current_weight": 0.0484,
+          "target_weight": 0.08,
+          "allocation_drift": 0.0316,
+          "allocation_drift_status": "GROUP_CAP_LOCKED",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "HOLD"
+        },
+        {
+          "ticker": "WHAUP",
+          "current_weight": 0.0539,
+          "target_weight": 0.08,
+          "allocation_drift": 0.0261,
+          "allocation_drift_status": "GROUP_CAP_LOCKED",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "HOLD"
+        },
+        {
+          "ticker": "WHA",
+          "current_weight": 0.2525,
+          "target_weight": 0.14,
+          "allocation_drift": 0.1125,
+          "allocation_drift_status": "REVIEW",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "TRIM_REVIEW"
+        },
+        {
+          "ticker": "TISCO",
+          "current_weight": 0.0883,
+          "target_weight": 0.1,
+          "allocation_drift": 0.0117,
+          "allocation_drift_status": "PASS",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "HOLD"
+        },
+        {
+          "ticker": "AOT",
+          "current_weight": 0.2555,
+          "target_weight": 0.12,
+          "allocation_drift": 0.1355,
+          "allocation_drift_status": "REVIEW",
+          "planned_buy": 0.0,
+          "actual_buy": 0.0,
+          "execution_drift": 0.0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "TRIM_REVIEW"
+        }
+      ]
+    },
+    "previous_snapshot": {
+      "cycle_id": "LEGACY-20260830-P003",
+      "as_of_date": "2026-08-30",
+      "portfolio_value": 2069793.06
+    },
+    "execution_history": [
+      {
+        "execution_id": "EXEC-20260924-P003-BDMS",
+        "cycle_id": "20260924-P003",
+        "ticker": "BDMS",
+        "action": "BUY",
+        "planned_buy": 16160.0,
+        "actual_buy": 16160.0,
+        "shares": 800,
+        "execution_price": 20.2,
+        "execution_drift": 0.0,
+        "drift_status": "ZERO_DRIFT / PASS"
+      },
+      {
+        "execution_id": "EXEC-20260924-P003-CPALL",
+        "cycle_id": "20260924-P003",
+        "ticker": "CPALL",
+        "action": "BUY",
+        "planned_buy": 13350.0,
+        "actual_buy": 13350.0,
+        "shares": 300,
+        "execution_price": 44.5,
+        "execution_drift": 0.0,
+        "drift_status": "ZERO_DRIFT / PASS"
+      }
+    ],
+    "drift_check": {
+      "execution_drift": "0.00%",
+      "drift_status": "PASS"
+    }
+  },
+  "system_status": {
+    "formula": "PASS",
+    "gates": "PASS",
+    "allocation": "PASS",
+    "execution": "PASS",
+    "persistence": "PASS",
+    "audit": "PASS",
+    "dashboard_sync": "READY"
+  }
+}
