@@ -3,7 +3,7 @@
     "system_version": "VF-DCA-2.3",
     "master_identifier": "VF-DCA-2.3.1-LOCKED",
     "core_formula": "VF-DCA-2026-V1",
-    "generated_at": "2026-09-24 15:54:18 +07:00",
+    "generated_at": "2026-09-25 23:45:00 +07:00",
     "export_format": "dashboard.json",
     "export_layer": "VF-DCA Production Database Exporter",
     "portfolio_count": 5,
@@ -29,16 +29,16 @@
       "portfolio_id": "P001",
       "portfolio_name": "หุ้นเหน่ง",
       "portfolio_type": "EQUITY",
-      "current_portfolio_value": 1114763.05,
+      "current_portfolio_value": 1122832.45,
       "budget": 70000,
-      "planned_executable_buy": 66095,
-      "actual_buy": 66095,
-      "remaining_pool": 3905,
+      "planned_executable_buy": 68985,
+      "actual_buy": 68985,
+      "remaining_pool": 1015,
       "minimum_buy": 10000,
-      "cycle_status": "AUDITED_LEGACY",
+      "cycle_status": "PASS — CORRECTED",
       "reconciliation_status": "PASS",
       "execution_drift": 0,
-      "latest_cycle_id": "LEGACY-20260831-P001"
+      "latest_cycle_id": "20260924-P001"
     },
     {
       "portfolio_id": "P002",
@@ -138,48 +138,48 @@
   },
   "assets": [
     {
-      "portfolio_id": "P003",
-      "ticker": "BDMS",
-      "target_weight": 0.18,
-      "current_weight": 0.0787,
-      "allocation_gap": 0.1013,
-      "dca_score": 72,
-      "ranking": 1,
-      "mos": 0.2786,
-      "hard_gate_status": "PASS",
-      "action": "BUY",
-      "theoretical_allocation": 16160,
-      "planned_executable_buy": 16160,
-      "actual_buy": 16160,
-      "board_lot": 800,
-      "decision_reason": "BUY"
-    },
-    {
-      "portfolio_id": "P003",
+      "portfolio_id": "P001",
       "ticker": "CPALL",
-      "target_weight": 0.18,
-      "current_weight": 0.0931,
-      "allocation_gap": 0.0869,
+      "target_weight": 0.15,
+      "current_weight": 0.1168,
+      "allocation_gap": 0.0332,
       "dca_score": 57,
-      "ranking": 2,
-      "mos": 0.2823,
+      "ranking": 1,
+      "mos": 0.3396,
       "hard_gate_status": "PASS",
       "action": "BUY",
-      "theoretical_allocation": 13350,
-      "planned_executable_buy": 13350,
-      "actual_buy": 13350,
-      "board_lot": 300,
+      "theoretical_allocation": 39825,
+      "planned_executable_buy": 39825,
+      "actual_buy": 39825,
+      "board_lot": 900,
       "decision_reason": "BUY"
     },
     {
-      "portfolio_id": "P003",
-      "ticker": "CPN",
-      "target_weight": 0.12,
-      "current_weight": 0.1295,
-      "allocation_gap": -0.0095,
-      "dca_score": 47,
+      "portfolio_id": "P001",
+      "ticker": "WHART",
+      "target_weight": 0.15,
+      "current_weight": 0.1068,
+      "allocation_gap": 0.0432,
+      "dca_score": 45,
+      "ranking": 2,
+      "mos": 0.0722,
+      "hard_gate_status": "PASS",
+      "action": "BUY",
+      "theoretical_allocation": 29160,
+      "planned_executable_buy": 29160,
+      "actual_buy": 29160,
+      "board_lot": 2700,
+      "decision_reason": "BUY"
+    },
+    {
+      "portfolio_id": "P001",
+      "ticker": "BDMS",
+      "target_weight": 0.15,
+      "current_weight": 0.1761,
+      "allocation_gap": -0.0261,
+      "dca_score": 42,
       "ranking": 3,
-      "mos": 0.1233,
+      "mos": 0.2593,
       "hard_gate_status": "PASS",
       "action": "HOLD",
       "theoretical_allocation": 0,
@@ -189,14 +189,31 @@
       "decision_reason": "HOLD"
     },
     {
-      "portfolio_id": "P003",
-      "ticker": "WHART",
-      "target_weight": 0.08,
-      "current_weight": 0.0484,
-      "allocation_gap": 0.0316,
-      "dca_score": 39.5,
+      "portfolio_id": "P001",
+      "ticker": "WORLDA01",
+      "target_weight": 0.3,
+      "current_weight": 0.2752,
+      "allocation_gap": 0.0248,
+      "dca_score": 41.5,
       "ranking": 4,
-      "mos": 0.0348,
+      "mos": null,
+      "hard_gate_status": "PASS",
+      "action": "HOLD",
+      "theoretical_allocation": 0,
+      "planned_executable_buy": 0,
+      "actual_buy": 0,
+      "board_lot": 0,
+      "decision_reason": "HOLD"
+    },
+    {
+      "portfolio_id": "P001",
+      "ticker": "QQQM19",
+      "target_weight": 0.15,
+      "current_weight": 0.2581,
+      "allocation_gap": -0.1081,
+      "dca_score": 33.5,
+      "ranking": 5,
+      "mos": null,
       "hard_gate_status": "HOLD / GROUP_CAP",
       "action": "HOLD",
       "theoretical_allocation": 0,
@@ -206,48 +223,14 @@
       "decision_reason": "HOLD / GROUP_CAP"
     },
     {
-      "portfolio_id": "P003",
-      "ticker": "WHAUP",
-      "target_weight": 0.08,
-      "current_weight": 0.0539,
-      "allocation_gap": 0.0261,
-      "dca_score": 34.5,
-      "ranking": 5,
-      "mos": 0.0067,
-      "hard_gate_status": "HOLD / ER_FAIL / GROUP_CAP",
-      "action": "HOLD",
-      "theoretical_allocation": 0,
-      "planned_executable_buy": 0,
-      "actual_buy": 0,
-      "board_lot": 0,
-      "decision_reason": "HOLD / ER_FAIL / GROUP_CAP"
-    },
-    {
-      "portfolio_id": "P003",
-      "ticker": "WHA",
-      "target_weight": 0.14,
-      "current_weight": 0.2525,
-      "allocation_gap": -0.1125,
-      "dca_score": 32,
-      "ranking": 6,
-      "mos": 0.1074,
-      "hard_gate_status": "TRIM_REVIEW / GROUP_CONCENTRATION",
-      "action": "TRIM_REVIEW",
-      "theoretical_allocation": 0,
-      "planned_executable_buy": 0,
-      "actual_buy": 0,
-      "board_lot": 0,
-      "decision_reason": "TRIM_REVIEW / GROUP_CONCENTRATION"
-    },
-    {
-      "portfolio_id": "P003",
+      "portfolio_id": "P001",
       "ticker": "TISCO",
       "target_weight": 0.1,
-      "current_weight": 0.0883,
-      "allocation_gap": 0.0117,
+      "current_weight": 0.067,
+      "allocation_gap": 0.033,
       "dca_score": 30,
-      "ranking": 7,
-      "mos": -0.1,
+      "ranking": 6,
+      "mos": -0.1591,
       "hard_gate_status": "HOLD / HARD_GATE_NO_NEW_MONEY",
       "action": "HOLD",
       "theoretical_allocation": 0,
@@ -255,60 +238,34 @@
       "actual_buy": 0,
       "board_lot": 0,
       "decision_reason": "HOLD / HARD_GATE_NO_NEW_MONEY"
-    },
-    {
-      "portfolio_id": "P003",
-      "ticker": "AOT",
-      "target_weight": 0.12,
-      "current_weight": 0.2555,
-      "allocation_gap": -0.1355,
-      "dca_score": 23,
-      "ranking": 8,
-      "mos": 0.1245,
-      "hard_gate_status": "TRIM_REVIEW / NO_NEW_MONEY",
-      "action": "TRIM_REVIEW",
-      "theoretical_allocation": 0,
-      "planned_executable_buy": 0,
-      "actual_buy": 0,
-      "board_lot": 0,
-      "decision_reason": "TRIM_REVIEW / NO_NEW_MONEY"
     }
   ],
   "consolidated_orders": [
     {
-      "portfolio_id": "P003",
-      "portfolio_name": "หุ้นพ่อ",
-      "ticker": "BDMS",
-      "quantity": 800,
-      "price": 20.2,
-      "amount": 16160,
+      "portfolio_id": "P001",
+      "portfolio_name": "หุ้นเหน่ง",
+      "ticker": "CPALL",
+      "quantity": 900,
+      "price": 44.25,
+      "amount": 39825,
       "order_type": "BUY"
     },
     {
-      "portfolio_id": "P003",
-      "portfolio_name": "หุ้นพ่อ",
-      "ticker": "CPALL",
-      "quantity": 300,
-      "price": 44.5,
-      "amount": 13350,
+      "portfolio_id": "P001",
+      "portfolio_name": "หุ้นเหน่ง",
+      "ticker": "WHART",
+      "quantity": 2700,
+      "price": 10.8,
+      "amount": 29160,
       "order_type": "BUY"
     }
   ],
   "remaining_cash_reconciliation": {
-    "P003": {
-      "cycle_id": "20260924-P003",
-      "monthly_budget": 30000,
-      "actual_buy_total": 29510,
-      "remaining_cash_pool": 490,
-      "cash_policy": "HOLD",
-      "reconciled": true,
-      "discrepancy": 0
-    },
     "P001": {
-      "cycle_id": "LEGACY-20260831-P001",
+      "cycle_id": "20260924-P001",
       "monthly_budget": 70000,
-      "actual_buy_total": 66095,
-      "remaining_cash_pool": 3905,
+      "actual_buy_total": 68985,
+      "remaining_cash_pool": 1015,
       "cash_policy": "HOLD",
       "reconciled": true,
       "discrepancy": 0
@@ -318,6 +275,15 @@
       "monthly_budget": 30000,
       "actual_buy_total": 22800,
       "remaining_cash_pool": 7200,
+      "cash_policy": "HOLD",
+      "reconciled": true,
+      "discrepancy": 0
+    },
+    "P003": {
+      "cycle_id": "20260924-P003",
+      "monthly_budget": 30000,
+      "actual_buy_total": 29510,
+      "remaining_cash_pool": 490,
       "cash_policy": "HOLD",
       "reconciled": true,
       "discrepancy": 0
@@ -500,49 +466,47 @@
       "review_upper": ">25% to 30%: stop new buys in group",
       "trim_review": ">30%: trim review; no automatic sale"
     },
-    "p003_group_concentration": {
-      "WHA_GROUP": {
-        "group_weight": 0.3551,
-        "group_status": ">30% / TRIM_REVIEW",
+    "p001_group_concentration": {
+      "GLOBAL_EQUITY": {
+        "group_weight": 0.2752,
+        "group_status": "<=30% / NORMAL",
         "tickers": [
-          "WHART",
-          "WHAUP",
-          "WHA"
+          "WORLDA01"
         ]
       },
-      "TRANSPORT": {
-        "group_weight": 0.2555,
+      "US_EQUITY": {
+        "group_weight": 0.2581,
         "group_status": ">25% to 30%: stop new buys in group",
         "tickers": [
-          "AOT"
+          "QQQM19"
         ]
       },
-      "PROPERTY": {
-        "group_weight": 0.1295,
+      "HEALTHCARE": {
+        "group_weight": 0.1761,
         "group_status": "<=25% / NORMAL",
         "tickers": [
-          "CPN"
+          "BDMS"
         ]
       },
       "COMMERCE": {
-        "group_weight": 0.0931,
+        "group_weight": 0.1168,
         "group_status": "<=25% / NORMAL",
         "tickers": [
           "CPALL"
         ]
       },
+      "PROPERTY": {
+        "group_weight": 0.1068,
+        "group_status": "<=25% / NORMAL",
+        "tickers": [
+          "WHART"
+        ]
+      },
       "FINANCE": {
-        "group_weight": 0.0883,
+        "group_weight": 0.067,
         "group_status": "<=25% / NORMAL",
         "tickers": [
           "TISCO"
-        ]
-      },
-      "HEALTHCARE": {
-        "group_weight": 0.0787,
-        "group_status": "<=25% / NORMAL",
-        "tickers": [
-          "BDMS"
         ]
       }
     }
@@ -556,87 +520,97 @@
       "P005": 90000
     },
     "total_monthly_equity_budget": 130000,
-    "p003_latest_execution": {
-      "budget": 30000,
-      "actual_buy": 29510,
-      "remaining_pool": 490,
+    "p001_latest_execution": {
+      "budget": 70000,
+      "actual_buy": 68985,
+      "remaining_pool": 1015,
       "cash_policy": "HOLD"
     }
   },
   "surveillance_notes": [
-    "BDMS: Action BUY — Reason: BUY",
     "CPALL: Action BUY — Reason: BUY",
-    "CPN: Action HOLD — Reason: HOLD",
-    "WHART: Action HOLD — Reason: HOLD / GROUP_CAP",
-    "WHAUP: Action HOLD — Reason: HOLD / ER_FAIL / GROUP_CAP",
-    "WHA: Action TRIM_REVIEW — Reason: TRIM_REVIEW / GROUP_CONCENTRATION",
-    "TISCO: Action HOLD — Reason: HOLD / HARD_GATE_NO_NEW_MONEY",
-    "AOT: Action TRIM_REVIEW — Reason: TRIM_REVIEW / NO_NEW_MONEY"
+    "WHART: Action BUY — Reason: BUY",
+    "BDMS: Action HOLD — Reason: HOLD",
+    "WORLDA01: Action HOLD — Reason: HOLD",
+    "QQQM19: Action HOLD — Reason: HOLD / GROUP_CAP",
+    "TISCO: Action HOLD — Reason: HOLD / HARD_GATE_NO_NEW_MONEY"
   ],
   "audit_integrity": {
     "audit_status": "PASS — CORRECTED",
     "dataset_version": "VF-DCA-2.3",
-    "cycle_id": "20260924-P003",
+    "cycle_id": "20260924-P001",
     "audit_authority": "GPT Audit Master / FINAL CORRECTED DATASET",
     "checks": {
       "no_unauthorized_recalculation": true,
       "target_weights_source_verified": "11_PORTFOLIO_ASSET_MASTER",
-      "p003_target_weight_sum": 1,
+      "p001_target_weight_sum": 1,
       "execution_reconciliation": true,
       "board_lot_rounding_correct": true,
       "group_caps_enforced": true
     }
   },
   "execution": {
-    "portfolio_id": "P003",
-    "cycle_id": "20260924-P003",
-    "budget": 30000,
-    "theoretical_allocation_total": 29510,
-    "planned_executable_buy": 29510,
-    "actual_buy": 29510,
-    "remaining_pool": 490,
+    "portfolio_id": "P001",
+    "cycle_id": "20260924-P001",
+    "budget": 70000,
+    "theoretical_allocation_total": 68985,
+    "planned_executable_buy": 68985,
+    "actual_buy": 68985,
+    "remaining_pool": 1015,
     "execution_drift": 0,
     "reconciliation": {
-      "budget": 30000,
-      "actual_buy_plus_remaining": 30000,
+      "budget": 70000,
+      "actual_buy_plus_remaining": 70000,
       "discrepancy": 0,
       "status": "PASS"
     }
   },
   "state_ledger": {
     "current_snapshot": {
-      "cycle_id": "20260924-P003",
+      "cycle_id": "20260924-P001",
       "as_of_date": "2026-09-24",
       "records": [
         {
-          "ticker": "BDMS",
-          "current_weight": 0.0787,
-          "target_weight": 0.18,
-          "allocation_drift": 0.1013,
-          "allocation_drift_status": "UNDERWEIGHT",
-          "planned_buy": 16160,
-          "actual_buy": 16160,
-          "execution_drift": 0,
-          "execution_drift_status": "ON_TRACK",
-          "action": "BUY"
-        },
-        {
           "ticker": "CPALL",
-          "current_weight": 0.0931,
-          "target_weight": 0.18,
-          "allocation_drift": 0.0869,
+          "current_weight": 0.1168,
+          "target_weight": 0.15,
+          "allocation_drift": 0.0332,
           "allocation_drift_status": "UNDERWEIGHT",
-          "planned_buy": 13350,
-          "actual_buy": 13350,
+          "planned_buy": 39825,
+          "actual_buy": 39825,
           "execution_drift": 0,
           "execution_drift_status": "ON_TRACK",
           "action": "BUY"
         },
         {
-          "ticker": "CPN",
-          "current_weight": 0.1295,
-          "target_weight": 0.12,
-          "allocation_drift": 0.0095,
+          "ticker": "WHART",
+          "current_weight": 0.1068,
+          "target_weight": 0.15,
+          "allocation_drift": 0.0432,
+          "allocation_drift_status": "UNDERWEIGHT",
+          "planned_buy": 29160,
+          "actual_buy": 29160,
+          "execution_drift": 0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "BUY"
+        },
+        {
+          "ticker": "BDMS",
+          "current_weight": 0.1761,
+          "target_weight": 0.15,
+          "allocation_drift": 0.0261,
+          "allocation_drift_status": "OVERWEIGHT",
+          "planned_buy": 0,
+          "actual_buy": 0,
+          "execution_drift": 0,
+          "execution_drift_status": "ON_TRACK",
+          "action": "HOLD"
+        },
+        {
+          "ticker": "WORLDA01",
+          "current_weight": 0.2752,
+          "target_weight": 0.3,
+          "allocation_drift": 0.0248,
           "allocation_drift_status": "NORMAL",
           "planned_buy": 0,
           "actual_buy": 0,
@@ -645,94 +619,58 @@
           "action": "HOLD"
         },
         {
-          "ticker": "WHART",
-          "current_weight": 0.0484,
-          "target_weight": 0.08,
-          "allocation_drift": 0.0316,
-          "allocation_drift_status": "GROUP_CAP_LOCKED",
-          "planned_buy": 0,
-          "actual_buy": 0,
-          "execution_drift": 0,
-          "execution_drift_status": "ON_TRACK",
-          "action": "HOLD"
-        },
-        {
-          "ticker": "WHAUP",
-          "current_weight": 0.0539,
-          "target_weight": 0.08,
-          "allocation_drift": 0.0261,
-          "allocation_drift_status": "GROUP_CAP_LOCKED",
-          "planned_buy": 0,
-          "actual_buy": 0,
-          "execution_drift": 0,
-          "execution_drift_status": "ON_TRACK",
-          "action": "HOLD"
-        },
-        {
-          "ticker": "WHA",
-          "current_weight": 0.2525,
-          "target_weight": 0.14,
-          "allocation_drift": 0.1125,
+          "ticker": "QQQM19",
+          "current_weight": 0.2581,
+          "target_weight": 0.15,
+          "allocation_drift": 0.1081,
           "allocation_drift_status": "REVIEW",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
           "execution_drift_status": "ON_TRACK",
-          "action": "TRIM_REVIEW"
+          "action": "HOLD"
         },
         {
           "ticker": "TISCO",
-          "current_weight": 0.0883,
+          "current_weight": 0.067,
           "target_weight": 0.1,
-          "allocation_drift": 0.0117,
+          "allocation_drift": 0.033,
           "allocation_drift_status": "PASS",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
           "execution_drift_status": "ON_TRACK",
           "action": "HOLD"
-        },
-        {
-          "ticker": "AOT",
-          "current_weight": 0.2555,
-          "target_weight": 0.12,
-          "allocation_drift": 0.1355,
-          "allocation_drift_status": "REVIEW",
-          "planned_buy": 0,
-          "actual_buy": 0,
-          "execution_drift": 0,
-          "execution_drift_status": "ON_TRACK",
-          "action": "TRIM_REVIEW"
         }
       ]
     },
     "previous_snapshot": {
-      "cycle_id": "LEGACY-20260830-P003",
-      "as_of_date": "2026-08-30",
-      "portfolio_value": 2069793.06
+      "cycle_id": "LEGACY-20260831-P001",
+      "as_of_date": "2026-08-31",
+      "portfolio_value": 1114763.05
     },
     "execution_history": [
       {
-        "execution_id": "EXEC-20260924-P003-BDMS",
-        "cycle_id": "20260924-P003",
-        "ticker": "BDMS",
+        "execution_id": "EXEC-20260924-P001-CPALL",
+        "cycle_id": "20260924-P001",
+        "ticker": "CPALL",
         "action": "BUY",
-        "planned_buy": 16160,
-        "actual_buy": 16160,
-        "shares": 800,
-        "execution_price": 20.2,
+        "planned_buy": 39825,
+        "actual_buy": 39825,
+        "shares": 900,
+        "execution_price": 44.25,
         "execution_drift": 0,
         "drift_status": "ZERO_DRIFT / PASS"
       },
       {
-        "execution_id": "EXEC-20260924-P003-CPALL",
-        "cycle_id": "20260924-P003",
-        "ticker": "CPALL",
+        "execution_id": "EXEC-20260924-P001-WHART",
+        "cycle_id": "20260924-P001",
+        "ticker": "WHART",
         "action": "BUY",
-        "planned_buy": 13350,
-        "actual_buy": 13350,
-        "shares": 300,
-        "execution_price": 44.5,
+        "planned_buy": 29160,
+        "actual_buy": 29160,
+        "shares": 2700,
+        "execution_price": 10.8,
         "execution_drift": 0,
         "drift_status": "ZERO_DRIFT / PASS"
       }
