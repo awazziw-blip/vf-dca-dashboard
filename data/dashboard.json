@@ -1,9 +1,25 @@
 {
+  "correction_metadata": {
+    "correction_id": "CORR-20260924-P001-001-PROD",
+    "original_cycle_id": "20260924-P001",
+    "portfolio_id": "P001",
+    "correction_status": "CORRECTED",
+    "supersedes_prior_publication": true,
+    "corrected_at": "2026-09-26 12:35:00",
+    "corrected_tables": [
+      "05_DASHBOARD_LOG",
+      "06_DCA_DECISION",
+      "10_STATE_LEDGER",
+      "12_DASHBOARD_EXPORT",
+      "07_AUDIT_LOG"
+    ],
+    "original_publish_completed_at": "2026-09-25 10:13:17"
+  },
   "metadata": {
     "system_version": "VF-DCA-2.3",
-    "master_identifier": "VF-DCA-2.3.1-LOCKED",
+    "master_identifier": "VF-DCA-2.3.2-CANDIDATE",
     "core_formula": "VF-DCA-2026-V1",
-    "generated_at": "2026-09-25 23:45:00 +07:00",
+    "generated_at": "2026-09-26 12:35:00",
     "export_format": "dashboard.json",
     "export_layer": "VF-DCA Production Database Exporter",
     "portfolio_count": 5,
@@ -11,25 +27,27 @@
   },
   "production_status": {
     "system_version": "VF-DCA-2.3",
-    "master_identifier": "VF-DCA-2.3.1-LOCKED",
+    "master_identifier": "VF-DCA-2.3.2-CANDIDATE",
     "core_formula": "VF-DCA-2026-V1",
     "core_logic": "V2.2 maintained",
-    "production_architecture": "Gemini Research → GPT Audit/Decision → Google Sheets → AppSheet",
+    "production_architecture": "Gemini Research -> GPT Audit/Decision -> Spark Write-back -> Google Sheets -> Apps Script -> GitHub Pages",
     "research_layer": "Gemini Deep Research; no final investment decision",
     "decision_authority": "GPT Audit Master / FINAL CORRECTED DATASET",
     "persistence_layer": "Google Sheets",
-    "presentation_layer": "AppSheet",
+    "presentation_layer": "GitHub Pages",
     "raw_audited_separation": "Required",
-    "github_dashboard": "ARCHIVED / NOT PRODUCTION",
+    "github_dashboard": "PRODUCTION",
     "appsheet_decision_recalc": "PROHIBITED",
-    "user_workflow": "UNCHANGED / ZERO USER WORK INCREASE"
+    "user_workflow": "UNCHANGED / ZERO USER WORK INCREASE",
+    "publisher_layer": "Apps Script",
+    "appsheet": "RETIRED"
   },
   "portfolio_summaries": [
     {
       "portfolio_id": "P001",
       "portfolio_name": "หุ้นเหน่ง",
       "portfolio_type": "EQUITY",
-      "current_portfolio_value": 1122832.45,
+      "current_portfolio_value": 1191817.45,
       "budget": 70000,
       "planned_executable_buy": 68985,
       "actual_buy": 68985,
@@ -74,7 +92,7 @@
       "portfolio_id": "P004",
       "portfolio_name": "RMFเหน่ง",
       "portfolio_type": "RMF",
-      "current_portfolio_value": 922672,
+      "current_value": 922672,
       "budget": 150000,
       "planned_executable_buy": 150000,
       "actual_buy": 150000,
@@ -89,7 +107,7 @@
       "portfolio_id": "P005",
       "portfolio_name": "RMFแนต",
       "portfolio_type": "RMF",
-      "current_portfolio_value": 1375454.46,
+      "current_value": 1375454.46,
       "budget": 90000,
       "planned_executable_buy": null,
       "actual_buy": null,
@@ -141,14 +159,14 @@
       "portfolio_id": "P001",
       "ticker": "CPALL",
       "target_weight": 0.15,
-      "current_weight": 0.1168,
-      "allocation_gap": 0.0332,
-      "dca_score": 57,
+      "current_weight": 0.1435,
+      "allocation_gap": 0.0065,
+      "dca_score": 72,
       "ranking": 1,
-      "mos": 0.3396,
+      "mos": 0.339552,
       "hard_gate_status": "PASS",
       "action": "BUY",
-      "theoretical_allocation": 39825,
+      "theoretical_allocation": 43261.8,
       "planned_executable_buy": 39825,
       "actual_buy": 39825,
       "board_lot": 900,
@@ -158,14 +176,14 @@
       "portfolio_id": "P001",
       "ticker": "WHART",
       "target_weight": 0.15,
-      "current_weight": 0.1068,
-      "allocation_gap": 0.0432,
-      "dca_score": 45,
+      "current_weight": 0.125053,
+      "allocation_gap": 0.024947,
+      "dca_score": 44.5,
       "ranking": 2,
-      "mos": 0.0722,
+      "mos": 0.072165,
       "hard_gate_status": "PASS",
       "action": "BUY",
-      "theoretical_allocation": 29160,
+      "theoretical_allocation": 26738.2,
       "planned_executable_buy": 29160,
       "actual_buy": 29160,
       "board_lot": 2700,
@@ -175,69 +193,69 @@
       "portfolio_id": "P001",
       "ticker": "BDMS",
       "target_weight": 0.15,
-      "current_weight": 0.1761,
-      "allocation_gap": -0.0261,
-      "dca_score": 42,
+      "current_weight": 0.165864,
+      "allocation_gap": -0.015864,
+      "dca_score": 56,
       "ranking": 3,
-      "mos": 0.2593,
+      "mos": 0.259259,
       "hard_gate_status": "PASS",
       "action": "HOLD",
       "theoretical_allocation": 0,
       "planned_executable_buy": 0,
       "actual_buy": 0,
       "board_lot": 0,
-      "decision_reason": "HOLD"
+      "decision_reason": "OVERWEIGHT_PRIORITY_MULTIPLIER_ZERO"
     },
     {
       "portfolio_id": "P001",
       "ticker": "WORLDA01",
       "target_weight": 0.3,
-      "current_weight": 0.2752,
-      "allocation_gap": 0.0248,
-      "dca_score": 41.5,
-      "ranking": 4,
-      "mos": null,
-      "hard_gate_status": "PASS",
+      "current_weight": 0.259316,
+      "allocation_gap": 0.040684,
+      "dca_score": null,
+      "ranking": null,
+      "mos": "PENDING DATA",
+      "hard_gate_status": "EXPECTED_RETURN_FAIL",
       "action": "HOLD",
       "theoretical_allocation": 0,
       "planned_executable_buy": 0,
       "actual_buy": 0,
       "board_lot": 0,
-      "decision_reason": "HOLD"
+      "decision_reason": "EXPECTED_RETURN_BELOW_REQUIRED_RETURN"
     },
     {
       "portfolio_id": "P001",
       "ticker": "QQQM19",
       "target_weight": 0.15,
-      "current_weight": 0.2581,
-      "allocation_gap": -0.1081,
-      "dca_score": 33.5,
-      "ranking": 5,
-      "mos": null,
-      "hard_gate_status": "HOLD / GROUP_CAP",
+      "current_weight": 0.243149,
+      "allocation_gap": -0.093149,
+      "dca_score": null,
+      "ranking": null,
+      "mos": "PENDING DATA",
+      "hard_gate_status": "VALUATION_PENDING_NOT_TESTABLE",
       "action": "HOLD",
       "theoretical_allocation": 0,
       "planned_executable_buy": 0,
       "actual_buy": 0,
       "board_lot": 0,
-      "decision_reason": "HOLD / GROUP_CAP"
+      "decision_reason": "VALUATION_PENDING_AND_OVERWEIGHT"
     },
     {
       "portfolio_id": "P001",
       "ticker": "TISCO",
       "target_weight": 0.1,
-      "current_weight": 0.067,
-      "allocation_gap": 0.033,
-      "dca_score": 30,
-      "ranking": 6,
-      "mos": -0.1591,
-      "hard_gate_status": "HOLD / HARD_GATE_NO_NEW_MONEY",
+      "current_weight": 0.063118,
+      "allocation_gap": 0.036882,
+      "dca_score": 20,
+      "ranking": 4,
+      "mos": -0.159091,
+      "hard_gate_status": "VALUATION_FAIL",
       "action": "HOLD",
       "theoretical_allocation": 0,
       "planned_executable_buy": 0,
       "actual_buy": 0,
       "board_lot": 0,
-      "decision_reason": "HOLD / HARD_GATE_NO_NEW_MONEY"
+      "decision_reason": "NEGATIVE_MOS_HARD_GATE_FAIL"
     }
   ],
   "consolidated_orders": [
@@ -467,46 +485,11 @@
       "trim_review": ">30%: trim review; no automatic sale"
     },
     "p001_group_concentration": {
-      "GLOBAL_EQUITY": {
-        "group_weight": 0.2752,
-        "group_status": "<=30% / NORMAL",
-        "tickers": [
-          "WORLDA01"
-        ]
-      },
-      "US_EQUITY": {
-        "group_weight": 0.2581,
-        "group_status": ">25% to 30%: stop new buys in group",
-        "tickers": [
-          "QQQM19"
-        ]
-      },
-      "HEALTHCARE": {
-        "group_weight": 0.1761,
-        "group_status": "<=25% / NORMAL",
-        "tickers": [
-          "BDMS"
-        ]
-      },
-      "COMMERCE": {
-        "group_weight": 0.1168,
-        "group_status": "<=25% / NORMAL",
-        "tickers": [
-          "CPALL"
-        ]
-      },
-      "PROPERTY": {
-        "group_weight": 0.1068,
+      "WHA_GROUP": {
+        "group_weight": 0.125053,
         "group_status": "<=25% / NORMAL",
         "tickers": [
           "WHART"
-        ]
-      },
-      "FINANCE": {
-        "group_weight": 0.067,
-        "group_status": "<=25% / NORMAL",
-        "tickers": [
-          "TISCO"
         ]
       }
     }
@@ -530,10 +513,10 @@
   "surveillance_notes": [
     "CPALL: Action BUY — Reason: BUY",
     "WHART: Action BUY — Reason: BUY",
-    "BDMS: Action HOLD — Reason: HOLD",
-    "WORLDA01: Action HOLD — Reason: HOLD",
-    "QQQM19: Action HOLD — Reason: HOLD / GROUP_CAP",
-    "TISCO: Action HOLD — Reason: HOLD / HARD_GATE_NO_NEW_MONEY"
+    "BDMS: Action HOLD — Reason: OVERWEIGHT_PRIORITY_MULTIPLIER_ZERO",
+    "WORLDA01: Action HOLD — Reason: EXPECTED_RETURN_BELOW_REQUIRED_RETURN",
+    "QQQM19: Action HOLD — Reason: VALUATION_PENDING_AND_OVERWEIGHT",
+    "TISCO: Action HOLD — Reason: NEGATIVE_MOS_HARD_GATE_FAIL"
   ],
   "audit_integrity": {
     "audit_status": "PASS — CORRECTED",
@@ -553,7 +536,7 @@
     "portfolio_id": "P001",
     "cycle_id": "20260924-P001",
     "budget": 70000,
-    "theoretical_allocation_total": 68985,
+    "theoretical_allocation_total": 70000,
     "planned_executable_buy": 68985,
     "actual_buy": 68985,
     "remaining_pool": 1015,
@@ -572,10 +555,10 @@
       "records": [
         {
           "ticker": "CPALL",
-          "current_weight": 0.1168,
+          "current_weight": 0.1435,
           "target_weight": 0.15,
-          "allocation_drift": 0.0332,
-          "allocation_drift_status": "UNDERWEIGHT",
+          "allocation_drift": 0.0065,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 39825,
           "actual_buy": 39825,
           "execution_drift": 0,
@@ -584,10 +567,10 @@
         },
         {
           "ticker": "WHART",
-          "current_weight": 0.1068,
+          "current_weight": 0.125053,
           "target_weight": 0.15,
-          "allocation_drift": 0.0432,
-          "allocation_drift_status": "UNDERWEIGHT",
+          "allocation_drift": 0.024947,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 29160,
           "actual_buy": 29160,
           "execution_drift": 0,
@@ -596,10 +579,10 @@
         },
         {
           "ticker": "BDMS",
-          "current_weight": 0.1761,
+          "current_weight": 0.165864,
           "target_weight": 0.15,
-          "allocation_drift": 0.0261,
-          "allocation_drift_status": "OVERWEIGHT",
+          "allocation_drift": 0.015864,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
@@ -608,10 +591,10 @@
         },
         {
           "ticker": "WORLDA01",
-          "current_weight": 0.2752,
+          "current_weight": 0.259316,
           "target_weight": 0.3,
-          "allocation_drift": 0.0248,
-          "allocation_drift_status": "NORMAL",
+          "allocation_drift": 0.040684,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
@@ -620,10 +603,10 @@
         },
         {
           "ticker": "QQQM19",
-          "current_weight": 0.2581,
+          "current_weight": 0.243149,
           "target_weight": 0.15,
-          "allocation_drift": 0.1081,
-          "allocation_drift_status": "REVIEW",
+          "allocation_drift": 0.093149,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
@@ -632,10 +615,10 @@
         },
         {
           "ticker": "TISCO",
-          "current_weight": 0.067,
+          "current_weight": 0.063118,
           "target_weight": 0.1,
-          "allocation_drift": 0.033,
-          "allocation_drift_status": "PASS",
+          "allocation_drift": 0.036882,
+          "allocation_drift_status": "ON_TRACK",
           "planned_buy": 0,
           "actual_buy": 0,
           "execution_drift": 0,
