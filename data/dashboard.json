@@ -16,12 +16,12 @@
     "original_publish_completed_at": "2026-09-25 10:13:17"
   },
   "export_recovery_metadata": {
-    "recovery_id": "RECOV-20260924-P003-001-PROD",
-    "cycle_id": "20260924-P003",
-    "portfolio_id": "P003",
+    "recovery_id": "RECOV-20260926-P004-UIWEIGHT-001-PROD",
+    "cycle_id": "20260926-P004",
+    "portfolio_id": "P004",
     "recovery_status": "RECOVERED",
-    "recovered_at": "2026-09-26 00:38:25",
-    "recovered_at_utc": "2026-09-26T07:38:25.000Z",
+    "recovered_at": "2026-09-27 09:30:06",
+    "recovered_at_utc": "2026-09-27T02:30:06.000Z",
     "changed_tables": [
       "12_DASHBOARD_EXPORT",
       "07_AUDIT_LOG"
@@ -32,7 +32,7 @@
     "system_version": "VF-DCA-2.3",
     "master_identifier": "VF-DCA-2.3.2-CANDIDATE",
     "core_formula": "VF-DCA-2026-V1",
-    "generated_at": "2026-09-26 23:53:18",
+    "generated_at": "2026-09-27 09:30:06",
     "export_format": "dashboard.json",
     "export_layer": "VF-DCA Production Database Exporter",
     "portfolio_count": 5,
@@ -441,27 +441,27 @@
     {
       "portfolio_id": "P004",
       "ticker": "KFUSINDFXRMF",
-      "target_weight": "45%",
-      "current_weight": "64.10%",
-      "allocation_gap": "-19.10%",
+      "target_weight": 0.45,
+      "current_weight": 0.641,
+      "allocation_gap": -0.191,
       "dca_score": 44.75,
       "action": "HOLD / NO_NEW_MONEY"
     },
     {
       "portfolio_id": "P004",
       "ticker": "KFINDIARMF",
-      "target_weight": "35%",
-      "current_weight": "24.81%",
-      "allocation_gap": "+10.19%",
+      "target_weight": 0.35,
+      "current_weight": 0.2481,
+      "allocation_gap": 0.1019,
       "dca_score": 63.25,
       "action": "HOLD / NO_NEW_MONEY"
     },
     {
       "portfolio_id": "P004",
       "ticker": "KFGOLDRMF",
-      "target_weight": "20%",
-      "current_weight": "11.10%",
-      "allocation_gap": "+8.90%",
+      "target_weight": 0.2,
+      "current_weight": 0.111,
+      "allocation_gap": 0.089,
       "dca_score": 57.5,
       "action": "HOLD / NO_NEW_MONEY"
     }
@@ -579,21 +579,21 @@
           "quantity": 44794.8668,
           "current_price": 13.3216,
           "market_value": 591395,
-          "actual_weight": "64.10%"
+          "actual_weight": 0.641
         },
         {
           "ticker": "KFINDIARMF",
           "quantity": 17077.6305,
           "current_price": 13.348,
           "market_value": 228882,
-          "actual_weight": "24.81%"
+          "actual_weight": 0.2481
         },
         {
           "ticker": "KFGOLDRMF",
           "quantity": 3882.5255,
           "current_price": 25.2518,
           "market_value": 102395,
-          "actual_weight": "11.10%"
+          "actual_weight": 0.111
         }
       ]
     },
@@ -608,35 +608,35 @@
           "quantity": 7370.0941,
           "current_price": 13.2737,
           "market_value": 97828.42,
-          "actual_weight": "7.11%"
+          "actual_weight": 0.0711
         },
         {
           "ticker": "KFINDIARMF",
           "quantity": 3484.982,
           "current_price": 13.2416,
           "market_value": 46146.74,
-          "actual_weight": "3.36%"
+          "actual_weight": 0.0336
         },
         {
           "ticker": "KFGOLDRMF",
           "quantity": 6827.3773,
           "current_price": 25.3299,
           "market_value": 172936.78,
-          "actual_weight": "12.57%"
+          "actual_weight": 0.1257
         },
         {
           "ticker": "KFAFIXRMF",
           "quantity": 78221.2658,
           "current_price": 11.9127,
           "market_value": 931826.47,
-          "actual_weight": "67.75%"
+          "actual_weight": 0.6775
         },
         {
           "ticker": "KFGTECHRMF",
           "quantity": 5297.848,
           "current_price": 23.9184,
           "market_value": 126716.05,
-          "actual_weight": "9.21%"
+          "actual_weight": 0.0921
         }
       ]
     }
