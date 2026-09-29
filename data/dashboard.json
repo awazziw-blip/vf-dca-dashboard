@@ -3,7 +3,7 @@
     "system_version": "VF-DCA-2.3",
     "master_identifier": "VF-DCA-2.3.2-CANDIDATE",
     "core_formula": "VF-DCA-2026-V1",
-    "generated_at": "2026-09-29 14:57:23",
+    "generated_at": "2026-09-29 20:18:01",
     "export_format": "dashboard.json",
     "export_layer": "VF-DCA Production Database Exporter",
     "portfolio_count": 5,
@@ -71,7 +71,7 @@
       "portfolio_id": "P004",
       "portfolio_name": "RMFเหน่ง",
       "portfolio_type": "RMF",
-      "current_portfolio_value": 922672,
+      "current_portfolio_value": 977099.89,
       "budget": 150000,
       "planned_executable_buy": 0,
       "actual_buy": 0,
@@ -80,7 +80,7 @@
       "cycle_status": "PASS — CANDIDATE_WRITEBACK",
       "reconciliation_status": "PASS",
       "execution_drift": 0,
-      "latest_cycle_id": "20260926-P004"
+      "latest_cycle_id": "20260929-P004-C001"
     },
     {
       "portfolio_id": "P005",
@@ -463,8 +463,8 @@
       "portfolio_id": "P004",
       "ticker": "KFUSINDFXRMF",
       "target_weight": 0.45,
-      "current_weight": 0.641,
-      "allocation_gap": -0.191,
+      "current_weight": 0.6313475,
+      "allocation_gap": -0.1813475,
       "dca_score": 44.75,
       "ranking": null,
       "mos": null,
@@ -481,8 +481,8 @@
       "portfolio_id": "P004",
       "ticker": "KFINDIARMF",
       "target_weight": 0.35,
-      "current_weight": 0.2481,
-      "allocation_gap": 0.1019,
+      "current_weight": 0.2472439,
+      "allocation_gap": 0.1027561,
       "dca_score": 63.25,
       "ranking": null,
       "mos": null,
@@ -493,14 +493,14 @@
       "actual_buy": 0,
       "shares": 0,
       "execution_price": null,
-      "decision_reason": "Base Expected Return 8.50% is below governing Required Return 9.00%."
+      "decision_reason": "Base Expected Return 8.50% is below governing Required Return 9.00%. Expected Return Hard Gate FAIL. DCA allocation = 0 regardless of DCA Score."
     },
     {
       "portfolio_id": "P004",
       "ticker": "KFGOLDRMF",
       "target_weight": 0.2,
-      "current_weight": 0.111,
-      "allocation_gap": 0.089,
+      "current_weight": 0.1214086,
+      "allocation_gap": 0.0785914,
       "dca_score": 57.5,
       "ranking": null,
       "mos": null,
@@ -511,7 +511,7 @@
       "actual_buy": 0,
       "shares": 0,
       "execution_price": null,
-      "decision_reason": "Base Expected Return 5.00% is below governing Required Return 11.00%."
+      "decision_reason": "Base Expected Return 5.00% is below governing Required Return 11.00%. Expected Return Hard Gate FAIL. DCA allocation = 0 regardless of DCA Score."
     },
     {
       "portfolio_id": "P005",
@@ -698,29 +698,29 @@
     "P004": {
       "portfolio_name": "RMFเหน่ง",
       "portfolio_type": "RMF",
-      "current_value": 922672,
+      "current_value": 977099.89,
       "budget": 150000,
       "holdings": [
         {
           "ticker": "KFUSINDFXRMF",
-          "quantity": 44794.8668,
-          "current_price": 13.3216,
-          "market_value": 591395,
-          "actual_weight": 0.641
+          "quantity": 45507.4269,
+          "current_price": 13.5558,
+          "market_value": 616889.58,
+          "actual_weight": 0.6313475
         },
         {
           "ticker": "KFINDIARMF",
-          "quantity": 17077.6305,
-          "current_price": 13.348,
-          "market_value": 228882,
-          "actual_weight": 0.2481
+          "quantity": 18840.1798,
+          "current_price": 12.8227,
+          "market_value": 241581.97,
+          "actual_weight": 0.2472439
         },
         {
           "ticker": "KFGOLDRMF",
-          "quantity": 3882.5255,
-          "current_price": 25.2518,
-          "market_value": 102395,
-          "actual_weight": 0.111
+          "quantity": 4981.5583,
+          "current_price": 23.8135,
+          "market_value": 118628.34,
+          "actual_weight": 0.1214086
         }
       ]
     },
@@ -818,29 +818,29 @@
   "audit_integrity": {
     "audit_status": "PASS",
     "dataset_version": "VF-DCA-2.3",
-    "cycle_id": "20260929-P001-C001",
+    "cycle_id": "20260929-P004-C001",
     "audit_authority": "GPT Audit Master / FINAL CORRECTED DATASET",
     "checks": {
       "no_unauthorized_recalculation": true,
       "target_weights_source_verified": "11_PORTFOLIO_ASSET_MASTER",
-      "p001_target_weight_sum": 1,
       "execution_reconciliation": true,
       "board_lot_rounding_correct": true,
-      "group_caps_enforced": true
+      "group_caps_enforced": true,
+      "p004_target_weight_sum": 1
     }
   },
   "execution": {
-    "portfolio_id": "P001",
-    "cycle_id": "20260929-P001-C001",
-    "budget": 70000,
-    "theoretical_allocation_total": 70000,
-    "planned_executable_buy": 69990,
-    "actual_buy": 69990,
-    "remaining_pool": 10,
+    "portfolio_id": "P004",
+    "cycle_id": "20260929-P004-C001",
+    "budget": 150000,
+    "theoretical_allocation_total": 0,
+    "planned_executable_buy": 0,
+    "actual_buy": 0,
+    "remaining_pool": 150000,
     "execution_drift": 0,
     "reconciliation": {
-      "budget": 70000,
-      "actual_buy_plus_remaining": 70000,
+      "budget": 150000,
+      "actual_buy_plus_remaining": 150000,
       "discrepancy": 0,
       "status": "PASS"
     }
