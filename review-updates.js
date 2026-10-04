@@ -49,8 +49,8 @@ function renderReviewUpdate() {
       orders.append(reviewNode('div', 'review-order', `${order.ticker} ${num(order.quantity)} × ${price(order.reference_price)} = ${money(order.planned_amount)}`));
     }
     if (orders.childElementCount) card.append(orders);
-    card.append(reviewNode('div', 'review-warning', update.actual_execution_status === 'NOT_REPORTED'
-      ? 'ยังไม่มีผลซื้อจริง — รายการข้างบนเป็นแผนประมาณการ'
+    card.append(reviewNode('div', 'review-warning', update.actual_execution_status === 'NOT_REPORTED' || update.actual_execution_status === 'NOT_TRACKED_IN_REMASTER'
+      ? 'รายการข้างบนเป็นแผนประมาณการ · รอบถัดไปใช้รูปพอร์ตใหม่ ไม่ติดตามผลซื้อรายรายการ'
       : `สถานะผลซื้อจริง: ${update.actual_execution_status}`));
     if (update.note) card.append(reviewNode('p', 'muted', update.note));
     if (typeof update.report_url === 'string' && update.report_url.startsWith('https://docs.google.com/document/d/')) {
