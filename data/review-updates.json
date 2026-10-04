@@ -1,0 +1,21 @@
+{
+  "schema_version": "rem-review-v1",
+  "updates": [
+    {
+      "portfolio_id": "P003",
+      "review_ref": "P003-REMASTER-STEP01-REVIEW",
+      "data_as_of": "2026-10-02",
+      "report_status": "ESTIMATE",
+      "decision": "BUY_PLAN",
+      "budget": 30000,
+      "planned_buy_total": 29510,
+      "planned_cash_buffer": 490,
+      "actual_execution_status": "NOT_REPORTED",
+      "planned_orders": [
+        { "ticker": "BDMS", "quantity": 800, "reference_price": 20.2, "planned_amount": 16160 },
+        { "ticker": "CPALL", "quantity": 300, "reference_price": 44.5, "planned_amount": 13350 }
+      ],
+      "note": "แผนประมาณการ ไม่ใช่คำสั่งซื้อจริง; FV ของ BDMS มีความไวต่อจำนวน lot"
+    }
+  ]
+}
