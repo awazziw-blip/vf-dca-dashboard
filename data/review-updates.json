@@ -12,10 +12,53 @@
       "planned_cash_buffer": 490,
       "actual_execution_status": "NOT_REPORTED",
       "planned_orders": [
-        { "ticker": "BDMS", "quantity": 800, "reference_price": 20.2, "planned_amount": 16160 },
-        { "ticker": "CPALL", "quantity": 300, "reference_price": 44.5, "planned_amount": 13350 }
+        {
+          "ticker": "BDMS",
+          "quantity": 800,
+          "reference_price": 20.2,
+          "planned_amount": 16160
+        },
+        {
+          "ticker": "CPALL",
+          "quantity": 300,
+          "reference_price": 44.5,
+          "planned_amount": 13350
+        }
       ],
       "note": "แผนประมาณการ ไม่ใช่คำสั่งซื้อจริง; FV ของ BDMS มีความไวต่อจำนวน lot"
+    },
+    {
+      "portfolio_id": "P001",
+      "review_ref": "PRE_AUDIT_P001_20261004",
+      "report_revision": "R02",
+      "data_as_of": "2026-10-04",
+      "report_status": "ESTIMATE",
+      "decision": "BUY_PLAN",
+      "budget": 70000,
+      "planned_buy_total": 69998.1,
+      "planned_cash_buffer": 1.9,
+      "actual_execution_status": "NOT_TRACKED_IN_REMASTER",
+      "planned_orders": [
+        {
+          "ticker": "CPALL",
+          "quantity": 600,
+          "reference_price": 43,
+          "planned_amount": 25800
+        },
+        {
+          "ticker": "WORLDA01",
+          "quantity": 4766,
+          "reference_price": 5.35,
+          "planned_amount": 25498.1
+        },
+        {
+          "ticker": "WHART",
+          "quantity": 1700,
+          "reference_price": 11,
+          "planned_amount": 18700
+        }
+      ],
+      "note": "แผนประมาณการ R02 ไม่ใช่ผลซื้อจริง; WORLDA01 ใช้สมมติฐาน forward P/E และกำไรดัชนี กรณี Conservative ไม่ผ่าน ER และเปลี่ยนแผนซื้อ"
     }
   ]
 }
