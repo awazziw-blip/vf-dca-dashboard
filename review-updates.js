@@ -1,5 +1,8 @@
 /* Display-only Remaster review feed. This never changes production actuals. */
 let reviewUpdates = [];
+const reviewFundMoney = value => Number.isFinite(value)
+  ? new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value) + ' บาท'
+  : 'ไม่ระบุ';
 
 function reviewNode(tag, className, value) {
   const node = document.createElement(tag);
@@ -32,25 +35,37 @@ function renderReviewUpdate() {
     head.append(left, reviewNode('span', 'review-badge', `${update.report_status} · ${update.decision}`));
     card.append(head);
 
+    const isFund = /^P00[45]$/.test(update.portfolio_id);
     const grid = reviewNode('div', 'review-grid');
     for (const [label, amount] of [
-      ['งบประมาณ', update.budget],
-      ['ยอดซื้อตามแผน', update.planned_buy_total],
-      ['งบเหลือตามแผน', update.planned_cash_buffer]
+      [isFund ? 'เงินใหม่รอบนี้' : 'งบประมาณ', update.budget],
+      [isFund ? 'เงินใหม่ตามแผน' : 'ยอดซื้อตามแผน', update.planned_buy_total],
+      [isFund ? 'เงินใหม่ที่ยังไม่จัดสรร' : 'งบเหลือตามแผน', update.planned_cash_buffer]
     ]) {
       const cell = reviewNode('div');
-      cell.append(reviewNode('span', '', label), reviewNode('b', '', money(amount)));
+      cell.append(reviewNode('span', '', label), reviewNode('b', '', isFund ? reviewFundMoney(amount) : money(amount)));
       grid.append(cell);
     }
     card.append(grid);
 
     const orders = reviewNode('div', 'review-orders');
     for (const order of update.planned_orders || []) {
-      orders.append(reviewNode('div', 'review-order', `${order.ticker} ${num(order.quantity)} × ${price(order.reference_price)} = ${money(order.planned_amount)}`));
+      if (isFund) {
+        const parts = [];
+        if (Number.isFinite(order.contribution_amount)) parts.push(`เงินใหม่ ${reviewFundMoney(order.contribution_amount)}`);
+        if (Number.isFinite(order.switch_in_amount)) parts.push(`สับเปลี่ยนเข้า ${reviewFundMoney(order.switch_in_amount)}`);
+        if (Number.isFinite(order.switch_out_amount)) parts.push(`สับเปลี่ยนออก ${reviewFundMoney(order.switch_out_amount)}`);
+        if (!parts.length && Number.isFinite(order.planned_amount)) parts.push(`ตามแผน ${reviewFundMoney(order.planned_amount)}`);
+        if (order.nav_status) parts.push(`NAV ${order.nav_status}`);
+        orders.append(reviewNode('div', 'review-order', `${order.fund_code || order.ticker || 'กองทุน'} · ${parts.join(' · ') || 'ยอดเงินรอยืนยัน'}`));
+      } else {
+        orders.append(reviewNode('div', 'review-order', `${order.ticker} ${num(order.quantity)} × ${price(order.reference_price)} = ${money(order.planned_amount)}`));
+      }
     }
     if (orders.childElementCount) card.append(orders);
+    else card.append(reviewNode('div', 'review-order', 'ไม่มีรายการซื้อในแผนรอบนี้'));
     card.append(reviewNode('div', 'review-warning', update.actual_execution_status === 'NOT_REPORTED' || update.actual_execution_status === 'NOT_TRACKED_IN_REMASTER'
-      ? 'รายการข้างบนเป็นแผนประมาณการ · รอบถัดไปใช้รูปพอร์ตใหม่ ไม่ติดตามผลซื้อรายรายการ'
+      ? 'รายการข้างบนเป็นแผน ไม่ใช่ผลซื้อจริง · รอบถัดไปใช้รูปพอร์ตใหม่'
       : `สถานะผลซื้อจริง: ${update.actual_execution_status}`));
     if (update.note) card.append(reviewNode('p', 'muted', update.note));
     if (typeof update.report_url === 'string' && update.report_url.startsWith('https://docs.google.com/document/d/')) {
