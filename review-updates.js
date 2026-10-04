@@ -1,5 +1,8 @@
 /* Display-only Remaster review feed. This never changes production actuals. */
 let reviewUpdates = [];
+const reviewMoney = value => Number.isFinite(value)
+  ? new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB', minimumFractionDigits: Number.isInteger(value) ? 0 : 2, maximumFractionDigits: 2 }).format(value)
+  : 'ไม่ระบุ';
 const reviewFundMoney = value => Number.isFinite(value)
   ? new Intl.NumberFormat('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value) + ' บาท'
   : 'ไม่ระบุ';
@@ -22,9 +25,6 @@ function renderReviewUpdate() {
     .sort((a, b) => a.data_as_of.localeCompare(b.data_as_of) || a.review_ref.localeCompare(b.review_ref))
     .at(-1);
 
-  const kicker = hero.querySelector('.hero-kicker');
-  if (kicker && update) kicker.textContent = `📁 ประวัติรอบที่บันทึกแล้ว · ${portfolio(selected)?.latest_cycle_id || '—'}`;
-
   if (update) {
     const card = reviewNode('section', 'card review-update');
     card.id = 'review-update';
@@ -43,7 +43,7 @@ function renderReviewUpdate() {
       [isFund ? 'เงินใหม่ที่ยังไม่จัดสรร' : 'งบเหลือตามแผน', update.planned_cash_buffer]
     ]) {
       const cell = reviewNode('div');
-      cell.append(reviewNode('span', '', label), reviewNode('b', '', isFund ? reviewFundMoney(amount) : money(amount)));
+      cell.append(reviewNode('span', '', label), reviewNode('b', '', isFund ? reviewFundMoney(amount) : reviewMoney(amount)));
       grid.append(cell);
     }
     card.append(grid);
@@ -59,7 +59,7 @@ function renderReviewUpdate() {
         if (order.nav_status) parts.push(`NAV ${order.nav_status}`);
         orders.append(reviewNode('div', 'review-order', `${order.fund_code || order.ticker || 'กองทุน'} · ${parts.join(' · ') || 'ยอดเงินรอยืนยัน'}`));
       } else {
-        orders.append(reviewNode('div', 'review-order', `${order.ticker} ${num(order.quantity)} × ${price(order.reference_price)} = ${money(order.planned_amount)}`));
+        orders.append(reviewNode('div', 'review-order', `${order.ticker} ${num(order.quantity)} × ${price(order.reference_price)} = ${reviewMoney(order.planned_amount)}`));
       }
     }
     if (orders.childElementCount) card.append(orders);
@@ -80,9 +80,10 @@ function renderReviewUpdate() {
 
   if (update) {
     const source = reviewNode('div', 'review-source-note',
-      `ข้อมูลด้านล่างเป็นประวัติรอบ ${portfolio(selected)?.latest_cycle_id || '—'} ไม่ใช่ผลซื้อของแผนวันที่ ${update.data_as_of}`);
+      `ข้อมูลพอร์ตด้านล่างเป็นประวัติระบบเดิมรอบ ${portfolio(selected)?.latest_cycle_id || '—'} ไม่ใช่ผลซื้อของแผนวันที่ ${update.data_as_of}`);
     source.id = 'review-source-note';
     hero.before(source);
+    hero.remove();
   }
 }
 
