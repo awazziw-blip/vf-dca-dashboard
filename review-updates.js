@@ -19,6 +19,9 @@ function renderReviewUpdate() {
     .sort((a, b) => a.data_as_of.localeCompare(b.data_as_of) || a.review_ref.localeCompare(b.review_ref))
     .at(-1);
 
+  const kicker = hero.querySelector('.hero-kicker');
+  if (kicker && update) kicker.textContent = `📁 ประวัติรอบที่บันทึกแล้ว · ${portfolio(selected)?.latest_cycle_id || '—'}`;
+
   if (update) {
     const card = reviewNode('section', 'card review-update');
     card.id = 'review-update';
@@ -60,10 +63,12 @@ function renderReviewUpdate() {
     hero.before(card);
   }
 
-  const source = reviewNode('div', 'review-source-note',
-    `ข้อมูลแผงด้านล่างมาจากรอบที่บันทึกในฐานข้อมูล: ${portfolio(selected)?.latest_cycle_id || '—'} · แยกจากอัปเดตแผนข้างบน`);
-  source.id = 'review-source-note';
-  hero.before(source);
+  if (update) {
+    const source = reviewNode('div', 'review-source-note',
+      `ข้อมูลด้านล่างเป็นประวัติรอบ ${portfolio(selected)?.latest_cycle_id || '—'} ไม่ใช่ผลซื้อของแผนวันที่ ${update.data_as_of}`);
+    source.id = 'review-source-note';
+    hero.before(source);
+  }
 }
 
 const renderProductionDashboard = render;
