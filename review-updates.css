@@ -10,5 +10,5 @@
 .review-update .review-order{border:1px solid var(--line);border-radius:9px;padding:9px 11px;background:var(--panel2)}
 .review-update .review-warning{color:var(--warn);font-weight:700}
 .review-update a{color:var(--accent)}
-.review-source-note{margin:10px 0;color:var(--muted);font-size:12px}
+.review-source-note{margin:10px 0;color:var(--warn);font-size:12px;font-weight:700}
 @media(max-width:600px){.review-update .review-grid{grid-template-columns:1fr}.review-update .review-head{display:block}.review-update .review-badge{margin-top:8px}}
